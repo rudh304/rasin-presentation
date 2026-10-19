@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>مخططات رَصين المعمارية</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@500;700&display=swap">
+<style>
+/* Layout: a drafting sheet — sheet tabs on top, the drawing as the hero, a side legend/inspector, schedule and rationale below */
+:root{
+  --paper:#EEF0EC; --sheet:#FAFAF7; --ink:#1B2226; --ink-2:#55616A; --rule:#CBD1CC; --wall:#1F282D; --accent:#1E5B74; --accent-ink:#FFFFFF;
+  --z0:#E2E5E0; --z1:#D4EADC; --z2:#D2E0F0; --z3:#F0DEB6; --z4:#EAB2A4;
+  --z0s:#7C857F; --z1s:#3B8660; --z2s:#3A6CA3; --z3s:#9C7019; --z4s:#AE3F2A;
+  --p-visitor:#25836A; --p-staff:#2D5FA6; --p-service:#BE6A22; --p-egress:#C0392F;
+  --green:#C9DCC4; --tree:#7FA27A; --road:#D5D8D3; --road-line:#FAFAF7;
+  --f-display:"Noto Kufi Arabic","IBM Plex Sans Arabic",Tahoma,sans-serif;
+  --f-body:"IBM Plex Sans Arabic",Tahoma,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0F1416; --sheet:#161D20; --ink:#E2E7E5; --ink-2:#9AA6AA; --rule:#2E383C; --wall:#D3DBD8; --accent:#72B6CF; --accent-ink:#0F1416;
+  --z0:#232A2C; --z1:#1D3A2B; --z2:#1C2F47; --z3:#463818; --z4:#5A271E;
+  --z0s:#8A9490; --z1s:#6CC296; --z2s:#7FA9DE; --z3s:#E1B04F; --z4s:#F08A72;
+  --p-visitor:#4FC7A0; --p-staff:#79A6EA; --p-service:#F0A15A; --p-egress:#F07467;
+  --green:#1E2D1F; --tree:#4E7449; --road:#262E31; --road-line:#3B4549; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --paper:#0F1416; --sheet:#161D20; --ink:#E2E7E5; --ink-2:#9AA6AA; --rule:#2E383C; --wall:#D3DBD8; --accent:#72B6CF; --accent-ink:#0F1416;
+  --z0:#232A2C; --z1:#1D3A2B; --z2:#1C2F47; --z3:#463818; --z4:#5A271E;
+  --z0s:#8A9490; --z1s:#6CC296; --z2s:#7FA9DE; --z3s:#E1B04F; --z4s:#F08A72;
+  --p-visitor:#4FC7A0; --p-staff:#79A6EA; --p-service:#F0A15A; --p-egress:#F07467;
+  --green:#1E2D1F; --tree:#4E7449; --road:#262E31; --road-line:#3B4549; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.65;direction:rtl;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+.wrap{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;margin:0;text-wrap:balance;line-height:1.35}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate}
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;border-bottom:2px solid var(--wall);padding-bottom:14px}
+.brand{display:flex;flex-direction:column;gap:2px}
+.brand .eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;color:var(--ink-2);direction:ltr;text-align:right}
+.brand h1{font-size:clamp(22px,3.2vw,32px)}
+.brand p{margin:0;color:var(--ink-2);font-size:14px}
+.phase{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--ink-2)}
+.phase b{background:var(--wall);color:var(--sheet);font-family:var(--f-mono);font-weight:500;padding:3px 9px;border-radius:3px}
+nav.sheets{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
+nav.sheets button{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:0;padding:8px 14px;border:1px solid var(--rule);background:var(--sheet);border-radius:4px;min-width:110px;flex:0 0 auto}
+nav.sheets button .no{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2);direction:ltr;text-align:right}
+nav.sheets button .nm{font-weight:600;font-size:14px}
+nav.sheets button[aria-selected="true"]{background:var(--wall);border-color:var(--wall);color:var(--sheet)}
+nav.sheets button[aria-selected="true"] .no{color:var(--sheet);opacity:.75}
+nav.sheets button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.board{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:20px;align-items:start}
+@media (max-width:900px){.board{grid-template-columns:minmax(0,1fr)}}
+.sheet{background:var(--sheet);border:1px solid var(--rule);border-radius:4px;display:flex;flex-direction:column;min-width:0}
+.sheet-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 16px;padding:14px 18px;border-bottom:1px solid var(--rule)}
+.sheet-head h2{font-size:20px}
+.sheet-head .theme{color:var(--ink-2);font-size:14px}
+.drawing{overflow-x:auto;padding:8px 10px}
+.drawing svg{display:block;width:100%;height:auto;direction:ltr}
+.drawing.wide svg{min-width:640px}
+.titleblock{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--rule);font-size:12.5px}
+.titleblock div{padding:8px 12px;border-inline-start:1px solid var(--rule);display:flex;flex-direction:column;min-width:0}
+.titleblock div:first-child{border-inline-start:none}
+.titleblock span{color:var(--ink-2);font-size:11px;letter-spacing:.02em}
+@media (max-width:600px){.titleblock{grid-template-columns:repeat(2,minmax(0,1fr))}.titleblock div:nth-child(3){border-inline-start:none}.titleblock div:nth-child(n+3){border-top:1px solid var(--rule)}}
+aside.panel{display:flex;flex-direction:column;gap:14px;min-width:0}
+.card{background:var(--sheet);border:1px solid var(--rule);border-radius:4px;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.card h3{font-size:15px}
+.legend{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.legend li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;align-items:start;font-size:13px;line-height:1.5}
+.sw{width:22px;height:16px;border-radius:2px;border:1.5px solid;margin-top:3px}
+.legend b{font-weight:600}
+.legend small{display:block;color:var(--ink-2);font-size:12px}
+.toggles{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.toggles label{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;padding:5px 8px;border:1px solid var(--rule);border-radius:4px;min-height:36px}
+.toggles input{accent-color:var(--accent);width:16px;height:16px;margin:0}
+.line{display:inline-block;width:18px;height:0;border-top:2.5px dashed;flex:0 0 auto}
+.inspect .id{font-family:var(--f-mono);font-size:12px;color:var(--ink-2);direction:ltr;text-align:right}
+.inspect h3{font-size:17px}
+.inspect .en{font-family:var(--f-mono);font-size:12px;color:var(--ink-2);direction:ltr;text-align:right;margin-top:-6px}
+.kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;font-size:13px;margin:0}
+.kv dt{color:var(--ink-2)}
+.kv dd{margin:0}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:1px 8px;border-radius:3px;border:1.5px solid}
+.tag{font-family:var(--f-body);font-weight:700;font-size:12px;padding:0 6px;border-radius:3px;border:1px solid var(--rule)}
+.tag.q{background:var(--wall);color:var(--sheet);border-color:var(--wall)}
+.mix{display:flex;height:12px;border-radius:2px;overflow:hidden;border:1px solid var(--rule)}
+.mix span{display:block;height:100%}
+.mixkey{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--ink-2)}
+.hint{font-size:12.5px;color:var(--ink-2);margin:0}
+.lower{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:900px){.lower{grid-template-columns:minmax(0,1fr)}}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:520px}
+th,td{text-align:right;padding:7px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-weight:600;color:var(--ink-2);font-size:12px;background:var(--paper)}
+td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:left;direction:ltr}
+tbody tr{cursor:pointer}
+tbody tr:hover,tbody tr.on{background:color-mix(in srgb,var(--accent) 10%,transparent)}
+tbody tr:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+tfoot td{font-weight:600}
+.notes ol{margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:8px;font-size:14px}
+.decisions{border:1.5px solid var(--wall)}
+.decisions ul{margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:7px;font-size:14px}
+.foot{font-size:12.5px;color:var(--ink-2);border-top:1px solid var(--rule);padding-top:12px}
+/* svg */
+.room{cursor:pointer}
+.room:focus{outline:none}
+.room:focus-visible .shape,.room.sel .shape{stroke:var(--accent);stroke-width:.22}
+.room:hover .shape{filter:brightness(.97)}
+svg text{font-family:var(--f-body);fill:var(--ink)}
+svg .lbl-id{font-family:var(--f-mono);fill:var(--ink-2)}
+.nozones .shape{fill:var(--sheet)!important}
+.nolabels .lbl{display:none}
+.hide-visitor .p-visitor,.hide-staff .p-staff,.hide-service .p-service,.hide-egress .p-egress{display:none}
+@media (prefers-reduced-motion:no-preference){.path-anim{stroke-dashoffset:0;animation:dash 1.6s linear infinite}@keyframes dash{to{stroke-dashoffset:-1.4}}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <span class="eyebrow">RASIN · ARCHITECTURAL SET · v0.2</span>
+      <h1>مركز رَصين للأمن والحماية المتكاملة</h1>
+      <p>المرحلة 2: المخطط المعماري للموقع العام والطوابق الثلاثة</p>
+    </div>
+    <div class="phase"><b>A-100 → A-104</b><span>خمس لوحات · المقياس تقريبي</span></div>
+  </header>
+
+  <nav class="sheets" role="tablist" aria-label="لوحات المخطط" id="tabs"></nav>
+
+  <div class="board">
+    <section class="sheet" aria-live="polite">
+      <div class="sheet-head"><h2 id="sh-title"></h2><span class="theme" id="sh-theme"></span></div>
+      <div class="drawing" id="drawing"></div>
+      <div class="titleblock">
+        <div><span>اللوحة</span><b class="mono" id="tb-no"></b></div>
+        <div><span>المقياس</span><b id="tb-scale"></b></div>
+        <div><span>المساحة</span><b id="tb-area"></b></div>
+        <div><span>الحالة</span><b>مسودة للاعتماد</b></div>
+      </div>
+    </section>
+
+    <aside class="panel">
+      <div class="card inspect" id="inspect"></div>
+      <div class="card">
+        <h3>طبقات العرض</h3>
+        <div class="toggles">
+          <label><input type="checkbox" id="t-zones" checked> ألوان المناطق</label>
+          <label><input type="checkbox" id="t-labels" checked> أسماء الغرف</label>
+          <label><input type="checkbox" id="t-visitor" checked><span class="line" style="border-color:var(--p-visitor)"></span> مسار الزوار</label>
+          <label><input type="checkbox" id="t-staff" checked><span class="line" style="border-color:var(--p-staff)"></span> مسار الموظفين</label>
+          <label><input type="checkbox" id="t-service" checked><span class="line" style="border-color:var(--p-service)"></span> مسار التوريد</label>
+          <label><input type="checkbox" id="t-egress"><span class="line" style="border-color:var(--p-egress)"></span> مسار الإخلاء</label>
+        </div>
+      </div>
+      <div class="card">
+        <h3>المناطق الأمنية</h3>
+        <ul class="legend" id="legend"></ul>
+      </div>
+    </aside>
+  </div>
+
+  <div class="lower">
+    <section class="card">
+      <h3 id="sched-title">جدول الغرف</h3>
+      <div class="tablewrap"><table id="sched"></table></div>
+    </section>
+    <section class="card notes">
+      <h3>مبررات التصميم في هذه اللوحة</h3>
+      <ol id="notes"></ol>
+    </section>
+  </div>
+
+  <p class="foot">جميع الأبعاد افتراضية إرشادية (الافتراضان ف-3 وف-4 في وثيقة التأسيس): الطابق 40 × 30 م والأرض 80 × 60 م وارتفاع الطابق 4 م. المخططات مفاهيمية للعرض الأكاديمي وليست مخططات تنفيذية. مواقع الكاميرات والحساسات والأقفال تأتي في المرحلة 3. مصدر كل الرسوم ملف بيانات واحد (rasin.json).</p>
+</div>
+
+<script id="data" type="application/json">{"meta":{"project":"مركز رَصين للأمن والحماية المتكاملة","project_en":"RASIN Integrated Security Center","version":"0.2","phase":2,"units":"m","building":{"w":40,"h":30,"floor_height":4,"origin_on_site":[20,14]},"site":{"w":80,"h":60},"note":"الأبعاد افتراضية إرشادية (ف-3، ف-4) وليست هندسية. المحور x من الغرب إلى الشرق، والمحور y من الشمال إلى الجنوب."},"zones":{"Z0":{"ar":"المحيط الخارجي","en":"Perimeter","auth":"حراسة البوابة وفحص المركبات"},"Z1":{"ar":"عامة","en":"Public","auth":"تسجيل الزائر والتحقق من الهوية والفحص الأمني"},"Z2":{"ar":"شبه مقيدة","en":"Semi-restricted","auth":"بطاقة زائر مع مرافق، أو بطاقة موظف"},"Z3":{"ar":"مقيدة","en":"Restricted","auth":"بطاقة موظف مع صلاحية الطابق"},"Z4":{"ar":"عالية الحساسية","en":"High security","auth":"بطاقة مع رمز سري (PIN) أو بصمة، وسجل دخول وخروج"}},"tags":{"ص":"من التصور المعتمد","ق":"قرار تصميمي في المرحلة 2","ح":"عنصر حركة وخدمة"},"floors":[{"id":"G","sheet":"A-101","ar":"الدور الأرضي","en":"Ground Floor","theme":"الاستقبال والتمكين السيبراني","rooms":[{"id":"G-01","n":"قاعة التوعية والتدريب","e":"Awareness & Training Hall","z":"Z2","t":"ص","r":[3,21,9,9],"d":[[7.5,21,"h",1.6],[7.5,30,"h",1.6,"exit"]],"f":"برامج التوعية والتدريب السيبراني للزوار والموظفين، بنحو 40 مقعدًا. لها مخرج طوارئ مباشر إلى الساحة."},{"id":"G-02","n":"قاعة اجتماعات (أ)","e":"Meeting Room A","z":"Z2","t":"ص","r":[0,15,6,4],"d":[[3,19,"h",1]],"f":"اجتماعات مع الزوار والعملاء دون دخولهم المناطق التشغيلية."},{"id":"G-03","n":"قاعة اجتماعات (ب)","e":"Meeting Room B","z":"Z2","t":"ص","r":[6,15,6,4],"d":[[9,19,"h",1]],"f":"اجتماعات صغيرة ومقابلات."},{"id":"G-04","n":"ممر الزوار","e":"Visitor Corridor","z":"Z2","t":"ق","r":[0,19,12,2],"d":[],"f":"يربط الردهة بالقاعات، ولا يتصل بالممر الداخلي للموظفين.","circ":true},{"id":"G-05","n":"دورات مياه الزوار","e":"Visitor WC","z":"Z2","t":"ق","r":[0,21,3,9],"d":[[1.5,21,"h",1]],"f":"داخل نطاق الزوار حتى لا يحتاج الزائر إلى عبور منطقة مقيدة.","wet":true},{"id":"G-06","n":"الردهة والاستقبال","e":"Lobby & Reception","z":"Z1","t":"ص","r":[12,15,17,7],"d":[[12,20,"v",1.8]],"f":"تسجيل الزوار وإصدار بطاقات الزائر المؤقتة. على حدها الشمالي بوابات دوارة تفصلها عن الممر الداخلي."},{"id":"G-07","n":"غرفة الانتظار","e":"Waiting Room","z":"Z1","t":"ص","r":[12,22,5,8],"d":[[14.5,22,"h",1]],"f":"انتظار الزائر حتى يحضر مرافقه."},{"id":"G-08","n":"الفحص الأمني والتحقق من الهوية","e":"Security Screening & ID Check","z":"Z1","t":"ص","r":[17,22,12,4],"d":[[23,22,"h",3]],"f":"جهاز كشف المعادن وجهاز الأشعة للحقائب ومطابقة الهوية قبل دخول الردهة."},{"id":"G-09","n":"المدخل الرئيسي (بهو عازل)","e":"Main Entrance Vestibule","z":"Z1","t":"ص","r":[20,26,6,4],"d":[[23,26,"h",2],[23,30,"h",2,"main"]],"f":"بابان متتاليان (Airlock) يمنعان الاندفاع المباشر ويضبطان التكييف."},{"id":"G-10","n":"خزائن أمانات الزوار","e":"Visitor Lockers","z":"Z1","t":"ق","r":[17,26,3,4],"d":[[18.5,26,"h",1]],"f":"يودع فيها الزائر الهاتف ووسائط التخزين والممنوعات قبل الدخول."},{"id":"G-11","n":"نقطة الحراسة عند المدخل","e":"Entrance Guard Post","z":"Z3","t":"ق","r":[26,26,3,4],"d":[[27.5,26,"h",1]],"f":"حارس يرى البهو العازل والفحص مباشرة."},{"id":"G-12","n":"غرفة الحراسة والتحكم الأمني","e":"Security Control Room","z":"Z4","t":"ق","r":[29,15,7,15],"d":[[32.5,15,"h",1]],"f":"مراقبة الكاميرات والإنذارات والبوابات والاستجابة الميدانية، على مدار الساعة. نافذة مقاومة على الردهة والفحص، وبابها من الممر الداخلي فقط."},{"id":"G-13","n":"غرفة الحراس","e":"Guards' Room","z":"Z3","t":"ق","r":[36,15,4,15],"d":[[38,15,"h",1]],"f":"تبديل المناوبات وخزائن الحراس وتجهيزاتهم."},{"id":"G-14","n":"الممر الداخلي","e":"Internal Corridor","z":"Z3","t":"ح","r":[0,12,40,3],"d":[[0,13.5,"v",1.4,"exit"]],"f":"ممر الموظفين؛ لا يُدخل إليه من الردهة إلا عبر البوابات الدوارة.","circ":true},{"id":"G-15","n":"الدرج (أ)","e":"Stair A","z":"Z3","t":"ح","r":[0,6,4,6],"d":[[2,12,"h",1.2],[0,9,"v",1.2,"exit"]],"f":"درج طوارئ يخرج مباشرة إلى الغرب.","stair":true},{"id":"G-16","n":"استراحة الموظفين والمطبخ ودورات المياه","e":"Staff Lounge, Pantry & WC","z":"Z3","t":"ص","p":[[0,0],[10,0],[10,12],[4,12],[4,6],[0,6]],"d":[[7,12,"h",1.2]],"f":"خدمات الموظفين داخل المنطقة المقيدة.","wet":true},{"id":"G-17","n":"خدمات الموظفين (غرف تبديل ومصلى)","e":"Staff Services","z":"Z3","t":"ص","r":[10,0,8,12],"d":[[14,12,"h",1.2]],"f":"خزائن شخصية؛ لا تُدخل الحقائب الشخصية إلى غرف العمليات."},{"id":"G-18","n":"مدخل الموظفين","e":"Staff Entrance","z":"Z2","t":"ص","r":[18,0,4,4],"d":[[20,0,"h",1.6,"main"],[20,4,"h",1.6,"turnstile"]],"f":"دخول الموظفين من المواقف الشمالية ببطاقة وبوابة دوارة."},{"id":"G-19","n":"ممر الموظفين","e":"Staff Spine","z":"Z3","t":"ح","r":[18,4,4,8],"d":[],"f":"يصل مدخل الموظفين بالممر الداخلي والمصاعد.","circ":true},{"id":"G-20","n":"غرفة الإتلاف الآمن للمستندات والوسائط","e":"Shredding & Media Destruction","z":"Z3","t":"ق","r":[22,0,8,6],"d":[[22,5,"v",1]],"f":"إتلاف الورق ووسائط التخزين قبل خروجها من المبنى (ISO 27001: 7.14)."},{"id":"G-21","n":"المصاعد","e":"Elevators","z":"Z3","t":"ح","r":[22,6,6,6],"d":[[25,12,"h",3]],"f":"مصعدان للأفراد ومصعد خدمة؛ لا تعمل إلا ببطاقة، والطوابق حسب الصلاحية.","lift":true},{"id":"G-22","n":"غرفة الاتصالات الفرعية","e":"IDF Room","z":"Z4","t":"ق","r":[28,6,2,6],"d":[[29,12,"h",0.9]],"f":"تجهيزات الشبكة الخاصة بالطابق."},{"id":"G-23","n":"غرفة الكهرباء الرئيسية","e":"Main Electrical Room","z":"Z4","t":"ق","r":[30,0,4,6],"d":[[34,3,"v",1]],"f":"اللوحات الرئيسية؛ يدخلها الفني من مدخل الخدمة دون المرور بالمكاتب."},{"id":"G-24","n":"فحص البريد والتوريدات","e":"Mail & Delivery Screening","z":"Z3","t":"ق","r":[30,6,4,6],"d":[[32,12,"h",1],[34,9,"v",1]],"f":"فحص الطرود والتوريدات قبل توزيعها داخل المبنى."},{"id":"G-25","n":"مدخل الخدمة والتحميل","e":"Service Entrance & Loading","z":"Z2","t":"ص","r":[34,0,6,6],"d":[[40,3,"v",2.4,"main"],[35,6,"h",1.2]],"f":"استلام التوريدات من ساحة الخدمة."},{"id":"G-26","n":"ممر الخدمة","e":"Service Passage","z":"Z3","t":"ح","r":[34,6,2,6],"d":[],"f":"يوصل مدخل الخدمة بالممر الداخلي.","circ":true},{"id":"G-27","n":"الدرج (ب)","e":"Stair B","z":"Z3","t":"ح","r":[36,6,4,6],"d":[[38,12,"h",1.2],[40,9,"v",1.2,"exit"]],"f":"درج طوارئ يخرج مباشرة إلى ساحة الخدمة.","stair":true}],"special":{"turnstiles":[[19,15,6]],"paths":{"visitor":[[[23,33],[23,28],[23,24],[23,19],[12,20],[3,20]],[[23,19],[14.5,21],[14.5,25]]],"staff":[[[20,-3],[20,2],[20,8],[20,13.5],[25,13.5],[25,10]],[[23,19],[22,15.6],[22,13.5]]],"service":[[[43,3],[37,3],[35,8],[35,13.5],[26,13.5],[26,10]]],"egress":[[[30,13.5],[38,13.5],[38,9],[41.5,9]],[[10,13.5],[2,13.5],[2,9],[-1.5,9]],[[7.5,25],[7.5,31.5]],[[23,24],[23,31.5]]]}},"notes":["المدخل الرئيسي في الواجهة الجنوبية، ويمر الزائر بثلاث مراحل متتالية: البهو العازل، ثم الفحص الأمني، ثم الردهة. هذا تسلسل ردع ثم كشف قبل أي وصول.","كل ما يحتاجه الزائر (الانتظار، القاعات، التدريب، دورات المياه) يقع جنوب خط البوابات الدوارة، فلا سبب يدفعه لعبور المنطقة المقيدة.","المصاعد والسلالم كلها شمال خط البوابات؛ الزائر لا يصل إلى أي طابق علوي إلا ببطاقة زائر مفعلة ومرافق.","غرفة الحراسة والتحكم ترى الردهة والفحص عبر نافذة مقاومة، لكن بابها من الممر الداخلي فقط، فلا يُقتحم من جهة الجمهور.","ثلاثة مسارات منفصلة: الزوار من الجنوب، والموظفون من الشمال، والتوريدات من الشرق عبر غرفة فحص البريد. لا يتقاطع مسار الزائر مع مسار التوريد.","غرفة الإتلاف الآمن قرب مدخل الخدمة، لأن المستندات والوسائط تخرج من المبنى بعد إتلافها فقط."]},{"id":"1","sheet":"A-102","ar":"الدور الأول","en":"First Floor","theme":"العمليات السيبرانية والتهديدات","rooms":[{"id":"1-01","n":"تحليل التهديدات والاستخبارات السيبرانية","e":"Threat Analysis & Cyber Intelligence","z":"Z3","t":"ص","r":[0,15,10,15],"d":[[5,15,"h",1.2]],"f":"رصد التهديدات وتحليل المؤشرات وتغذية مركز العمليات بها."},{"id":"1-02","n":"مركز العمليات الأمنية","e":"Security Operations Center (SOC)","z":"Z4","t":"ص","r":[10,15,18,15],"d":[[19,15,"h",1.6]],"f":"مراقبة الأحداث على مدار الساعة، ويستقبل أحداث الأنظمة المادية لربطها بالأحداث السيبرانية. زجاج الواجهة الجنوبية معتم حتى لا تُرى الشاشات من الخارج."},{"id":"1-03","n":"غرفة الاستجابة للحوادث","e":"Incident Response Room","z":"Z4","t":"ص","r":[28,15,8,8],"d":[[32,15,"h",1.2],[28,19,"v",1.2]],"f":"إدارة الحادث عند تصعيده؛ متصلة مباشرة بمركز العمليات."},{"id":"1-04","n":"التنسيق ومراجعة الحوادث","e":"Coordination & Incident Review","z":"Z3","t":"ص","r":[28,23,12,7],"d":[[32,23,"h",1],[28,26.5,"v",1]],"f":"اجتماعات التنسيق ومراجعة ما بعد الحادث (Lessons Learned)."},{"id":"1-05","n":"مكتب مشرف المناوبة","e":"Shift Supervisor Office","z":"Z3","t":"ق","r":[36,15,4,8],"d":[[38,15,"h",1]],"f":"إشراف المناوبة وقرار التصعيد إلى غرفة الاستجابة."},{"id":"1-06","n":"حماية المعلومات والأنظمة","e":"Information & Systems Protection","z":"Z3","t":"ص","p":[[0,0],[12,0],[12,12],[4,12],[4,6],[0,6]],"d":[[8,12,"h",1.2]],"f":"إدارة الضوابط التقنية لحماية الأنظمة والبيانات."},{"id":"1-07","n":"غرفة الطاقة غير المنقطعة والبطاريات","e":"UPS & Battery Room","z":"Z4","t":"ق","r":[12,0,10,4],"d":[[17,4,"h",1.2]],"f":"تغذي غرفة الخوادم عند انقطاع الكهرباء حتى يعمل المولد. تحمي غرفة الخوادم من الجدار الخارجي."},{"id":"1-08","n":"غرفة الخوادم","e":"Server Room","z":"Z4","t":"ق","p":[[12,4],[22,4],[22,12],[16,12],[16,9],[12,9]],"d":[],"f":"قلب الطابق، بلا جدار خارجي ولا نافذة، وتحتها غرف جافة في الأرضي. الدخول عبر الغرفة العازلة فقط (ق-1، ق-2)."},{"id":"1-09","n":"الغرفة العازلة","e":"Mantrap","z":"Z4","t":"ق","r":[12,9,4,3],"d":[[14,12,"h",1],[16,10.5,"v",1]],"f":"بابان لا يفتحان معًا، وتحقق ثنائي؛ يمنع التتبع خلف موظف."},{"id":"1-10","n":"تشغيل ومراقبة الأنظمة","e":"Systems Operations & Monitoring","z":"Z3","t":"ص","p":[[22,0],[34,0],[34,12],[30,12],[30,6],[22,6]],"d":[[32,12,"h",1.2]],"f":"مراقبة أداء الخوادم والشبكات وتوفرها؛ مجاورة لغرفة الخوادم دون أن تفتح عليها."},{"id":"1-11","n":"المصاعد","e":"Elevators","z":"Z3","t":"ح","r":[22,6,6,6],"d":[[25,12,"h",3]],"f":"تفتح على الممر الداخلي؛ لا يتوقف المصعد هنا إلا لمن يملك صلاحية الطابق.","lift":true},{"id":"1-12","n":"غرفة الاتصالات الفرعية","e":"IDF Room","z":"Z4","t":"ق","r":[28,6,2,6],"d":[[29,12,"h",0.9]],"f":"تجهيزات الشبكة الخاصة بالطابق."},{"id":"1-13","n":"دورات المياه والمطبخ","e":"WC & Pantry","z":"Z3","t":"ق","p":[[34,0],[40,0],[40,6],[36,6],[36,12],[34,12]],"d":[[35,12,"h",1.2]],"f":"تخدم فرق المناوبة على مدار الساعة؛ بعيدة عن غرفة الخوادم.","wet":true},{"id":"1-14","n":"الممر الداخلي","e":"Internal Corridor","z":"Z3","t":"ح","r":[0,12,40,3],"d":[],"f":"ممر الطابق.","circ":true},{"id":"1-15","n":"الدرج (أ)","e":"Stair A","z":"Z3","t":"ح","r":[0,6,4,6],"d":[[2,12,"h",1.2]],"f":"الخروج منه حر، وإعادة الدخول إلى الطابق ببطاقة.","stair":true},{"id":"1-16","n":"الدرج (ب)","e":"Stair B","z":"Z3","t":"ح","r":[36,6,4,6],"d":[[38,12,"h",1.2]],"f":"الخروج منه حر، وإعادة الدخول إلى الطابق ببطاقة.","stair":true}],"special":{"turnstiles":[],"paths":{"staff":[[[25,10],[25,13.5],[19,13.5],[19,17]],[[25,13.5],[14,13.5],[14,10.5],[19,8]]],"egress":[[[19,22],[19,13.5],[2,13.5],[2,9]],[[19,13.5],[38,13.5],[38,9]]]}},"notes":["غرفة الخوادم في قلب الطابق: شمالها غرفة الطاقة، وشرقها المصاعد وغرفة التشغيل، وغربها وحدة الحماية، وجنوبها الممر. لا يلامسها أي جدار خارجي (ق-1).","الوصول إلى غرفة الخوادم عبر الغرفة العازلة فقط، وبابها الثاني لا يُفتح قبل إغلاق الأول (ق-2).","تحت غرفة الخوادم في الأرضي غرف جافة (خدمات الموظفين وممر الموظفين)، ولا تمر فوقها تمديدات مياه؛ دورات المياه والمطبخ في الطرف الشرقي البعيد.","مركز العمليات وغرفة الاستجابة متجاوران ويتصلان بباب داخلي، فينتقل الفريق دون المرور بالممر.","مركز العمليات في الواجهة الجنوبية، لذلك زجاجها معتم أو بغشاء عاكس حتى لا تُرى الشاشات من الساحة أو الشارع.","الطابق كله منطقة مقيدة (Z3) لا يدخله الزوار، وداخله غرف عالية الحساسية (Z4) بتحقق ثنائي."]},{"id":"2","sheet":"A-103","ar":"الدور الثاني","en":"Second Floor","theme":"الحوكمة والمخاطر والتطوير","rooms":[{"id":"2-01","n":"البحث والابتكار","e":"Research & Innovation","z":"Z3","t":"ص","r":[0,15,8,15],"d":[[4,15,"h",1.2]],"f":"مختبر لتجربة الأدوات والحلول على شبكة معزولة عن شبكة الإنتاج."},{"id":"2-02","n":"تحليل البيانات والتقارير","e":"Data Analytics & Reporting","z":"Z3","t":"ص","r":[8,15,8,15],"d":[[12,15,"h",1.2]],"f":"مؤشرات الأداء الأمني والتقارير للإدارة العليا."},{"id":"2-03","n":"الاستراتيجية والتخطيط السيبراني","e":"Cyber Strategy & Planning","z":"Z3","t":"ص","r":[16,15,6,15],"d":[[19,15,"h",1.2]],"f":"الخطط الاستراتيجية وخرائط الطريق."},{"id":"2-04","n":"قاعة الاجتماعات الإدارية","e":"Executive Meeting Room","z":"Z3","t":"ص","r":[22,15,8,15],"d":[[26,15,"h",1.6]],"f":"مقابل المصاعد مباشرة، فيصل إليها الزائر المرافَق (مدقق، جهة رقابية) دون المرور بالمكاتب."},{"id":"2-05","n":"السياسات والمعايير والضوابط","e":"Policies, Standards & Controls","z":"Z3","t":"ص","r":[30,15,5,15],"d":[[32.5,15,"h",1.2]],"f":"إعداد السياسات ومراجعتها وربطها بالضوابط."},{"id":"2-06","n":"الالتزام والتقييمات السيبرانية","e":"Compliance & Assessments","z":"Z3","t":"ص","r":[35,15,5,15],"d":[[37.5,15,"h",1.2]],"f":"التقييمات الداخلية ومتابعة الالتزام بالضوابط."},{"id":"2-07","n":"مخاطر وأصول المعلومات","e":"Information Risk & Asset Management","z":"Z3","t":"ص","p":[[0,0],[12,0],[12,12],[4,12],[4,6],[0,6]],"d":[[8,12,"h",1.2]],"f":"سجل المخاطر وسجل الأصول، ومنها مخاطر الأمن المادي."},{"id":"2-08","n":"خزنة الوسائط والنسخ الاحتياطية","e":"Media & Backup Vault","z":"Z4","t":"ق","r":[12,0,10,4],"d":[[17,4,"h",1.2]],"f":"خزائن مقاومة للحريق لوسائط التخزين؛ تحمي الأرشيف من الجدار الخارجي."},{"id":"2-09","n":"أرشيف السجلات والوثائق الحساسة","e":"Sensitive Records Archive","z":"Z4","t":"ص","p":[[12,4],[22,4],[22,12],[16,12],[16,9],[12,9]],"d":[],"f":"فوق غرفة الخوادم مباشرة، فيستفيد من البنية المدعمة لحمل الأرفف المتحركة. بلا نوافذ، وإطفاء بالغاز النظيف."},{"id":"2-10","n":"استلام السجلات والطباعة الآمنة","e":"Records Check-in & Secure Print","z":"Z4","t":"ق","r":[12,9,4,3],"d":[[14,12,"h",1],[16,10.5,"v",1]],"f":"نقطة وحيدة لتسليم السجلات واستلامها وتسجيلها؛ تعمل كغرفة عازلة للأرشيف."},{"id":"2-11","n":"إدارة البيانات والخصوصية","e":"Data Management & Privacy","z":"Z3","t":"ص","p":[[22,0],[34,0],[34,12],[30,12],[30,6],[22,6]],"d":[[32,12,"h",1.2]],"f":"تصنيف البيانات وحماية الخصوصية؛ مجاورة للأرشيف."},{"id":"2-12","n":"المصاعد","e":"Elevators","z":"Z3","t":"ح","r":[22,6,6,6],"d":[[25,12,"h",3]],"f":"تفتح مقابل قاعة الاجتماعات الإدارية.","lift":true},{"id":"2-13","n":"غرفة الاتصالات الفرعية","e":"IDF Room","z":"Z4","t":"ق","r":[28,6,2,6],"d":[[29,12,"h",0.9]],"f":"تجهيزات الشبكة الخاصة بالطابق."},{"id":"2-14","n":"دورات المياه والمطبخ","e":"WC & Pantry","z":"Z3","t":"ق","p":[[34,0],[40,0],[40,6],[36,6],[36,12],[34,12]],"d":[[35,12,"h",1.2]],"f":"فوق مثيلتها في الدور الأول، بعيدًا عن الأرشيف.","wet":true},{"id":"2-15","n":"الممر الداخلي","e":"Internal Corridor","z":"Z3","t":"ح","r":[0,12,40,3],"d":[],"f":"ممر الطابق.","circ":true},{"id":"2-16","n":"الدرج (أ)","e":"Stair A","z":"Z3","t":"ح","r":[0,6,4,6],"d":[[2,12,"h",1.2]],"f":"الخروج منه حر، وإعادة الدخول إلى الطابق ببطاقة.","stair":true},{"id":"2-17","n":"الدرج (ب)","e":"Stair B","z":"Z3","t":"ح","r":[36,6,4,6],"d":[[38,12,"h",1.2]],"f":"الخروج منه حر، وإعادة الدخول إلى الطابق ببطاقة.","stair":true}],"special":{"turnstiles":[],"paths":{"visitor":[[[25,10],[25,13.5],[26,13.5],[26,20]]],"staff":[[[25,13.5],[14,13.5],[14,10.5],[19,8]]],"egress":[[[19,22],[19,13.5],[2,13.5],[2,9]],[[26,13.5],[38,13.5],[38,9]]]}},"notes":["الأرشيف الحساس فوق غرفة الخوادم تمامًا، فتُصمَّم بنية واحدة مدعمة لهذا العمود الرأسي من الأرض إلى السطح.","الأرشيف محاط بخزنة الوسائط شمالًا وبغرفة الاستلام جنوبًا، فلا جدار خارجي مباشر ولا مدخل إلا عبر نقطة الاستلام المسجلة.","الأرشيف في الطابق الأخير، لذلك: لا معدات تكييف أو تصريف مطر فوق سقفه، وعزل مائي مضاعف للسطح، وحساسات تسرب على السقف (معالجة لخطر الماء).","قاعة الاجتماعات الإدارية مقابل المصاعد: الزائر المرافَق يخرج من المصعد إلى القاعة مباشرة ولا يرى المكاتب أو المستندات.","دورات المياه في الطرف الشرقي، فوق مثيلتها في الأول، بعيدًا عن الأرشيف وغرفة الخوادم."]}],"site":{"sheet":"A-100","canvas":[80,76],"elements":[{"id":"S-01","k":"street","n":"الشارع الرئيسي","r":[0,69,80,7]},{"id":"S-02","k":"parkout","n":"مواقف الزوار (خارج السور)","r":[6,62,30,7],"f":"خارج السور عمدًا، فلا تقف مركبة غير مفحوصة قرب المبنى (مسافة الأمان Standoff)."},{"id":"S-03","k":"sidewalk","n":"الرصيف","r":[0,60,80,2]},{"id":"S-04","k":"plaza","n":"ساحة المدخل (منطقة الأمان)","r":[20,44,40,16],"f":"16 م بين السور والواجهة الجنوبية بلا مواقف."},{"id":"S-05","k":"parkin","n":"مواقف الموظفين","r":[4,2,50,8],"f":"داخل السور؛ تصلها المركبات بعد الفحص عند البوابة (2)."},{"id":"S-06","k":"yard","n":"ساحة الخدمة","r":[62,14,16,30],"f":"التحميل والتوريدات والمولد."},{"id":"S-07","k":"gen","n":"المولد وخزان الوقود","r":[70,34,8,8],"f":"على بعد 10 م من المبنى."},{"id":"S-08","k":"assembly","n":"نقطة التجمع","r":[3,47,13,10],"f":"بعيدة عن الواجهات وعن مسار مركبات الطوارئ."},{"id":"S-09","k":"drive","n":"طريق المركبات الداخلي","r":[58,2,20,8]},{"id":"S-10","k":"green","n":"تشجير منخفض","r":[2,14,16,30]}],"gates":[{"id":"GT-1","n":"البوابة (1): الزوار والمشاة","at":[43,60],"w":4,"side":"s","booth":[47,56,3,3]},{"id":"GT-2","n":"البوابة (2): الموظفون والتوريدات","at":[80,6],"w":6,"side":"e","booth":[74,11,4,3]}],"bollards":[[22,52],[58,52]],"paths":{"visitor":[[[45,66],[45,60],[43,52],[43,45]]],"staff":[[[82,6],[70,6],[40,6],[40,14]]],"service":[[[82,7],[70,7],[66,12],[66,17],[60,17]]],"egress":[[[27.5,44],[14,50]],[[20,23],[14,50]],[[60,23],[64,30]]]}}}</script>
+<script>
+(function(){
+const D = JSON.parse(document.getElementById('data').textContent);
+const NS = 'http://www.w3.org/2000/svg';
+const ZC = z => `var(--${z.toLowerCase()})`, ZS = z => `var(--${z.toLowerCase()}s)`;
+const fmt = n => (Math.round(n*10)/10).toLocaleString('ar-SA-u-nu-latn');
+const SHEETS = [
+  {k:'site', no:'A-100', nm:'الموقع العام'},
+  {k:'G', no:'A-101', nm:'الدور الأرضي'},
+  {k:'1', no:'A-102', nm:'الدور الأول'},
+  {k:'2', no:'A-103', nm:'الدور الثاني'},
+  {k:'sec', no:'A-104', nm:'المقطع الرأسي'}
+];
+const SITE_NOTES = [
+  'مبنى مستقل داخل سور كامل؛ المحيط الخارجي هو المنطقة Z0، وكل دخول إليه يمر ببوابة عليها حارس.',
+  'بوابتان فقط: (1) للمشاة والزوار من الشارع جنوبًا، و(2) للموظفين والتوريدات شرقًا. فصل المداخل يمنع اختلاط الزائر بالتوريد منذ اللحظة الأولى.',
+  'مواقف الزوار خارج السور، وساحة المدخل 16 م بلا مواقف؛ هذه مسافة الأمان (Standoff) التي تبعد أي مركبة غير مفحوصة عن الواجهة.',
+  'صف من الحواجز الثابتة (Bollards) يقطع الساحة أمام المدخل، فلا تصل مركبة إلى الواجهة حتى لو اقتحمت البوابة.',
+  'المولد وخزان الوقود في ساحة الخدمة على بعد 10 م من المبنى، فلا يهدد حريقهما الغرف التقنية.',
+  'نقطة التجمع في الركن الجنوبي الغربي، بعيدة عن مسار مركبات الطوارئ وعن الواجهات الزجاجية.'
+];
+const SEC_NOTES = [
+  'المقطع مأخوذ من الشمال إلى الجنوب عند المحور x = 15 م، وهو يمر بالعمود الأكثر حساسية في المبنى.',
+  'العمود الرأسي المحمي: خدمات جافة في الأرضي، ثم غرفة الخوادم في الأول، ثم الأرشيف الحساس في الثاني. لا تمديدات مياه في هذا العمود، والبنية مدعمة لحمل الخوادم والأرفف.',
+  'الحساسية ترتفع مع الارتفاع: الأرضي يجمع Z1 وZ2 للجمهور، والطابقان العلويان Z3 وZ4 فقط.',
+  'الغرف عالية الحساسية محاطة من الشمال بغرفة عازلة عن الجدار الخارجي (الطاقة غير المنقطعة، وخزنة الوسائط) ومن الجنوب بغرفة عازلة عن الممر (الغرفة العازلة، ونقطة الاستلام).',
+  'الواجهة الجنوبية تبعد 16 م عن السور، والشمالية 14 م، فتبقى المركبات بعيدة عن المبنى من الجهتين.'
+];
+const state = {sheet:'G', sel:null};
+try{ const s = localStorage.getItem('rasin-sheet'); if(s && SHEETS.some(x=>x.k===s)) state.sheet = s; }catch(e){}
+const h = (location.hash||'').slice(1); if(SHEETS.some(x=>x.k===h)) state.sheet = h;
+
+function el(tag, attrs, parent, text){
+  const e = document.createElementNS(NS, tag);
+  for(const k in (attrs||{})) e.setAttribute(k, attrs[k]);
+  if(text!=null) e.textContent = text;
+  if(parent) parent.appendChild(e);
+  return e;
+}
+function poly(r){ if(r.r){const [x,y,w,hh]=r.r; return [[x,y],[x+w,y],[x+w,y+hh],[x,y+hh]];} return r.p; }
+function area(p){ let s=0; for(let i=0;i<p.length;i++){const a=p[i],b=p[(i+1)%p.length]; s+=a[0]*b[1]-b[0]*a[1];} return Math.abs(s)/2; }
+function centroid(p){ let a=0,cx=0,cy=0; for(let i=0;i<p.length;i++){const q=p[i],r=p[(i+1)%p.length]; const c=q[0]*r[1]-r[0]*q[1]; a+=c; cx+=(q[0]+r[0])*c; cy+=(q[1]+r[1])*c;} a/=2; return [cx/(6*a), cy/(6*a)]; }
+function bbox(p){ const xs=p.map(q=>q[0]), ys=p.map(q=>q[1]); return [Math.min(...xs),Math.min(...ys),Math.max(...xs),Math.max(...ys)]; }
+function wrap(text, maxChars){ const words=text.split(' '); const lines=[]; let cur=''; for(const w of words){ const t=cur?cur+' '+w:w; if(t.length>maxChars && cur){lines.push(cur); cur=w;} else cur=t; } if(cur) lines.push(cur); return lines; }
+function defs(svg){
+  const d = el('defs',{},svg);
+  for(const k of ['visitor','staff','service','egress']){
+    const m = el('marker',{id:'ar-'+k,viewBox:'0 0 10 10',refX:'8',refY:'5',markerWidth:'5',markerHeight:'5',orient:'auto-start-reverse'},d);
+    el('path',{d:'M0 0L10 5L0 10z',fill:`var(--p-${k})`},m);
+  }
+  const hp = el('pattern',{id:'hatch',width:'.5',height:'.5',patternUnits:'userSpaceOnUse',patternTransform:'rotate(45)'},d);
+  el('line',{x1:'0',y1:'0',x2:'0',y2:'.5',stroke:'var(--z0s)','stroke-width':'.06'},hp);
+}
+function drawPaths(g, paths, sw){
+  for(const k in paths){
+    for(const pts of paths[k]){
+      el('polyline',{class:'p-'+k+' path-anim',points:pts.map(p=>p.join(',')).join(' '),fill:'none',stroke:`var(--p-${k})`,'stroke-width':sw,'stroke-dasharray':`${sw*3} ${sw*2.6}`,'stroke-linecap':'round','stroke-linejoin':'round','marker-end':`url(#ar-${k})`},g);
+    }
+  }
+}
+function northArrow(g,x,y,s){
+  const a = el('g',{transform:`translate(${x} ${y})`},g);
+  el('circle',{r:s,fill:'none',stroke:'var(--ink-2)','stroke-width':s*.06},a);
+  el('path',{d:`M0 ${-s*.85} L${s*.38} ${s*.55} L0 ${s*.25} L${-s*.38} ${s*.55}Z`,fill:'var(--wall)'},a);
+  el('text',{x:0,y:-s*1.2,'text-anchor':'middle','font-size':s*.7,'font-weight':'700'},a,'ش');
+}
+function scaleBar(g,x,y,len,unit,fs){
+  const b = el('g',{},g);
+  for(let i=0;i<len;i+=unit){ el('rect',{x:x+i,y,width:unit,height:fs*.35,fill:(i/unit)%2?'var(--sheet)':'var(--wall)',stroke:'var(--wall)','stroke-width':fs*.04},b); }
+  el('text',{x,y:y+fs*1.25,'text-anchor':'middle','font-size':fs*.8,class:'mono'},b,'0');
+  el('text',{x:x+len,y:y+fs*1.25,'text-anchor':'middle','font-size':fs*.8,class:'mono'},b,len+' m');
+}
+function dim(g,x1,y1,x2,y2,label,fs,vertical){
+  const d = el('g',{stroke:'var(--ink-2)','stroke-width':fs*.05},g);
+  el('line',{x1,y1,x2,y2},d);
+  const t=fs*.35;
+  if(vertical){ el('line',{x1:x1-t,y1:y1,x2:x1+t,y2:y1},d); el('line',{x1:x2-t,y1:y2,x2:x2+t,y2:y2},d);
+    el('text',{x:x1+fs*.55,y:(y1+y2)/2,'text-anchor':'middle','font-size':fs*.8,stroke:'none',fill:'var(--ink-2)',class:'mono',transform:`rotate(-90 ${x1+fs*.55} ${(y1+y2)/2})`},d,label);
+  } else { el('line',{x1,y1:y1-t,x2:x1,y2:y1+t},d); el('line',{x1:x2,y1:y2-t,x2,y2:y2+t},d);
+    el('text',{x:(x1+x2)/2,y:y1-fs*.35,'text-anchor':'middle','font-size':fs*.8,stroke:'none',fill:'var(--ink-2)',class:'mono'},d,label); }
+}
+
+/* ---------- floor plan ---------- */
+function drawFloor(f){
+  const svg = el('svg',{viewBox:'-3.2 -4.6 46.6 39',role:'img','aria-label':`مخطط ${f.ar}`});
+  defs(svg);
+  const fs = .62;
+  const rooms = el('g',{},svg);
+  for(const r of f.rooms){
+    const p = poly(r);
+    const g = el('g',{class:'room','data-id':r.id,tabindex:'0',role:'button','aria-label':`${r.id} ${r.n}`},rooms);
+    el('polygon',{class:'shape',points:p.map(q=>q.join(',')).join(' '),fill:ZC(r.z),stroke:'var(--wall)','stroke-width':'.07','stroke-linejoin':'miter'},g);
+    if(r.stair){ const [x,y,w,hh]=r.r; for(let t=y+.5;t<y+hh-.4;t+=.45){ el('line',{x1:x+.15,y1:t,x2:x+w/2-.1,y2:t,stroke:'var(--ink-2)','stroke-width':'.03'},g); el('line',{x1:x+w/2+.1,y1:t,x2:x+w-.15,y2:t,stroke:'var(--ink-2)','stroke-width':'.03'},g);} el('line',{x1:x+w/2,y1:y+.3,x2:x+w/2,y2:y+hh-.3,stroke:'var(--ink-2)','stroke-width':'.05'},g); }
+    if(r.lift){ const [x,y]=r.r; for(let i=0;i<3;i++){ const cx=x+.2+i*1.95, cw=1.75, ch=2.3; el('rect',{x:cx,y:y+.25,width:cw,height:ch,fill:'none',stroke:'var(--ink-2)','stroke-width':'.04'},g); el('path',{d:`M${cx} ${y+.25}L${cx+cw} ${y+.25+ch}M${cx+cw} ${y+.25}L${cx} ${y+.25+ch}`,stroke:'var(--ink-2)','stroke-width':'.03'},g);} }
+  }
+  el('rect',{x:0,y:0,width:40,height:30,fill:'none',stroke:'var(--wall)','stroke-width':'.32'},svg);
+  // doors
+  const doors = el('g',{},svg);
+  for(const r of f.rooms){
+    const p=poly(r), c=centroid(p);
+    for(const [x,y,o,w,kind] of (r.d||[])){
+      const ext = (o==='h'&&(y===0||y===30))||(o==='v'&&(x===0||x===40));
+      const gw = ext?.4:.14;
+      if(o==='h'){
+        el('line',{x1:x-w/2,y1:y,x2:x+w/2,y2:y,stroke:'var(--sheet)','stroke-width':gw},doors);
+        if(kind==='turnstile'){ for(let i=0;i<3;i++) el('line',{x1:x-w/2+.25+i*(w-.5)/2,y1:y-.35,x2:x-w/2+.25+i*(w-.5)/2,y2:y+.35,stroke:'var(--wall)','stroke-width':'.08'},doors); continue; }
+        let s = (c[1]>y)?1:-1; if(ext) s = (y===0)?1:-1;
+        el('path',{d:`M${x-w/2} ${y} L${x-w/2} ${y+s*w} A${w} ${w} 0 0 ${s>0?0:1} ${x+w/2} ${y}`,fill:'none',stroke:'var(--ink-2)','stroke-width':'.035'},doors);
+        if(kind==='exit'||kind==='main'){ const out=-s; el('path',{d:`M${x-.3} ${y+out*.45} L${x} ${y+out*.95} L${x+.3} ${y+out*.45}Z`,fill:kind==='exit'?'var(--p-egress)':'var(--accent)'},doors); }
+      } else {
+        el('line',{x1:x,y1:y-w/2,x2:x,y2:y+w/2,stroke:'var(--sheet)','stroke-width':gw},doors);
+        let s = (c[0]>x)?1:-1; if(ext) s=(x===0)?1:-1;
+        el('path',{d:`M${x} ${y-w/2} L${x+s*w} ${y-w/2} A${w} ${w} 0 0 ${s>0?1:0} ${x} ${y+w/2}`,fill:'none',stroke:'var(--ink-2)','stroke-width':'.035'},doors);
+        if(kind==='exit'||kind==='main'){ const out=-s; el('path',{d:`M${x+out*.45} ${y-.3} L${x+out*.95} ${y} L${x+out*.45} ${y+.3}Z`,fill:kind==='exit'?'var(--p-egress)':'var(--accent)'},doors); }
+      }
+    }
+  }
+  // turnstile line
+  for(const [x,y,len] of (f.special.turnstiles||[])){
+    const t = el('g',{},svg);
+    el('line',{x1:x,y1:y,x2:x+len,y2:y,stroke:'var(--sheet)','stroke-width':'.16'},t);
+    for(let i=0;i<=len;i+=1){ el('rect',{x:x+i-.12,y:y-.45,width:.24,height:.9,fill:'var(--wall)'},t); }
+    for(let i=.5;i<len;i+=1){ el('line',{x1:x+i,y1:y-.35,x2:x+i,y2:y+.35,stroke:'var(--accent)','stroke-width':'.07'},t); }
+    el('text',{x:x+len/2,y:y-.7,'text-anchor':'middle','font-size':fs*.78,fill:'var(--accent)','font-weight':'700'},t,'بوابات دوارة');
+  }
+  // labels
+  const L = el('g',{class:'lbl','pointer-events':'none'},svg);
+  for(const r of f.rooms){
+    const p=poly(r), b=bbox(p), a=area(p);
+    let [cx,cy] = r.r ? [r.r[0]+r.r[2]/2, r.r[1]+r.r[3]/2] : centroid(p);
+    const w = r.r ? r.r[2] : (b[2]-b[0])*.78;
+    const hh = r.r ? r.r[3] : (b[3]-b[1])*.6;
+    if(r.circ && r.r){
+      if(r.r[2]>r.r[3]) { el('text',{x:r.id.endsWith('14')||r.id.endsWith('15')?8.5:cx,y:cy+.22,'text-anchor':'middle','font-size':fs*.82,fill:'var(--ink-2)'},L,r.n); }
+      continue;
+    }
+    if(r.stair||r.lift){ el('text',{x:cx,y:r.lift?cy+1.9:cy+.2,'text-anchor':'middle','font-size':fs*.75,fill:'var(--ink-2)','font-weight':'600',stroke:'var(--sheet)','stroke-width':'.12','paint-order':'stroke'},L,r.n); continue; }
+    const small = a<14 || Math.min(w,hh)<3.2;
+    const fsz = w<5? fs*.85 : fs;
+    if(small){
+      el('text',{x:cx,y:cy+.2,'text-anchor':'middle','font-size':fs*.78,class:'lbl-id'},L,r.id);
+      continue;
+    }
+    const maxc = Math.max(6, Math.floor((w-.7)/(fsz*.52)));
+    const lines = wrap(r.n, maxc).slice(0,4);
+    const lh = fsz*1.3, total = lines.length*lh + fs*1.1;
+    let y0 = cy - total/2 + fs*.75;
+    el('text',{x:cx,y:y0,'text-anchor':'middle','font-size':fs*.74,class:'lbl-id'},L,r.id);
+    lines.forEach((ln,i)=> el('text',{x:cx,y:y0+fs*1.15+i*lh,'text-anchor':'middle','font-size':fsz,'font-weight':'600'},L,ln));
+    el('text',{x:cx,y:y0+fs*1.15+lines.length*lh,'text-anchor':'middle','font-size':fs*.74,class:'lbl-id'},L,fmt(a)+' م²');
+  }
+  // paths
+  drawPaths(el('g',{'pointer-events':'none'},svg), f.special.paths||{}, .13);
+  // dims + north + scale
+  dim(svg,0,-1.6,40,-1.6,'40.00 m',1,false);
+  dim(svg,41.6,0,41.6,30,'30.00 m',1,true);
+  northArrow(svg,-1.7,-2.2,.9);
+  scaleBar(svg,0,31.6,10,2,1);
+  el('text',{x:40,y:33.3,'text-anchor':'end','font-size':fs*.85,fill:'var(--ink-2)'},svg,'الواجهة الجنوبية: الشارع والمدخل الرئيسي');
+  return svg;
+}
+
+/* ---------- site plan ---------- */
+function drawSite(){
+  const S = D.site;
+  const svg = el('svg',{viewBox:'-3 -6 87 84',role:'img','aria-label':'الموقع العام'});
+  defs(svg);
+  const fs=1.25;
+  const kfill = {street:'var(--road)',sidewalk:'var(--z0)',parkout:'var(--road)',plaza:'var(--z1)',parkin:'var(--road)',yard:'var(--z0)',gen:'var(--z4)',assembly:'none',drive:'var(--road)',green:'var(--green)'};
+  for(const e of S.elements){
+    const [x,y,w,hh]=e.r;
+    const g = el('g',{class:'room','data-id':e.id,tabindex:'0',role:'button','aria-label':e.n},svg);
+    el('rect',{class:'shape',x,y,width:w,height:hh,fill:kfill[e.k],stroke:e.k==='assembly'?'var(--p-egress)':'var(--rule)','stroke-width':e.k==='assembly'?.25:.12,'stroke-dasharray':e.k==='assembly'?'1 .6':'none'},g);
+    if(e.k==='parkin'||e.k==='parkout'){ for(let i=x+2.5;i<x+w;i+=2.5) el('line',{x1:i,y1:e.k==='parkin'?y:y,x2:i,y2:y+hh*.62,stroke:'var(--road-line)','stroke-width':'.12'},g); }
+    if(e.k==='street'){ el('line',{x1:0,y1:y+hh/2,x2:80,y2:y+hh/2,stroke:'var(--road-line)','stroke-width':'.2','stroke-dasharray':'2 1.5'},g); }
+    if(e.k==='green'){ for(let i=0;i<6;i++) el('circle',{cx:x+4+(i%2)*8,cy:y+4+Math.floor(i/2)*10,r:1.6,fill:'var(--tree)',opacity:.7},g); }
+  }
+  // building
+  const b = el('g',{class:'room','data-id':'BLD',tabindex:'0',role:'button','aria-label':'مبنى المركز'},svg);
+  el('rect',{class:'shape',x:20,y:14,width:40,height:30,fill:'var(--z3)',stroke:'var(--wall)','stroke-width':'.45'},b);
+  el('rect',{x:40,y:41,width:6,height:3,fill:'var(--z1)',stroke:'var(--wall)','stroke-width':'.12'},b);
+  el('text',{x:40,y:28.4,'text-anchor':'middle','font-size':fs*1.25,'font-weight':'700'},b,'مبنى مركز رَصين');
+  el('text',{x:40,y:30.8,'text-anchor':'middle','font-size':fs*.85,fill:'var(--ink-2)'},b,'ثلاثة طوابق · 40 × 30 م');
+  // fence
+  el('rect',{x:0,y:0,width:80,height:60,fill:'none',stroke:'var(--wall)','stroke-width':'.35','stroke-dasharray':'1.4 .5'},svg);
+  // gates
+  for(const gt of S.gates){
+    const [gx,gy]=gt.at; const g = el('g',{class:'room','data-id':gt.id,tabindex:'0',role:'button','aria-label':gt.n},svg);
+    if(gt.side==='s'){ el('line',{x1:gx-gt.w/2,y1:gy,x2:gx+gt.w/2,y2:gy,stroke:'var(--sheet)','stroke-width':'.9'},g); el('line',{x1:gx-gt.w/2,y1:gy,x2:gx+gt.w/2,y2:gy,stroke:'var(--accent)','stroke-width':'.35'},g); }
+    else { el('line',{x1:gx,y1:gy-gt.w/2,x2:gx,y2:gy+gt.w/2,stroke:'var(--sheet)','stroke-width':'.9'},g); el('line',{x1:gx,y1:gy-gt.w/2,x2:gx,y2:gy+gt.w/2,stroke:'var(--accent)','stroke-width':'.35'},g); }
+    const [bx,by,bw,bh]=gt.booth; el('rect',{class:'shape',x:bx,y:by,width:bw,height:bh,fill:'var(--z3)',stroke:'var(--wall)','stroke-width':'.15'},g);
+    el('text',{x:gt.side==='s'?gx:gx-.4,y:gt.side==='s'?gy-1.2:-1,'text-anchor':gt.side==='s'?'middle':'end','font-size':fs*.85,'font-weight':'700',fill:'var(--accent)',stroke:'var(--sheet)','stroke-width':'.25','paint-order':'stroke'},g,gt.side==='s'?'البوابة (1)':'البوابة (2)');
+  }
+  // bollards
+  const [[bx1,by1],[bx2]] = S.bollards; for(let x=bx1;x<=bx2;x+=1.6){ if(x>41&&x<47) continue; el('circle',{cx:x,cy:by1,r:.32,fill:'var(--wall)'},svg); }
+  el('text',{x:bx1,y:by1-1,'font-size':fs*.75,fill:'var(--ink-2)'},svg,'حواجز ثابتة للمركبات (Bollards)');
+  // labels
+  for(const e of S.elements){
+    if(e.k==='gen'||e.k==='sidewalk') { if(e.k==='gen') el('text',{x:e.r[0]+e.r[2]/2,y:e.r[1]+e.r[3]/2+.4,'text-anchor':'middle','font-size':fs*.75,'font-weight':'600','pointer-events':'none'},svg,'المولد'); continue; }
+    const [x,y,w,hh]=e.r; const lines = wrap(e.n, Math.floor(w/(fs*.5)));
+    const ly = e.k==='plaza'? y+4 : y+hh/2; lines.forEach((ln,i)=> el('text',{x:x+w/2,y:ly+(i-(lines.length-1)/2)*fs*1.2+.4,'text-anchor':'middle','font-size':fs*.9,'font-weight':'600','pointer-events':'none',stroke:'var(--sheet)','stroke-width':'.3','paint-order':'stroke'},svg,ln));
+  }
+  drawPaths(el('g',{'pointer-events':'none'},svg), S.paths, .32);
+  dim(svg,0,-2.6,80,-2.6,'80.00 m',2,false);
+  dim(svg,82.6,0,82.6,60,'60.00 m',2,true);
+  dim(svg,74,44,74,60,'16 m',1.4,true);
+  northArrow(svg,-1,-3.2,1.8);
+  scaleBar(svg,60,74.5,20,5,2);
+  return svg;
+}
+
+/* ---------- vertical section ---------- */
+function drawSection(){
+  const X = 15, FH = 4, sx = v => v;   // north (y=0 on site) on the left
+  const svg = el('svg',{viewBox:'-8 -16.5 90 23.5',role:'img','aria-label':'المقطع الرأسي عند المحور x = 15 م'});
+  defs(svg);
+  const fs=.85, off = D.meta.building.origin_on_site[1];
+  // ground & site
+  el('rect',{x:-2,y:0,width:86,height:2.2,fill:'url(#hatch)'},svg);
+  el('line',{x1:-2,y1:0,x2:84,y2:0,stroke:'var(--wall)','stroke-width':'.12'},svg);
+  // fences
+  for(const fx of [0,60]){ el('line',{x1:fx,y1:0,x2:fx,y2:-2.4,stroke:'var(--wall)','stroke-width':'.2'},svg); el('text',{x:fx,y:-2.9,'text-anchor':'middle','font-size':fs*.85,fill:'var(--ink-2)'},svg,'السور'); }
+  el('line',{x1:46,y1:0,x2:46,y2:-1,stroke:'var(--wall)','stroke-width':'.35'},svg);
+  el('text',{x:47,y:-1.4,'font-size':fs*.8,fill:'var(--ink-2)'},svg,'حواجز');
+  el('text',{x:7,y:-.6,'text-anchor':'middle','font-size':fs*.85,fill:'var(--ink-2)'},svg,'مواقف الموظفين');
+  el('text',{x:52,y:-.6,'text-anchor':'middle','font-size':fs*.85,fill:'var(--ink-2)'},svg,'ساحة الأمان 16 م');
+  el('text',{x:70,y:-.6,'text-anchor':'middle','font-size':fs*.85,fill:'var(--ink-2)'},svg,'الرصيف والشارع');
+  // floors
+  D.floors.forEach((f,i)=>{
+    const base = -i*FH;
+    const segs = [];
+    for(const r of f.rooms){
+      const p = poly(r);
+      // intersect vertical line x=X with polygon -> y intervals
+      const ys=[]; for(let k=0;k<p.length;k++){ const a=p[k], b=p[(k+1)%p.length]; if((a[0]<=X&&b[0]>X)||(b[0]<=X&&a[0]>X)){ const t=(X-a[0])/(b[0]-a[0]); ys.push(a[1]+t*(b[1]-a[1])); } }
+      ys.sort((a,b)=>a-b); for(let k=0;k+1<ys.length;k+=2) segs.push({r,y1:ys[k],y2:ys[k+1]});
+    }
+    for(const s of segs){
+      const x1 = s.y1+off, w = s.y2-s.y1;
+      const g = el('g',{class:'room','data-id':s.r.id,'data-floor':f.id,tabindex:'0',role:'button','aria-label':`${s.r.id} ${s.r.n}`},svg);
+      el('rect',{class:'shape',x:x1,y:base-FH+.3,width:w,height:FH-.3,fill:ZC(s.r.z),stroke:'var(--wall)','stroke-width':'.06'},g);
+      const lbl = el('g',{class:'lbl','pointer-events':'none'},g);
+      if(w>=5){ const lines = wrap(s.r.n, Math.floor(w/(fs*.55))).slice(0,3); const y0=base-FH/2-(lines.length-1)*fs*.62+.15; el('text',{x:x1+w/2,y:y0-fs*1.05,'text-anchor':'middle','font-size':fs*.72,class:'lbl-id'},lbl,s.r.id); lines.forEach((ln,k)=>el('text',{x:x1+w/2,y:y0+k*fs*1.25,'text-anchor':'middle','font-size':fs*.85,'font-weight':'600'},lbl,ln)); }
+      else el('text',{x:x1+w/2,y:base-FH/2+.2,'text-anchor':'middle','font-size':fs*.7,class:'lbl-id',transform:w<3.2?`rotate(-90 ${x1+w/2} ${base-FH/2})`:''},lbl,s.r.id);
+    }
+    // slab
+    el('rect',{x:off,y:base-.3,width:30,height:.3,fill:'var(--wall)'},svg);
+    el('text',{x:-1,y:base-FH/2+.2,'text-anchor':'end','font-size':fs*.95,'font-weight':'700'},svg,f.ar);
+    el('text',{x:-1,y:base-FH/2+1.1,'text-anchor':'end','font-size':fs*.75,class:'lbl-id'},svg,(i?'+':'±')+(i*FH).toFixed(2)+' m');
+  });
+  // roof & walls
+  el('rect',{x:off,y:-3*FH-.4,width:30,height:.4,fill:'var(--wall)'},svg);
+  el('rect',{x:off-.25,y:-3*FH-.4,width:.25,height:3*FH+.4,fill:'var(--wall)'},svg);
+  el('rect',{x:off+30,y:-3*FH-.4,width:.25,height:3*FH+.4,fill:'var(--wall)'},svg);
+  el('text',{x:-1,y:-3*FH-.1,'text-anchor':'end','font-size':fs*.75,class:'lbl-id'},svg,'+12.00 m');
+  // protected column highlight
+  const cx1 = off+4, cx2 = off+12;
+  el('rect',{x:cx1,y:-3*FH-.15,width:cx2-cx1,height:3*FH-.2,fill:'none',stroke:'var(--accent)','stroke-width':'.16','stroke-dasharray':'.6 .35'},svg);
+  el('line',{x1:(cx1+cx2)/2,y1:-3*FH-.5,x2:(cx1+cx2)/2,y2:-3*FH-2.4,stroke:'var(--accent)','stroke-width':'.08'},svg);
+  el('text',{x:(cx1+cx2)/2,y:-3*FH-2.9,'text-anchor':'middle','font-size':fs*.95,'font-weight':'700',fill:'var(--accent)'},svg,'العمود الرأسي المحمي');
+  el('text',{x:(cx1+cx2)/2,y:-3*FH-1.7+2.4+-1.6,'text-anchor':'middle','font-size':fs*.72,fill:'var(--ink-2)'},svg,'');
+  el('text',{x:off+15,y:-3*FH-1.2,'text-anchor':'start','font-size':fs*.75,fill:'var(--ink-2)'},svg,'لا معدات ولا تصريف مياه فوق الأرشيف');
+  el('text',{x:off,y:3.6,'text-anchor':'middle','font-size':fs*.85,'font-weight':'700'},svg,'شمال');
+  el('text',{x:off+30,y:3.6,'text-anchor':'middle','font-size':fs*.85,'font-weight':'700'},svg,'جنوب');
+  dim(svg,off,5.3,off+30,5.3,'30.00 m',.9,false);
+  return svg;
+}
+
+/* ---------- UI ---------- */
+const tabs = document.getElementById('tabs');
+SHEETS.forEach(s=>{ const b=document.createElement('button'); b.setAttribute('role','tab'); b.id='tab-'+s.k; b.dataset.k=s.k; b.innerHTML=`<span class="no">${s.no}</span><span class="nm">${s.nm}</span>`; b.onclick=()=>go(s.k); tabs.appendChild(b); });
+tabs.addEventListener('keydown',e=>{ if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight') return; const i=SHEETS.findIndex(s=>s.k===state.sheet); const n=(i+(e.key==='ArrowLeft'?1:-1)+SHEETS.length)%SHEETS.length; go(SHEETS[n].k); document.getElementById('tab-'+SHEETS[n].k).focus(); });
+
+const legend = document.getElementById('legend');
+for(const z of ['Z1','Z2','Z3','Z4']){ const li=document.createElement('li'); const Z=D.zones[z]; li.innerHTML=`<span class="sw" style="background:${ZC(z)};border-color:${ZS(z)}"></span><span><b>${z} · ${Z.ar}</b> <span class="mono" style="color:var(--ink-2);font-size:11px">${Z.en}</span><small>${Z.auth}</small></span>`; legend.appendChild(li); }
+
+function zoneMix(rooms){
+  const tot={}; let all=0; for(const r of rooms){ const a=area(poly(r)); tot[r.z]=(tot[r.z]||0)+a; all+=a; }
+  return {tot,all};
+}
+function floorSummary(f){
+  const {tot,all} = zoneMix(f.rooms);
+  const bars = ['Z1','Z2','Z3','Z4'].filter(z=>tot[z]).map(z=>`<span style="width:${tot[z]/all*100}%;background:${ZS(z)}" title="${z}"></span>`).join('');
+  const keys = ['Z1','Z2','Z3','Z4'].filter(z=>tot[z]).map(z=>`<span><b class="mono">${z}</b> ${fmt(tot[z])} م² (${Math.round(tot[z]/all*100)}٪)</span>`).join('');
+  const nQ = f.rooms.filter(r=>r.t==='ق').length, nS=f.rooms.filter(r=>r.t==='ص').length;
+  return `<span class="id">${f.sheet}</span><h3>${f.ar}: ${f.theme}</h3>
+  <p class="hint">اختر غرفة في المخطط أو في الجدول لعرض وظيفتها ومنطقتها.</p>
+  <div><div class="mix" role="img" aria-label="توزيع مساحة الطابق على المناطق">${bars}</div></div>
+  <div class="mixkey">${keys}</div>
+  <dl class="kv"><dt>عدد الفراغات</dt><dd>${f.rooms.length}</dd><dt>من التصور [ص]</dt><dd>${nS}</dd><dt>إضافات [ق]</dt><dd>${nQ}</dd></dl>`;
+}
+function roomCard(r, f){
+  const a = area(poly(r)); const Z = D.zones[r.z];
+  return `<span class="id">${r.id}${f?' · '+f.ar:''}</span><h3>${r.n}</h3><div class="en">${r.e}</div>
+  <div><span class="chip" style="background:${ZC(r.z)};border-color:${ZS(r.z)}">${r.z} · ${Z.ar}</span></div>
+  <dl class="kv"><dt>التحقق</dt><dd>${Z.auth}</dd><dt>المساحة</dt><dd><span class="mono">${fmt(a)}</span> م²</dd><dt>المصدر</dt><dd><span class="tag ${r.t==='ق'?'q':''}">[${r.t}]</span> ${D.tags[r.t]}</dd></dl>
+  <p style="margin:0;font-size:14px">${r.f}</p>
+  <button type="button" id="clear-sel" style="all:unset;cursor:pointer;font-size:12.5px;color:var(--accent);font-weight:600">عودة إلى ملخص اللوحة</button>`;
+}
+function siteCard(id){
+  const S=D.site;
+  if(id==='BLD') return `<span class="id">BLD</span><h3>مبنى مركز رَصين</h3><p style="margin:0;font-size:14px">ثلاثة طوابق بمساحة 1,200 م² لكل طابق. المدخل الرئيسي في الواجهة الجنوبية، ومدخل الموظفين شمالًا، ومدخل الخدمة شرقًا.</p><button type="button" id="clear-sel" style="all:unset;cursor:pointer;font-size:12.5px;color:var(--accent);font-weight:600">عودة إلى ملخص اللوحة</button>`;
+  const g = S.gates.find(x=>x.id===id); if(g) return `<span class="id">${g.id}</span><h3>${g.n}</h3><div><span class="chip" style="background:${ZC('Z0')};border-color:${ZS('Z0')}">Z0 · المحيط الخارجي</span></div><p style="margin:0;font-size:14px">${id==='GT-1'?'مدخل المشاة الوحيد من الشارع، وعليها كشك حراسة. الزائر يُوجَّه منها إلى المدخل الرئيسي عبر ممر مشاة يقطع صف الحواجز.':'مدخل المركبات الوحيد: سيارات الموظفين ومركبات التوريد، مع فحص المركبة عند الكشك. مركبات الطوارئ تدخل منها أيضًا.'}</p><button type="button" id="clear-sel" style="all:unset;cursor:pointer;font-size:12.5px;color:var(--accent);font-weight:600">عودة إلى ملخص اللوحة</button>`;
+  const e = S.elements.find(x=>x.id===id); if(e) return `<span class="id">${e.id}</span><h3>${e.n}</h3><p style="margin:0;font-size:14px">${e.f||'—'}</p><button type="button" id="clear-sel" style="all:unset;cursor:pointer;font-size:12.5px;color:var(--accent);font-weight:600">عودة إلى ملخص اللوحة</button>`;
+  return '';
+}
+function siteSummary(){ return `<span class="id">A-100</span><h3>الموقع العام</h3><p class="hint">اختر عنصرًا في المخطط لعرض دوره.</p><dl class="kv"><dt>الأرض</dt><dd><span class="mono">80 × 60</span> م (افتراض ف-4)</dd><dt>البوابات</dt><dd>2، عليها حراسة</dd><dt>مسافة الأمان</dt><dd>16 م جنوبًا، 14 م شمالًا</dd></dl>`; }
+function secSummary(){ return `<span class="id">A-104</span><h3>المقطع الرأسي (شمال ← جنوب)</h3><p class="hint">مقطع عند المحور x = 15 م. اختر فراغًا لعرض تفاصيله.</p><dl class="kv"><dt>ارتفاع الطابق</dt><dd><span class="mono">4.00</span> م (افتراض ف-3)</dd><dt>ارتفاع المبنى</dt><dd><span class="mono">12.00</span> م</dd></dl>`; }
+
+const inspect = document.getElementById('inspect');
+function findRoom(id){ for(const f of D.floors){ const r=f.rooms.find(x=>x.id===id); if(r) return [r,f]; } return [null,null]; }
+function select(id){
+  state.sel = id;
+  document.querySelectorAll('.room.sel').forEach(n=>n.classList.remove('sel'));
+  document.querySelectorAll('#sched tbody tr.on').forEach(n=>n.classList.remove('on'));
+  if(id){ document.querySelectorAll(`.room[data-id="${id}"]`).forEach(n=>n.classList.add('sel')); const tr=document.querySelector(`#sched tr[data-id="${id}"]`); if(tr) tr.classList.add('on'); }
+  const k = state.sheet;
+  if(!id){ inspect.innerHTML = k==='site'?siteSummary(): k==='sec'?secSummary(): floorSummary(D.floors.find(f=>f.id===k)); }
+  else if(k==='site') inspect.innerHTML = siteCard(id);
+  else { const [r,f]=findRoom(id); inspect.innerHTML = roomCard(r, k==='sec'?f:null); }
+  const c = document.getElementById('clear-sel'); if(c) c.onclick=()=>select(null);
+}
+function schedule(rows, title, showFloor){
+  document.getElementById('sched-title').textContent = title;
+  const t = document.getElementById('sched');
+  let sum=0;
+  t.innerHTML = `<thead><tr><th>الرمز</th><th>الفراغ</th>${showFloor?'<th>الطابق</th>':''}<th>المنطقة</th><th style="text-align:left">م²</th><th>المصدر</th></tr></thead><tbody>${rows.map(([r,f])=>{const a=area(poly(r)); sum+=a; return `<tr data-id="${r.id}" tabindex="0"><td class="mono" style="text-align:right">${r.id}</td><td>${r.n}</td>${showFloor?`<td>${f.ar}</td>`:''}<td><span class="chip" style="background:${ZC(r.z)};border-color:${ZS(r.z)}">${r.z}</span></td><td class="num">${fmt(a)}</td><td><span class="tag ${r.t==='ق'?'q':''}">[${r.t}]</span></td></tr>`}).join('')}</tbody><tfoot><tr><td></td><td>المجموع</td>${showFloor?'<td></td>':''}<td></td><td class="num">${fmt(sum)}</td><td></td></tr></tfoot>`;
+  t.querySelectorAll('tbody tr').forEach(tr=>{ tr.onclick=()=>select(tr.dataset.id); tr.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault(); select(tr.dataset.id);} }; });
+}
+function siteSchedule(){
+  document.getElementById('sched-title').textContent = 'عناصر الموقع العام';
+  const S=D.site, t=document.getElementById('sched');
+  const rows = [...S.gates.map(g=>[g.id,g.n,'Z0']), ...S.elements.filter(e=>e.f).map(e=>[e.id,e.n,e.k==='parkout'?'خارج السور':'Z0'])];
+  t.innerHTML = `<thead><tr><th>الرمز</th><th>العنصر</th><th>المنطقة</th></tr></thead><tbody>${rows.map(([id,n,z])=>`<tr data-id="${id}" tabindex="0"><td class="mono" style="text-align:right">${id}</td><td>${n}</td><td>${z}</td></tr>`).join('')}</tbody>`;
+  t.querySelectorAll('tbody tr').forEach(tr=>{ tr.onclick=()=>select(tr.dataset.id); tr.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault(); select(tr.dataset.id);} }; });
+}
+function go(k){
+  state.sheet=k; state.sel=null;
+  try{ localStorage.setItem('rasin-sheet',k); }catch(e){}
+  try{ history.replaceState(null,'','#'+k); }catch(e){}
+  document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-selected', String(b.dataset.k===k)));
+  const s = SHEETS.find(x=>x.k===k);
+  const dr = document.getElementById('drawing'); dr.innerHTML='';
+  let svg, notes;
+  document.getElementById('tb-no').textContent = s.no;
+  document.getElementById('drawing').classList.toggle('wide', k==='sec');
+  if(k==='site'){ svg=drawSite(); notes=SITE_NOTES; document.getElementById('sh-title').textContent='الموقع العام'; document.getElementById('sh-theme').textContent='السور والبوابات والمسارات ومسافات الأمان'; document.getElementById('tb-scale').textContent='≈ 1:500'; document.getElementById('tb-area').textContent='4,800 م²'; siteSchedule(); }
+  else if(k==='sec'){ svg=drawSection(); notes=SEC_NOTES; document.getElementById('sh-title').textContent='المقطع الرأسي'; document.getElementById('sh-theme').textContent='تدرج الحساسية مع الارتفاع'; document.getElementById('tb-scale').textContent='≈ 1:250'; document.getElementById('tb-area').textContent='3,600 م² مبنية'; const rows=[]; D.floors.forEach(f=>f.rooms.filter(r=>r.z==='Z4').forEach(r=>rows.push([r,f]))); schedule(rows,'الفراغات عالية الحساسية (Z4) في المبنى كله',true); }
+  else { const f=D.floors.find(x=>x.id===k); svg=drawFloor(f); notes=f.notes; document.getElementById('sh-title').textContent=f.ar; document.getElementById('sh-theme').textContent=f.theme; document.getElementById('tb-scale').textContent='≈ 1:200'; document.getElementById('tb-area').textContent='1,200 م²'; schedule(f.rooms.map(r=>[r,f]), `جدول غرف ${f.ar}`, false); }
+  dr.appendChild(svg);
+  svg.querySelectorAll('.room').forEach(g=>{ g.addEventListener('click',()=>select(g.dataset.id)); g.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault(); select(g.dataset.id);} }); });
+  document.getElementById('notes').innerHTML = notes.map(n=>`<li>${n}</li>`).join('');
+  applyToggles(); select(null);
+}
+function applyToggles(){
+  const dr=document.getElementById('drawing');
+  dr.classList.toggle('nozones', !document.getElementById('t-zones').checked);
+  dr.classList.toggle('nolabels', !document.getElementById('t-labels').checked);
+  for(const k of ['visitor','staff','service','egress']) dr.classList.toggle('hide-'+k, !document.getElementById('t-'+k).checked);
+}
+document.querySelectorAll('.toggles input').forEach(i=>i.addEventListener('change',applyToggles));
+go(state.sheet);
+})();
+</script>
+
+</body>
+</html>

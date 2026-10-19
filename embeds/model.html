@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>نموذج رَصين التفاعلي</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@500;700&display=swap">
+<style>
+/* Layout: the model is the hero — a large viewport with an elevator-panel floor switcher and view controls; inspector, tours and room directory at the side */
+:root{
+  --paper:#EEF0EC; --sheet:#FAFAF7; --ink:#1B2226; --ink-2:#55616A; --rule:#CBD1CC; --wall:#1F282D; --accent:#1E5B74;
+  --sky:#E6EAE7; --ground:#DCE1DB; --plot:#E8EBE6;
+  --wall-a:#9AA6A3; --wall-b:#B9C2BF; --wall-x:#4D5A5F; --wall-xb:#6E7B80; --slab:#59656A; --slab-b:#7C878B; --wall-top:#2B3439;
+  --z0:#E2E5E0; --z1:#CFE7D8; --z2:#CCDCEE; --z3:#EED9AC; --z4:#E7A797;
+  --z0s:#7C857F; --z1s:#3B8660; --z2s:#3A6CA3; --z3s:#9C7019; --z4s:#AE3F2A;
+  --lift:#C8CDCB; --stair:#D9DDDB;
+  --p-visitor:#25836A; --p-staff:#2D5FA6; --p-service:#BE6A22; --p-egress:#C0392F;
+  --d-cam:#5B3E9E; --d-acc:#1E5B74; --d-ids:#C25418; --d-scr:#7D6B10; --d-grd:#1F282D; --d-env:#17807C; --d-bar:#7A4B22;
+  --road:#CDD2CD; --green:#C3D8BE; --tree:#6E9B69; --fence:#1F282D; --hi:#F2B705;
+  --f-display:"Noto Kufi Arabic","IBM Plex Sans Arabic",Tahoma,sans-serif;
+  --f-body:"IBM Plex Sans Arabic",Tahoma,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0F1416; --sheet:#161D20; --ink:#E2E7E5; --ink-2:#9AA6AA; --rule:#2E383C; --wall:#D3DBD8; --accent:#72B6CF;
+  --sky:#12191B; --ground:#1A2224; --plot:#1F282A;
+  --wall-a:#56636A; --wall-b:#6C7A80; --wall-x:#8E9CA1; --wall-xb:#A9B5B9; --slab:#3A4549; --slab-b:#4B575B; --wall-top:#C9D2CF;
+  --z0:#232A2C; --z1:#22473A; --z2:#22395A; --z3:#58441C; --z4:#6E3023;
+  --z0s:#8A9490; --z1s:#6CC296; --z2s:#7FA9DE; --z3s:#E1B04F; --z4s:#F08A72;
+  --lift:#3C474B; --stair:#333E42;
+  --p-visitor:#4FC7A0; --p-staff:#79A6EA; --p-service:#F0A15A; --p-egress:#F07467;
+  --d-cam:#B49BF0; --d-acc:#72B6CF; --d-ids:#F59A5E; --d-scr:#D9C55A; --d-grd:#E2E7E5; --d-env:#5ED1CB; --d-bar:#D9A273;
+  --road:#283033; --green:#1E2D1F; --tree:#4E7449; --fence:#C9D2CF; --hi:#F2C94C; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --paper:#0F1416; --sheet:#161D20; --ink:#E2E7E5; --ink-2:#9AA6AA; --rule:#2E383C; --wall:#D3DBD8; --accent:#72B6CF;
+  --sky:#12191B; --ground:#1A2224; --plot:#1F282A;
+  --wall-a:#56636A; --wall-b:#6C7A80; --wall-x:#8E9CA1; --wall-xb:#A9B5B9; --slab:#3A4549; --slab-b:#4B575B; --wall-top:#C9D2CF;
+  --z0:#232A2C; --z1:#22473A; --z2:#22395A; --z3:#58441C; --z4:#6E3023;
+  --z0s:#8A9490; --z1s:#6CC296; --z2s:#7FA9DE; --z3s:#E1B04F; --z4s:#F08A72;
+  --lift:#3C474B; --stair:#333E42;
+  --p-visitor:#4FC7A0; --p-staff:#79A6EA; --p-service:#F0A15A; --p-egress:#F07467;
+  --d-cam:#B49BF0; --d-acc:#72B6CF; --d-ids:#F59A5E; --d-scr:#D9C55A; --d-grd:#E2E7E5; --d-env:#5ED1CB; --d-bar:#D9A273;
+  --road:#283033; --green:#1E2D1F; --tree:#4E7449; --fence:#C9D2CF; --hi:#F2C94C; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.65;direction:rtl;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+.wrap{max-width:1320px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;margin:0;text-wrap:balance;line-height:1.35}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate}
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;border-bottom:2px solid var(--wall);padding-bottom:14px}
+.brand{display:flex;flex-direction:column;gap:2px}
+.brand .eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;color:var(--ink-2);direction:ltr;text-align:right}
+.brand h1{font-size:clamp(22px,3.2vw,32px)}
+.brand p{margin:0;color:var(--ink-2);font-size:14px}
+.how{font-size:13px;color:var(--ink-2);max-width:46ch;margin:0}
+.board{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px;align-items:start}
+@media (max-width:980px){.board{grid-template-columns:minmax(0,1fr)}}
+.viewer{position:relative;background:var(--sky);border:1px solid var(--rule);border-radius:4px;overflow:hidden;height:min(74vh,760px);min-height:440px}
+@media (max-width:600px){.viewer{height:68vh;min-height:400px}}
+.viewer > svg.scene{display:block;width:100%;height:100%;touch-action:none;cursor:grab;direction:ltr}
+.viewer > svg.scene:active{cursor:grabbing}
+.viewer > svg.scene:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.elev{position:absolute;top:12px;right:12px;display:flex;flex-direction:column;gap:6px;background:var(--sheet);border:1px solid var(--rule);border-radius:28px;padding:8px 6px;box-shadow:0 2px 10px color-mix(in srgb,var(--wall) 15%,transparent)}
+.elev .lbl{font-size:10.5px;color:var(--ink-2);text-align:center;letter-spacing:.02em}
+.elev button{all:unset;cursor:pointer;width:42px;height:42px;border-radius:50%;border:1.5px solid var(--rule);display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-weight:700;font-size:15px;color:var(--ink);background:var(--paper)}
+.elev button small{font-size:10px;font-family:var(--f-body);font-weight:600}
+.elev button[aria-pressed="true"]{background:var(--wall);color:var(--sheet);border-color:var(--wall);box-shadow:0 0 0 3px color-mix(in srgb,var(--hi) 55%,transparent)}
+.elev button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.elev hr{border:none;border-top:1px solid var(--rule);margin:2px 4px;width:30px}
+.vctl{position:absolute;bottom:12px;right:12px;display:flex;gap:6px;flex-wrap:wrap}
+.vctl button{all:unset;cursor:pointer;min-width:38px;height:38px;padding:0 10px;border-radius:4px;background:var(--sheet);border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--ink)}
+.vctl button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.vctl button svg{width:18px;height:18px}
+.where{position:absolute;top:12px;left:12px;background:var(--sheet);border:1px solid var(--rule);border-radius:4px;padding:8px 12px;max-width:min(60%,360px);display:flex;flex-direction:column;gap:0}
+.where b{font-family:var(--f-display);font-size:16px}
+.where span{font-size:12.5px;color:var(--ink-2)}
+.compass{position:absolute;bottom:62px;left:16px;width:52px;height:52px}
+.tourcard[hidden]{display:none}
+.tourcard{position:absolute;left:12px;right:70px;bottom:12px;background:var(--sheet);border:1.5px solid var(--wall);border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;max-width:560px;box-shadow:0 4px 18px color-mix(in srgb,var(--wall) 18%,transparent)}
+.tourcard .meta{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--ink-2)}
+.tourcard h3{font-size:17px}
+.tourcard p{margin:0;font-size:14px}
+.tourcard .prog{display:flex;gap:3px}
+.tourcard .prog i{flex:1;height:3px;background:var(--rule);border-radius:2px}
+.tourcard .prog i.on{background:var(--accent)}
+.tourcard .nav{display:flex;gap:6px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.tourcard .nav div{display:flex;gap:6px}
+.btn{all:unset;cursor:pointer;padding:6px 12px;border-radius:4px;border:1px solid var(--rule);font-size:13px;font-weight:600;background:var(--paper)}
+.btn.primary{background:var(--wall);color:var(--sheet);border-color:var(--wall)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn[disabled]{opacity:.4;cursor:default}
+@media (max-width:600px){.tourcard{right:12px;bottom:58px}.compass{display:none}}
+aside.panel{display:flex;flex-direction:column;gap:14px;min-width:0}
+.card{background:var(--sheet);border:1px solid var(--rule);border-radius:4px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card h3{font-size:15px}
+.inspect .id{font-family:var(--f-mono);font-size:12px;color:var(--ink-2);direction:ltr;text-align:right}
+.inspect h3{font-size:18px}
+.inspect .en{font-family:var(--f-mono);font-size:12px;color:var(--ink-2);direction:ltr;text-align:right;margin-top:-6px}
+.kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;font-size:13px;margin:0}
+.kv dt{color:var(--ink-2)}
+.kv dd{margin:0}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:1px 8px;border-radius:3px;border:1.5px solid;white-space:nowrap}
+.fn{display:inline-block;font-size:11.5px;font-weight:600;padding:0 7px;border-radius:10px;border:1px solid var(--rule);margin-inline-end:4px}
+.hint{font-size:12.5px;color:var(--ink-2);margin:0}
+.linkbtn{all:unset;cursor:pointer;font-size:12.5px;color:var(--accent);font-weight:600}
+.linkbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.devlist{display:flex;flex-direction:column;gap:3px;margin:0;padding:0;list-style:none}
+.devlist button{all:unset;cursor:pointer;display:grid;grid-template-columns:12px auto minmax(0,1fr);gap:8px;align-items:center;font-size:12.5px;padding:3px 6px;border-radius:3px;width:100%;box-sizing:border-box}
+.devlist button:hover,.devlist button:focus-visible{background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.devlist .dot{width:10px;height:10px;border-radius:50%}
+.devlist .mono{font-size:11.5px;color:var(--ink-2)}
+.tours{display:flex;flex-direction:column;gap:6px}
+.tours button{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:0;padding:9px 12px;border:1px solid var(--rule);border-radius:4px}
+.tours button b{font-size:14px}
+.tours button span{font-size:12.5px;color:var(--ink-2)}
+.tours button:hover{border-color:var(--accent)}
+.tours button[aria-pressed="true"]{border-color:var(--wall);background:color-mix(in srgb,var(--wall) 7%,transparent)}
+.tours button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.toggles{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.toggles label{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;padding:5px 8px;border:1px solid var(--rule);border-radius:4px;min-height:36px}
+.toggles input{accent-color:var(--accent);width:16px;height:16px;margin:0;flex:0 0 auto}
+.dir{display:flex;flex-direction:column;gap:2px;max-height:300px;overflow:auto;margin:0;padding:0;list-style:none}
+.dir button{all:unset;cursor:pointer;display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:8px;align-items:center;padding:4px 6px;border-radius:3px;font-size:13px;width:100%;box-sizing:border-box}
+.dir button:hover,.dir button:focus-visible,.dir button.on{background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.dir .mono{font-size:11.5px;color:var(--ink-2)}
+.dir .sw{width:12px;height:12px;border-radius:2px;border:1.5px solid}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px}
+.legend span{display:inline-flex;gap:6px;align-items:center}
+.legend i{width:12px;height:12px;border-radius:2px;border:1.5px solid;display:inline-block}
+.foot{font-size:12.5px;color:var(--ink-2);border-top:1px solid var(--rule);padding-top:12px}
+.decisions{border:1.5px solid var(--wall)}
+.decisions ul{margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:7px;font-size:14px}
+/* scene */
+.scene text{font-family:var(--f-body);pointer-events:none}
+.tile{cursor:pointer}
+.tile:hover{filter:brightness(1.06)}
+.tile.sel{stroke:var(--accent);stroke-width:2.5}
+.tile.hi{fill:var(--hi)!important;fill-opacity:.85}
+.dev{cursor:pointer}
+.dev.hi{stroke:var(--hi);stroke-width:3}
+@media (prefers-reduced-motion:no-preference){.tile.hi{animation:pulse 1.6s ease-in-out infinite}@keyframes pulse{50%{fill-opacity:.55}}}
+.lbl-name{font-weight:700;fill:var(--ink);paint-order:stroke;stroke:var(--sheet);stroke-width:3px;stroke-linejoin:round}
+.lbl-id{font-family:var(--f-mono)!important;fill:var(--ink-2);paint-order:stroke;stroke:var(--sheet);stroke-width:3px}
+.flabel{font-family:var(--f-display)!important;font-weight:700;fill:var(--ink);paint-order:stroke;stroke:var(--sky);stroke-width:4px}
+.off-labels .lbls{display:none}
+.off-devices .devs{display:none}
+.off-paths .paths{display:none}
+.off-zones .tile{fill:var(--stair)!important}
+.nojs{padding:20px}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <span class="eyebrow">RASIN · INTERACTIVE MODEL · v0.4</span>
+      <h1>مركز رَصين للأمن والحماية المتكاملة</h1>
+      <p>المرحلة 4: النموذج المعماري التفاعلي</p>
+    </div>
+    <p class="how">اسحب لتدوير النموذج، وحرّك العجلة أو قرّب بإصبعين للتكبير. اختر الطابق من لوحة المصعد، وانقر على أي غرفة أو جهاز لعرض تفاصيله.</p>
+  </header>
+
+  <div class="board">
+    <div class="viewer" id="viewer">
+      <svg id="scene" class="scene" tabindex="0" role="application" aria-label="نموذج ثلاثي الأبعاد لمبنى مركز رَصين؛ استخدم الأسهم للتدوير وعلامتي الزائد والناقص للتكبير"></svg>
+      <div class="where" aria-live="polite"><b id="where-t"></b><span id="where-s"></span></div>
+      <svg class="compass" id="compass" viewBox="-30 -30 60 60" aria-hidden="true"></svg>
+      <div class="elev" role="group" aria-label="لوحة المصعد: اختيار الطابق">
+        <span class="lbl">الطوابق</span>
+        <button type="button" data-mode="2" aria-label="الدور الثاني">٢</button>
+        <button type="button" data-mode="1" aria-label="الدور الأول">١</button>
+        <button type="button" data-mode="G" aria-label="الدور الأرضي">أ</button>
+        <hr>
+        <button type="button" data-mode="site" aria-label="المبنى كاملًا في موقعه"><small>الكل</small></button>
+        <button type="button" data-mode="explode" aria-label="الطوابق مفصولة"><small>فصل</small></button>
+      </div>
+      <div class="vctl">
+        <button type="button" id="rotL" aria-label="تدوير 45 درجة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+        <button type="button" id="rotR" aria-label="تدوير 45 درجة بالعكس"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></button>
+        <button type="button" id="zin" aria-label="تكبير">+</button>
+        <button type="button" id="zout" aria-label="تصغير">−</button>
+        <button type="button" id="reset">إعادة</button>
+      </div>
+      <div class="tourcard" id="tourcard" hidden></div>
+    </div>
+
+    <aside class="panel">
+      <div class="card inspect" id="inspect"></div>
+      <div class="card">
+        <h3>جولات موجّهة</h3>
+        <div class="tours" id="tours"></div>
+      </div>
+      <div class="card">
+        <h3>الطبقات</h3>
+        <div class="toggles">
+          <label><input type="checkbox" id="t-zones" checked> ألوان المناطق</label>
+          <label><input type="checkbox" id="t-labels" checked> أسماء الغرف</label>
+          <label><input type="checkbox" id="t-devices" checked> الأجهزة الأمنية</label>
+          <label><input type="checkbox" id="t-paths"> مسارات الحركة</label>
+        </div>
+        <div class="legend" id="legend"></div>
+      </div>
+      <div class="card">
+        <h3 id="dir-title">غرف الطابق</h3>
+        <ul class="dir" id="dir"></ul>
+      </div>
+    </aside>
+  </div>
+
+  <p class="foot">النموذج مبني آليًا من ملفات البيانات نفسها التي بُنيت منها المخططات ومخطط الأمن المادي (rasin.json وsecurity.json وtours.json)؛ أي تعديل على غرفة أو جهاز يظهر هنا دون رسم جديد. الأبعاد افتراضية (ف-3، ف-4)، وارتفاع الجدران مقطوع عمدًا للعرض.</p>
+</div>
+
+<script id="data" type="application/json">{"meta":{"project":"مركز رَصين للأمن والحماية المتكاملة","project_en":"RASIN Integrated Security Center","version":"0.2","phase":2,"units":"m","building":{"w":40,"h":30,"floor_height":4,"origin_on_site":[20,14]},"site":{"w":80,"h":60},"note":"الأبعاد افتراضية إرشادية (ف-3، ف-4) وليست هندسية. المحور x من الغرب إلى الشرق، والمحور y من الشمال إلى الجنوب."},"zones":{"Z0":{"ar":"المحيط الخارجي","en":"Perimeter","auth":"حراسة البوابة وفحص المركبات"},"Z1":{"ar":"عامة","en":"Public","auth":"تسجيل الزائر والتحقق من الهوية والفحص الأمني"},"Z2":{"ar":"شبه مقيدة","en":"Semi-restricted","auth":"بطاقة زائر مع مرافق، أو بطاقة موظف"},"Z3":{"ar":"مقيدة","en":"Restricted","auth":"بطاقة موظف مع صلاحية الطابق"},"Z4":{"ar":"عالية الحساسية","en":"High security","auth":"بطاقة مع رمز سري (PIN) أو بصمة، وسجل دخول وخروج"}},"tags":{"ص":"من التصور المعتمد","ق":"قرار تصميمي في المرحلة 2","ح":"عنصر حركة وخدمة"},"floors":[{"id":"G","sheet":"A-101","ar":"الدور الأرضي","en":"Ground Floor","theme":"الاستقبال والتمكين السيبراني","rooms":[{"id":"G-01","n":"قاعة التوعية والتدريب","e":"Awareness & Training Hall","z":"Z2","t":"ص","r":[3,21,9,9],"d":[[7.5,21,"h",1.6],[7.5,30,"h",1.6,"exit"]],"f":"برامج التوعية والتدريب السيبراني للزوار والموظفين، بنحو 40 مقعدًا. لها مخرج طوارئ مباشر إلى الساحة."},{"id":"G-02","n":"قاعة اجتماعات (أ)","e":"Meeting Room A","z":"Z2","t":"ص","r":[0,15,6,4],"d":[[3,19,"h",1]],"f":"اجتماعات مع الزوار والعملاء دون دخولهم المناطق التشغيلية."},{"id":"G-03","n":"قاعة اجتماعات (ب)","e":"Meeting Room B","z":"Z2","t":"ص","r":[6,15,6,4],"d":[[9,19,"h",1]],"f":"اجتماعات صغيرة ومقابلات."},{"id":"G-04","n":"ممر الزوار","e":"Visitor Corridor","z":"Z2","t":"ق","r":[0,19,12,2],"d":[],"f":"يربط الردهة بالقاعات، ولا يتصل بالممر الداخلي للموظفين.","circ":true},{"id":"G-05","n":"دورات مياه الزوار","e":"Visitor WC","z":"Z2","t":"ق","r":[0,21,3,9],"d":[[1.5,21,"h",1]],"f":"داخل نطاق الزوار حتى لا يحتاج الزائر إلى عبور منطقة مقيدة.","wet":true},{"id":"G-06","n":"الردهة والاستقبال","e":"Lobby & Reception","z":"Z1","t":"ص","r":[12,15,17,7],"d":[[12,20,"v",1.8]],"f":"تسجيل الزوار وإصدار بطاقات الزائر المؤقتة. على حدها الشمالي بوابات دوارة تفصلها عن الممر الداخلي."},{"id":"G-07","n":"غرفة الانتظار","e":"Waiting Room","z":"Z1","t":"ص","r":[12,22,5,8],"d":[[14.5,22,"h",1]],"f":"انتظار الزائر حتى يحضر مرافقه."},{"id":"G-08","n":"الفحص الأمني والتحقق من الهوية","e":"Security Screening & ID Check","z":"Z1","t":"ص","r":[17,22,12,4],"d":[[23,22,"h",3]],"f":"جهاز كشف المعادن وجهاز الأشعة للحقائب ومطابقة الهوية قبل دخول الردهة."},{"id":"G-09","n":"المدخل الرئيسي (بهو عازل)","e":"Main Entrance Vestibule","z":"Z1","t":"ص","r":[20,26,6,4],"d":[[23,26,"h",2],[23,30,"h",2,"main"]],"f":"بابان متتاليان (Airlock) يمنعان الاندفاع المباشر ويضبطان التكييف."},{"id":"G-10","n":"خزائن أمانات الزوار","e":"Visitor Lockers","z":"Z1","t":"ق","r":[17,26,3,4],"d":[[18.5,26,"h",1]],"f":"يودع فيها الزائر الهاتف ووسائط التخزين والممنوعات قبل الدخول."},{"id":"G-11","n":"نقطة الحراسة عند المدخل","e":"Entrance Guard Post","z":"Z3","t":"ق","r":[26,26,3,4],"d":[[27.5,26,"h",1]],"f":"حارس يرى البهو العازل والفحص مباشرة."},{"id":"G-12","n":"غرفة الحراسة والتحكم الأمني","e":"Security Control Room","z":"Z4","t":"ق","r":[29,15,7,15],"d":[[32.5,15,"h",1]],"f":"مراقبة الكاميرات والإنذارات والبوابات والاستجابة الميدانية، على مدار الساعة. نافذة مقاومة على الردهة والفحص، وبابها من الممر الداخلي فقط."},{"id":"G-13","n":"غرفة الحراس","e":"Guards' Room","z":"Z3","t":"ق","r":[36,15,4,15],"d":[[38,15,"h",1]],"f":"تبديل المناوبات وخزائن الحراس وتجهيزاتهم."},{"id":"G-14","n":"الممر الداخلي","e":"Internal Corridor","z":"Z3","t":"ح","r":[0,12,40,3],"d":[[0,13.5,"v",1.4,"exit"]],"f":"ممر الموظفين؛ لا يُدخل إليه من الردهة إلا عبر البوابات الدوارة.","circ":true},{"id":"G-15","n":"الدرج (أ)","e":"Stair A","z":"Z3","t":"ح","r":[0,6,4,6],"d":[[2,12,"h",1.2],[0,9,"v",1.2,"exit"]],"f":"درج طوارئ يخرج مباشرة إلى الغرب.","stair":true},{"id":"G-16","n":"استراحة الموظفين والمطبخ ودورات المياه","e":"Staff Lounge, Pantry & WC","z":"Z3","t":"ص","p":[[0,0],[10,0],[10,12],[4,12],[4,6],[0,6]],"d":[[7,12,"h",1.2]],"f":"خدمات الموظفين داخل المنطقة المقيدة.","wet":true},{"id":"G-17","n":"خدمات الموظفين (غرف تبديل ومصلى)","e":"Staff Services","z":"Z3","t":"ص","r":[10,0,8,12],"d":[[14,12,"h",1.2]],"f":"خزائن شخصية؛ لا تُدخل الحقائب الشخصية إلى غرف العمليات."},{"id":"G-18","n":"مدخل الموظفين","e":"Staff Entrance","z":"Z2","t":"ص","r":[18,0,4,4],"d":[[20,0,"h",1.6,"main"],[20,4,"h",1.6,"turnstile"]],"f":"دخول الموظفين من المواقف الشمالية ببطاقة وبوابة دوارة."},{"id":"G-19","n":"ممر الموظفين","e":"Staff Spine","z":"Z3","t":"ح","r":[18,4,4,8],"d":[],"f":"يصل مدخل الموظفين بالممر الداخلي والمصاعد.","circ":true},{"id":"G-20","n":"غرفة الإتلاف الآمن للمستندات والوسائط","e":"Shredding & Media Destruction","z":"Z3","t":"ق","r":[22,0,8,6],"d":[[22,5,"v",1]],"f":"إتلاف الورق ووسائط التخزين قبل خروجها من المبنى (ISO 27001: 7.14)."},{"id":"G-21","n":"المصاعد","e":"Elevators","z":"Z3","t":"ح","r":[22,6,6,6],"d":[[25,12,"h",3]],"f":"مصعدان للأفراد ومصعد خدمة؛ لا تعمل إلا ببطاقة، والطوابق حسب الصلاحية.","lift":true},{"id":"G-22","n":"غرفة الاتصالات الفرعية","e":"IDF Room","z":"Z4","t":"ق","r":[28,6,2,6],"d":[[29,12,"h",0.9]],"f":"تجهيزات الشبكة الخاصة بالطابق."},{"id":"G-23","n":"غرفة الكهرباء الرئيسية","e":"Main Electrical Room","z":"Z4","t":"ق","r":[30,0,4,6],"d":[[34,3,"v",1]],"f":"اللوحات الرئيسية؛ يدخلها الفني من مدخل الخدمة دون المرور بالمكاتب."},{"id":"G-24","n":"فحص البريد والتوريدات","e":"Mail & Delivery Screening","z":"Z3","t":"ق","r":[30,6,4,6],"d":[[32,12,"h",1],[34,9,"v",1]],"f":"فحص الطرود والتوريدات قبل توزيعها داخل المبنى."},{"id":"G-25","n":"مدخل الخدمة والتحميل","e":"Service Entrance & Loading","z":"Z2","t":"ص","r":[34,0,6,6],"d":[[40,3,"v",2.4,"main"],[35,6,"h",1.2]],"f":"استلام التوريدات من ساحة الخدمة."},{"id":"G-26","n":"ممر الخدمة","e":"Service Passage","z":"Z3","t":"ح","r":[34,6,2,6],"d":[],"f":"يوصل مدخل الخدمة بالممر الداخلي.","circ":true},{"id":"G-27","n":"الدرج (ب)","e":"Stair B","z":"Z3","t":"ح","r":[36,6,4,6],"d":[[38,12,"h",1.2],[40,9,"v",1.2,"exit"]],"f":"درج طوارئ يخرج مباشرة إلى ساحة الخدمة.","stair":true}],"special":{"turnstiles":[[19,15,6]],"paths":{"visitor":[[[23,33],[23,28],[23,24],[23,19],[12,20],[3,20]],[[23,19],[14.5,21],[14.5,25]]],"staff":[[[20,-3],[20,2],[20,8],[20,13.5],[25,13.5],[25,10]],[[23,19],[22,15.6],[22,13.5]]],"service":[[[43,3],[37,3],[35,8],[35,13.5],[26,13.5],[26,10]]],"egress":[[[30,13.5],[38,13.5],[38,9],[41.5,9]],[[10,13.5],[2,13.5],[2,9],[-1.5,9]],[[7.5,25],[7.5,31.5]],[[23,24],[23,31.5]]]}},"notes":["المدخل الرئيسي في الواجهة الجنوبية، ويمر الزائر بثلاث مراحل متتالية: البهو العازل، ثم الفحص الأمني، ثم الردهة. هذا تسلسل ردع ثم كشف قبل أي وصول.","كل ما يحتاجه الزائر (الانتظار، القاعات، التدريب، دورات المياه) يقع جنوب خط البوابات الدوارة، فلا سبب يدفعه لعبور المنطقة المقيدة.","المصاعد والسلالم كلها شمال خط البوابات؛ الزائر لا يصل إلى أي طابق علوي إلا ببطاقة زائر مفعلة ومرافق.","غرفة الحراسة والتحكم ترى الردهة والفحص عبر نافذة مقاومة، لكن بابها من الممر الداخلي فقط، فلا يُقتحم من جهة الجمهور.","ثلاثة مسارات منفصلة: الزوار من الجنوب، والموظفون من الشمال، والتوريدات من الشرق عبر غرفة فحص البريد. لا يتقاطع مسار الزائر مع مسار التوريد.","غرفة الإتلاف الآمن قرب مدخل الخدمة، لأن المستندات والوسائط تخرج من المبنى بعد إتلافها فقط."]},{"id":"1","sheet":"A-102","ar":"الدور الأول","en":"First Floor","theme":"العمليات السيبرانية والتهديدات","rooms":[{"id":"1-01","n":"تحليل التهديدات والاستخبارات السيبرانية","e":"Threat Analysis & Cyber Intelligence","z":"Z3","t":"ص","r":[0,15,10,15],"d":[[5,15,"h",1.2]],"f":"رصد التهديدات وتحليل المؤشرات وتغذية مركز العمليات بها."},{"id":"1-02","n":"مركز العمليات الأمنية","e":"Security Operations Center (SOC)","z":"Z4","t":"ص","r":[10,15,18,15],"d":[[19,15,"h",1.6]],"f":"مراقبة الأحداث على مدار الساعة، ويستقبل أحداث الأنظمة المادية لربطها بالأحداث السيبرانية. زجاج الواجهة الجنوبية معتم حتى لا تُرى الشاشات من الخارج."},{"id":"1-03","n":"غرفة الاستجابة للحوادث","e":"Incident Response Room","z":"Z4","t":"ص","r":[28,15,8,8],"d":[[32,15,"h",1.2],[28,19,"v",1.2]],"f":"إدارة الحادث عند تصعيده؛ متصلة مباشرة بمركز العمليات."},{"id":"1-04","n":"التنسيق ومراجعة الحوادث","e":"Coordination & Incident Review","z":"Z3","t":"ص","r":[28,23,12,7],"d":[[32,23,"h",1],[28,26.5,"v",1]],"f":"اجتماعات التنسيق ومراجعة ما بعد الحادث (Lessons Learned)."},{"id":"1-05","n":"مكتب مشرف المناوبة","e":"Shift Supervisor Office","z":"Z3","t":"ق","r":[36,15,4,8],"d":[[38,15,"h",1]],"f":"إشراف المناوبة وقرار التصعيد إلى غرفة الاستجابة."},{"id":"1-06","n":"حماية المعلومات والأنظمة","e":"Information & Systems Protection","z":"Z3","t":"ص","p":[[0,0],[12,0],[12,12],[4,12],[4,6],[0,6]],"d":[[8,12,"h",1.2]],"f":"إدارة الضوابط التقنية لحماية الأنظمة والبيانات."},{"id":"1-07","n":"غرفة الطاقة غير المنقطعة والبطاريات","e":"UPS & Battery Room","z":"Z4","t":"ق","r":[12,0,10,4],"d":[[17,4,"h",1.2]],"f":"تغذي غرفة الخوادم عند انقطاع الكهرباء حتى يعمل المولد. تحمي غرفة الخوادم من الجدار الخارجي."},{"id":"1-08","n":"غرفة الخوادم","e":"Server Room","z":"Z4","t":"ق","p":[[12,4],[22,4],[22,12],[16,12],[16,9],[12,9]],"d":[],"f":"قلب الطابق، بلا جدار خارجي ولا نافذة، وتحتها غرف جافة في الأرضي. الدخول عبر الغرفة العازلة فقط (ق-1، ق-2)."},{"id":"1-09","n":"الغرفة العازلة","e":"Mantrap","z":"Z4","t":"ق","r":[12,9,4,3],"d":[[14,12,"h",1],[16,10.5,"v",1]],"f":"بابان لا يفتحان معًا، وتحقق ثنائي؛ يمنع التتبع خلف موظف."},{"id":"1-10","n":"تشغيل ومراقبة الأنظمة","e":"Systems Operations & Monitoring","z":"Z3","t":"ص","p":[[22,0],[34,0],[34,12],[30,12],[30,6],[22,6]],"d":[[32,12,"h",1.2]],"f":"مراقبة أداء الخوادم والشبكات وتوفرها؛ مجاورة لغرفة الخوادم دون أن تفتح عليها."},{"id":"1-11","n":"المصاعد","e":"Elevators","z":"Z3","t":"ح","r":[22,6,6,6],"d":[[25,12,"h",3]],"f":"تفتح على الممر الداخلي؛ لا يتوقف المصعد هنا إلا لمن يملك صلاحية الطابق.","lift":true},{"id":"1-12","n":"غرفة الاتصالات الفرعية","e":"IDF Room","z":"Z4","t":"ق","r":[28,6,2,6],"d":[[29,12,"h",0.9]],"f":"تجهيزات الشبكة الخاصة بالطابق."},{"id":"1-13","n":"دورات المياه والمطبخ","e":"WC & Pantry","z":"Z3","t":"ق","p":[[34,0],[40,0],[40,6],[36,6],[36,12],[34,12]],"d":[[35,12,"h",1.2]],"f":"تخدم فرق المناوبة على مدار الساعة؛ بعيدة عن غرفة الخوادم.","wet":true},{"id":"1-14","n":"الممر الداخلي","e":"Internal Corridor","z":"Z3","t":"ح","r":[0,12,40,3],"d":[],"f":"ممر الطابق.","circ":true},{"id":"1-15","n":"الدرج (أ)","e":"Stair A","z":"Z3","t":"ح","r":[0,6,4,6],"d":[[2,12,"h",1.2]],"f":"الخروج منه حر، وإعادة الدخول إلى الطابق ببطاقة.","stair":true},{"id":"1-16","n":"الدرج (ب)","e":"Stair B","z":"Z3","t":"ح","r":[36,6,4,6],"d":[[38,12,"h",1.2]],"f":"الخروج منه حر، وإعادة الدخول إلى الطابق ببطاقة.","stair":true}],"special":{"turnstiles":[],"paths":{"staff":[[[25,10],[25,13.5],[19,13.5],[19,17]],[[25,13.5],[14,13.5],[14,10.5],[19,8]]],"egress":[[[19,22],[19,13.5],[2,13.5],[2,9]],[[19,13.5],[38,13.5],[38,9]]]}},"notes":["غرفة الخوادم في قلب الطابق: شمالها غرفة الطاقة، وشرقها المصاعد وغرفة التشغيل، وغربها وحدة الحماية، وجنوبها الممر. لا يلامسها أي جدار خارجي (ق-1).","الوصول إلى غرفة الخوادم عبر الغرفة العازلة فقط، وبابها الثاني لا يُفتح قبل إغلاق الأول (ق-2).","تحت غرفة الخوادم في الأرضي غرف جافة (خدمات الموظفين وممر الموظفين)، ولا تمر فوقها تمديدات مياه؛ دورات المياه والمطبخ في الطرف الشرقي البعيد.","مركز العمليات وغرفة الاستجابة متجاوران ويتصلان بباب داخلي، فينتقل الفريق دون المرور بالممر.","مركز العمليات في الواجهة الجنوبية، لذلك زجاجها معتم أو بغشاء عاكس حتى لا تُرى الشاشات من الساحة أو الشارع.","الطابق كله منطقة مقيدة (Z3) لا يدخله الزوار، وداخله غرف عالية الحساسية (Z4) بتحقق ثنائي."]},{"id":"2","sheet":"A-103","ar":"الدور الثاني","en":"Second Floor","theme":"الحوكمة والمخاطر والتطوير","rooms":[{"id":"2-01","n":"البحث والابتكار","e":"Research & Innovation","z":"Z3","t":"ص","r":[0,15,8,15],"d":[[4,15,"h",1.2]],"f":"مختبر لتجربة الأدوات والحلول على شبكة معزولة عن شبكة الإنتاج."},{"id":"2-02","n":"تحليل البيانات والتقارير","e":"Data Analytics & Reporting","z":"Z3","t":"ص","r":[8,15,8,15],"d":[[12,15,"h",1.2]],"f":"مؤشرات الأداء الأمني والتقارير للإدارة العليا."},{"id":"2-03","n":"الاستراتيجية والتخطيط السيبراني","e":"Cyber Strategy & Planning","z":"Z3","t":"ص","r":[16,15,6,15],"d":[[19,15,"h",1.2]],"f":"الخطط الاستراتيجية وخرائط الطريق."},{"id":"2-04","n":"قاعة الاجتماعات الإدارية","e":"Executive Meeting Room","z":"Z3","t":"ص","r":[22,15,8,15],"d":[[26,15,"h",1.6]],"f":"مقابل المصاعد مباشرة، فيصل إليها الزائر المرافَق (مدقق، جهة رقابية) دون المرور بالمكاتب."},{"id":"2-05","n":"السياسات والمعايير والضوابط","e":"Policies, Standards & Controls","z":"Z3","t":"ص","r":[30,15,5,15],"d":[[32.5,15,"h",1.2]],"f":"إعداد السياسات ومراجعتها وربطها بالضوابط."},{"id":"2-06","n":"الالتزام والتقييمات السيبرانية","e":"Compliance & Assessments","z":"Z3","t":"ص","r":[35,15,5,15],"d":[[37.5,15,"h",1.2]],"f":"التقييمات الداخلية ومتابعة الالتزام بالضوابط."},{"id":"2-07","n":"مخاطر وأصول المعلومات","e":"Information Risk & Asset Management","z":"Z3","t":"ص","p":[[0,0],[12,0],[12,12],[4,12],[4,6],[0,6]],"d":[[8,12,"h",1.2]],"f":"سجل المخاطر وسجل الأصول، ومنها مخاطر الأمن المادي."},{"id":"2-08","n":"خزنة الوسائط والنسخ الاحتياطية","e":"Media & Backup Vault","z":"Z4","t":"ق","r":[12,0,10,4],"d":[[17,4,"h",1.2]],"f":"خزائن مقاومة للحريق لوسائط التخزين؛ تحمي الأرشيف من الجدار الخارجي."},{"id":"2-09","n":"أرشيف السجلات والوثائق الحساسة","e":"Sensitive Records Archive","z":"Z4","t":"ص","p":[[12,4],[22,4],[22,12],[16,12],[16,9],[12,9]],"d":[],"f":"فوق غرفة الخوادم مباشرة، فيستفيد من البنية المدعمة لحمل الأرفف المتحركة. بلا نوافذ، وإطفاء بالغاز النظيف."},{"id":"2-10","n":"استلام السجلات والطباعة الآمنة","e":"Records Check-in & Secure Print","z":"Z4","t":"ق","r":[12,9,4,3],"d":[[14,12,"h",1],[16,10.5,"v",1]],"f":"نقطة وحيدة لتسليم السجلات واستلامها وتسجيلها؛ تعمل كغرفة عازلة للأرشيف."},{"id":"2-11","n":"إدارة البيانات والخصوصية","e":"Data Management & Privacy","z":"Z3","t":"ص","p":[[22,0],[34,0],[34,12],[30,12],[30,6],[22,6]],"d":[[32,12,"h",1.2]],"f":"تصنيف البيانات وحماية الخصوصية؛ مجاورة للأرشيف."},{"id":"2-12","n":"المصاعد","e":"Elevators","z":"Z3","t":"ح","r":[22,6,6,6],"d":[[25,12,"h",3]],"f":"تفتح مقابل قاعة الاجتماعات الإدارية.","lift":true},{"id":"2-13","n":"غرفة الاتصالات الفرعية","e":"IDF Room","z":"Z4","t":"ق","r":[28,6,2,6],"d":[[29,12,"h",0.9]],"f":"تجهيزات الشبكة الخاصة بالطابق."},{"id":"2-14","n":"دورات المياه والمطبخ","e":"WC & Pantry","z":"Z3","t":"ق","p":[[34,0],[40,0],[40,6],[36,6],[36,12],[34,12]],"d":[[35,12,"h",1.2]],"f":"فوق مثيلتها في الدور الأول، بعيدًا عن الأرشيف.","wet":true},{"id":"2-15","n":"الممر الداخلي","e":"Internal Corridor","z":"Z3","t":"ح","r":[0,12,40,3],"d":[],"f":"ممر الطابق.","circ":true},{"id":"2-16","n":"الدرج (أ)","e":"Stair A","z":"Z3","t":"ح","r":[0,6,4,6],"d":[[2,12,"h",1.2]],"f":"الخروج منه حر، وإعادة الدخول إلى الطابق ببطاقة.","stair":true},{"id":"2-17","n":"الدرج (ب)","e":"Stair B","z":"Z3","t":"ح","r":[36,6,4,6],"d":[[38,12,"h",1.2]],"f":"الخروج منه حر، وإعادة الدخول إلى الطابق ببطاقة.","stair":true}],"special":{"turnstiles":[],"paths":{"visitor":[[[25,10],[25,13.5],[26,13.5],[26,20]]],"staff":[[[25,13.5],[14,13.5],[14,10.5],[19,8]]],"egress":[[[19,22],[19,13.5],[2,13.5],[2,9]],[[26,13.5],[38,13.5],[38,9]]]}},"notes":["الأرشيف الحساس فوق غرفة الخوادم تمامًا، فتُصمَّم بنية واحدة مدعمة لهذا العمود الرأسي من الأرض إلى السطح.","الأرشيف محاط بخزنة الوسائط شمالًا وبغرفة الاستلام جنوبًا، فلا جدار خارجي مباشر ولا مدخل إلا عبر نقطة الاستلام المسجلة.","الأرشيف في الطابق الأخير، لذلك: لا معدات تكييف أو تصريف مطر فوق سقفه، وعزل مائي مضاعف للسطح، وحساسات تسرب على السقف (معالجة لخطر الماء).","قاعة الاجتماعات الإدارية مقابل المصاعد: الزائر المرافَق يخرج من المصعد إلى القاعة مباشرة ولا يرى المكاتب أو المستندات.","دورات المياه في الطرف الشرقي، فوق مثيلتها في الأول، بعيدًا عن الأرشيف وغرفة الخوادم."]}],"site":{"sheet":"A-100","canvas":[80,76],"elements":[{"id":"S-01","k":"street","n":"الشارع الرئيسي","r":[0,69,80,7]},{"id":"S-02","k":"parkout","n":"مواقف الزوار (خارج السور)","r":[6,62,30,7],"f":"خارج السور عمدًا، فلا تقف مركبة غير مفحوصة قرب المبنى (مسافة الأمان Standoff)."},{"id":"S-03","k":"sidewalk","n":"الرصيف","r":[0,60,80,2]},{"id":"S-04","k":"plaza","n":"ساحة المدخل (منطقة الأمان)","r":[20,44,40,16],"f":"16 م بين السور والواجهة الجنوبية بلا مواقف."},{"id":"S-05","k":"parkin","n":"مواقف الموظفين","r":[4,2,50,8],"f":"داخل السور؛ تصلها المركبات بعد الفحص عند البوابة (2)."},{"id":"S-06","k":"yard","n":"ساحة الخدمة","r":[62,14,16,30],"f":"التحميل والتوريدات والمولد."},{"id":"S-07","k":"gen","n":"المولد وخزان الوقود","r":[70,34,8,8],"f":"على بعد 10 م من المبنى."},{"id":"S-08","k":"assembly","n":"نقطة التجمع","r":[3,47,13,10],"f":"بعيدة عن الواجهات وعن مسار مركبات الطوارئ."},{"id":"S-09","k":"drive","n":"طريق المركبات الداخلي","r":[58,2,20,8]},{"id":"S-10","k":"green","n":"تشجير منخفض","r":[2,14,16,30]}],"gates":[{"id":"GT-1","n":"البوابة (1): الزوار والمشاة","at":[43,60],"w":4,"side":"s","booth":[47,56,3,3]},{"id":"GT-2","n":"البوابة (2): الموظفون والتوريدات","at":[80,6],"w":6,"side":"e","booth":[74,11,4,3]}],"bollards":[[22,52],[58,52]],"paths":{"visitor":[[[45,66],[45,60],[43,52],[43,45]]],"staff":[[[82,6],[70,6],[40,6],[40,14]]],"service":[[[82,7],[70,7],[66,12],[66,17],[60,17]]],"egress":[[[27.5,44],[14,50]],[[20,23],[14,50]],[[60,23],[64,30]]]}}}</script>
+<script id="sec" type="application/json">{"catalog":{"CF":{"ar":"كاميرا ثابتة","en":"Fixed camera","cat":"cam","fn":["ردع","كشف"],"req":["ت-4","ت-5"],"std":{"ecc":"2-14-3 (التسجيل والمراقبة بالكاميرات)","iso":"7.4","nist":"PE-6"},"why":"مراقبة مستمرة وتسجيل دليل لكل حدث؛ وجودها الظاهر يردع قبل أن يكشف."},"CP":{"ar":"كاميرا متحركة (PTZ)","en":"PTZ camera","cat":"cam","fn":["كشف","استجابة"],"req":["ت-4","ت-5"],"std":{"ecc":"2-14-3 (التسجيل والمراقبة بالكاميرات)","iso":"7.4","nist":"PE-6"},"why":"على أركان السور؛ يوجهها المشغل نحو أي إنذار ويتبع الهدف، فتغطي مساحة واسعة بعدد قليل."},"LPR":{"ar":"كاميرا قراءة اللوحات","en":"License plate recognition","cat":"cam","fn":["كشف"],"req":["ت-4"],"std":{"ecc":"2-14-3 (سجلات الدخول والخروج)","iso":"7.2","nist":"PE-6"},"why":"تسجل لوحة كل مركبة وتقارنها بقائمة المركبات المصرح لها."},"AC":{"ar":"قارئ بطاقة","en":"Card reader","cat":"acc","fn":["تأخير"],"req":["ت-9"],"std":{"ecc":"2-14-3 (التحكم بالوصول إلى المناطق الحساسة)","iso":"7.2","nist":"PE-3"},"why":"يسمح بالدخول حسب الصلاحية ويسجل اسم الداخل ووقته."},"AB":{"ar":"قارئ ثنائي (بطاقة + رمز أو بصمة)","en":"Two-factor reader","cat":"acc","fn":["تأخير"],"req":["ت-9"],"std":{"ecc":"2-14-3 (التحكم بالوصول إلى المناطق الحساسة)","iso":"7.3","nist":"PE-3"},"why":"البطاقة المسروقة وحدها لا تكفي لدخول منطقة Z4."},"TS":{"ar":"بوابة دوارة","en":"Turnstile","cat":"acc","fn":["تأخير"],"req":["ت-3","ت-9"],"std":{"ecc":"2-14-3 (التحكم بالوصول)","iso":"7.2","nist":"PE-3"},"why":"شخص واحد لكل بطاقة؛ تمنع التتبع خلف الموظف (Tailgating)."},"MT":{"ar":"باب غرفة عازلة (تشابك)","en":"Mantrap interlock","cat":"acc","fn":["تأخير"],"req":["ت-9"],"std":{"ecc":"2-14-3 (التحكم بالوصول إلى المناطق الحساسة)","iso":"7.3","nist":"PE-3"},"why":"لا يفتح الباب الثاني قبل إغلاق الأول، فلا يدخل شخصان ببطاقة واحدة."},"PIR":{"ar":"كاشف حركة","en":"Motion detector","cat":"ids","fn":["كشف"],"req":["ت-6"],"std":{"ecc":"2-14-2 (تطبيق متطلبات الحماية المادية)","iso":"7.4","nist":"PE-6"},"why":"يكشف أي حركة في الغرفة خارج ساعات العمل أو بلا دخول مسجل."},"DC":{"ar":"حساس فتح الباب","en":"Door contact","cat":"ids","fn":["كشف"],"req":["ت-6"],"std":{"ecc":"2-14-2 (تطبيق متطلبات الحماية المادية)","iso":"7.4","nist":"PE-6"},"why":"ينذر عند فتح الباب بالقوة أو تركه مفتوحًا؛ وعلى أبواب الطوارئ عند استخدامها."},"GB":{"ar":"كاشف كسر الزجاج","en":"Glass-break detector","cat":"ids","fn":["كشف"],"req":["ت-6","ت-3"],"std":{"ecc":"2-14-2 (تطبيق متطلبات الحماية المادية)","iso":"7.4","nist":"PE-6"},"why":"يكشف محاولة الدخول عبر نوافذ الدور الأرضي."},"FS":{"ar":"حساس اهتزاز السور","en":"Fence intrusion sensor","cat":"ids","fn":["كشف"],"req":["ت-6","ت-3"],"std":{"ecc":"2-14-2 (تطبيق متطلبات الحماية المادية)","iso":"7.1","nist":"PE-6"},"why":"كابل على كامل السور يحدد مقطع محاولة التسلق أو القطع، فتتجه إليه الكاميرا المتحركة."},"PB":{"ar":"زر استغاثة","en":"Duress button","cat":"ids","fn":["استجابة"],"req":["ت-6","ت-7"],"std":{"ecc":"2-14-2 (تطبيق متطلبات الحماية المادية)","iso":"7.4","nist":"PE-6"},"why":"إنذار صامت إلى غرفة التحكم دون أن يلاحظ المهدِّد."},"MD":{"ar":"بوابة كشف المعادن","en":"Walk-through metal detector","cat":"scr","fn":["كشف"],"req":["ت-8"],"std":{"ecc":"2-14-3 (التحكم بالوصول)","iso":"7.2","nist":"PE-8"},"why":"فحص الزائر قبل الردهة."},"XR":{"ar":"جهاز أشعة للحقائب","en":"X-ray baggage scanner","cat":"scr","fn":["كشف"],"req":["ت-8"],"std":{"ecc":"2-14-3 (التحكم بالوصول)","iso":"7.2","nist":"PE-16"},"why":"فحص الحقائب والطرود دون فتحها، ويكشف وسائط التخزين والأجهزة."},"GP":{"ar":"موقع حارس","en":"Guard post","cat":"grd","fn":["ردع","استجابة"],"req":["ت-7"],"std":{"ecc":"2-14-2 (تطبيق متطلبات الحماية المادية)","iso":"7.2","nist":"PE-3"},"why":"العنصر البشري يتحقق ويقرر ويستجيب حيث لا تكفي الأجهزة."},"RB":{"ar":"حاجز طريق هيدروليكي وذراع بوابة","en":"Road blocker & barrier arm","cat":"bar","fn":["تأخير"],"req":["ت-3"],"std":{"ecc":"2-14-2 (تطبيق متطلبات الحماية المادية)","iso":"7.1","nist":"PE-3"},"why":"يوقف المركبة حتى ينتهي فحصها، ويصدّ محاولة الاقتحام بالمركبة."},"TH":{"ar":"حساس حرارة ورطوبة","en":"Temperature & humidity sensor","cat":"env","fn":["كشف"],"req":["ت-10"],"std":{"ecc":"2-14-3 (حماية الأجهزة والمعدات)","iso":"7.5","nist":"PE-14"},"why":"ينذر قبل أن تؤثر الحرارة أو الرطوبة على الخوادم أو الورق."},"WL":{"ar":"حساس تسرب مياه","en":"Water leak sensor","cat":"env","fn":["كشف"],"req":["ت-10"],"std":{"ecc":"2-14-3 (حماية الأجهزة والمعدات)","iso":"7.5","nist":"PE-15"},"why":"كابل استشعار تحت الأرضية أو على السقف يحدد موقع التسرب."},"SD":{"ar":"كاشف دخان مبكر (VESDA)","en":"Aspirating smoke detector","cat":"env","fn":["كشف"],"req":["ت-10"],"std":{"ecc":"2-14-3 (حماية الأجهزة والمعدات)","iso":"7.5","nist":"PE-13"},"why":"يسحب عينات الهواء ويكشف الدخان قبل ظهوره، فتُعالج المشكلة قبل تفعيل الإطفاء."},"GS":{"ar":"إطفاء بالغاز النظيف","en":"Clean-agent suppression","cat":"env","fn":["استجابة"],"req":["ت-10"],"std":{"ecc":"2-14-3 (حماية الأجهزة والمعدات)","iso":"7.5","nist":"PE-13"},"why":"يطفئ الحريق دون ماء، فلا يتلف الخوادم أو الورق."},"AH":{"ar":"تكييف دقيق (CRAC)","en":"Precision cooling unit","cat":"env","fn":["حماية"],"req":["ت-10"],"std":{"ecc":"2-14-3 (حماية الأجهزة والمعدات)","iso":"7.11","nist":"PE-14"},"why":"وحدتان تعمل إحداهما احتياطًا للأخرى (N+1) لثبات الحرارة على مدار الساعة."},"EPO":{"ar":"مفتاح فصل الطاقة الطارئ","en":"Emergency power off","cat":"env","fn":["استجابة"],"req":["ت-10"],"std":{"ecc":"2-14-3 (حماية الأجهزة والمعدات)","iso":"7.11","nist":"PE-10"},"why":"قرب الباب، بغطاء يمنع الضغط العرضي."}},"categories":{"cam":{"ar":"المراقبة بالكاميرات","req":"ت-4، ت-5"},"acc":{"ar":"التحكم في الوصول","req":"ت-9"},"ids":{"ar":"كشف التسلل والإنذار","req":"ت-6"},"scr":{"ar":"الفحص الأمني","req":"ت-8"},"grd":{"ar":"الحراسة","req":"ت-7"},"bar":{"ar":"الحواجز","req":"ت-3"},"env":{"ar":"العوامل البيئية","req":"ت-10"}},"facade_types":{"lam":{"ar":"زجاج أمني مصفح مقاوم للكسر","why":"يؤخر الاختراق دقائق ويبقى متماسكًا عند الكسر."},"grille":{"ar":"نوافذ بقضبان فولاذية داخلية وزجاج مصفح","why":"واجهات الدور الأرضي الخلفية البعيدة عن نظر الحراس."},"solid":{"ar":"جدار مصمت بلا نوافذ","why":"غرف حساسة أو تقنية لا تحتاج ضوءًا طبيعيًا."},"film":{"ar":"زجاج مصفح بغشاء معتم من الخارج","why":"يمنع رؤية الشاشات من الخارج مع إدخال الضوء."}},"floors":{"G":{"facade":[[0,30,29,30,"lam"],[29,30,40,30,"solid"],[0,15,0,30,"lam"],[0,0,0,15,"grille"],[0,0,18,0,"grille"],[18,0,40,0,"solid"],[40,0,40,30,"solid"]],"devices":[{"id":"CF-G01","k":"CF","x":23,"y":29.6,"dir":90,"fov":80,"rng":9,"clip":[],"note":"على المدخل الرئيسي، يواجه الساحة؛ يلتقط وجه كل قادم."},{"id":"CF-G02","k":"CF","x":28.6,"y":22.4,"dir":185,"fov":110,"rng":13,"clip":["G-08","G-09","G-10"],"note":"يغطي الفحص الأمني والبهو العازل والخزائن."},{"id":"CF-G03","k":"CF","x":12.4,"y":21.6,"dir":325,"fov":95,"rng":18,"clip":["G-06"],"note":"يغطي الردهة كاملة."},{"id":"CF-G04","k":"CF","x":28.6,"y":15.4,"dir":160,"fov":60,"rng":10,"clip":["G-06"],"note":"يواجه البوابات الدوارة لالتقاط وجه كل عابر."},{"id":"CF-G05","k":"CF","x":11.8,"y":20,"dir":180,"fov":30,"rng":12,"clip":["G-04"],"note":"ممر الزوار."},{"id":"CF-G06","k":"CF","x":0.4,"y":13.5,"dir":0,"fov":35,"rng":22,"clip":["G-14"],"note":"الممر الداخلي من الغرب."},{"id":"CF-G07","k":"CF","x":39.6,"y":13.5,"dir":180,"fov":35,"rng":22,"clip":["G-14"],"note":"الممر الداخلي من الشرق."},{"id":"CF-G08","k":"CF","x":21.6,"y":0.4,"dir":120,"fov":80,"rng":13,"clip":["G-18","G-19"],"note":"مدخل الموظفين وبوابته الدوارة."},{"id":"CF-G09","k":"CF","x":39.6,"y":0.4,"dir":145,"fov":90,"rng":12,"clip":["G-25","G-26"],"note":"مدخل الخدمة وممرها."},{"id":"CF-G10","k":"CF","x":30.4,"y":6.4,"dir":45,"fov":90,"rng":8,"clip":["G-24"],"note":"فحص البريد والتوريدات."},{"id":"CF-G11","k":"CF","x":29.6,"y":0.4,"dir":145,"fov":90,"rng":9,"clip":["G-20"],"note":"يوثق سلسلة الإتلاف من الاستلام حتى الإتلاف."},{"id":"CF-G12","k":"CF","x":29.4,"y":15.4,"dir":65,"fov":90,"rng":16,"clip":["G-12"],"note":"داخل غرفة التحكم نفسها."},{"id":"CF-G13","k":"CF","x":30.4,"y":0.4,"dir":55,"fov":90,"rng":7,"clip":["G-23"],"note":"الكهرباء الرئيسية."},{"id":"CF-G14","k":"CF","x":28.2,"y":6.2,"dir":75,"fov":64,"rng":6.5,"clip":["G-22"],"note":"غرفة الاتصالات الفرعية."},{"id":"CF-G15","k":"CF","x":20.4,"y":26.4,"dir":40,"fov":90,"rng":7,"clip":["G-09"],"note":"داخل البهو العازل؛ يرى الداخلين بين البابين."},{"id":"TS-G01","k":"TS","x":22,"y":15,"note":"ست بوابات دوارة بين الردهة والممر الداخلي؛ الزائر يعبرها ببطاقة زائر مع مرافقه."},{"id":"TS-G02","k":"TS","x":20,"y":4,"note":"بوابة دوارة لمدخل الموظفين."},{"id":"AC-G01","k":"AC","x":20,"y":0,"note":"الباب الخارجي لمدخل الموظفين."},{"id":"AC-G02","k":"AC","x":40,"y":3,"note":"مدخل الخدمة، مع جهاز اتصال داخلي (Intercom) إلى غرفة التحكم."},{"id":"AC-G03","k":"AC","x":35,"y":6,"note":"من مدخل الخدمة إلى ممر الخدمة."},{"id":"AB-G01","k":"AB","x":32.5,"y":15,"note":"غرفة الحراسة والتحكم الأمني (Z4)."},{"id":"AC-G04","k":"AC","x":38,"y":15,"note":"غرفة الحراس."},{"id":"AC-G05","k":"AC","x":22,"y":5,"note":"غرفة الإتلاف الآمن."},{"id":"AB-G02","k":"AB","x":29,"y":12,"note":"غرفة الاتصالات الفرعية (Z4)."},{"id":"AB-G03","k":"AB","x":34,"y":3,"note":"الكهرباء الرئيسية (Z4)."},{"id":"AC-G06","k":"AC","x":32,"y":12,"note":"فحص البريد."},{"id":"AC-G07","k":"AC","x":2,"y":12,"note":"إعادة الدخول من الدرج (أ) إلى الممر."},{"id":"AC-G08","k":"AC","x":38,"y":12,"note":"إعادة الدخول من الدرج (ب) إلى الممر."},{"id":"DC-G01","k":"DC","x":23,"y":30,"note":"المدخل الرئيسي؛ يُقفل خارج ساعات الاستقبال."},{"id":"DC-G02","k":"DC","x":7.5,"y":30,"note":"مخرج طوارئ قاعة التدريب: للخروج فقط، مع إنذار محلي."},{"id":"DC-G03","k":"DC","x":0,"y":9,"note":"مخرج الدرج (أ): للخروج فقط، مع إنذار."},{"id":"DC-G04","k":"DC","x":40,"y":9,"note":"مخرج الدرج (ب): للخروج فقط، مع إنذار."},{"id":"DC-G05","k":"DC","x":0,"y":13.5,"note":"مخرج الممر الغربي: للخروج فقط، مع إنذار."},{"id":"PIR-G01","k":"PIR","x":20,"y":16.6,"note":"الردهة خارج ساعات العمل."},{"id":"PIR-G02","k":"PIR","x":11.2,"y":29.2,"note":"قاعة التدريب."},{"id":"PIR-G03","k":"PIR","x":23,"y":1,"note":"غرفة الإتلاف."},{"id":"PIR-G04","k":"PIR","x":33.4,"y":1,"note":"الكهرباء الرئيسية."},{"id":"PIR-G05","k":"PIR","x":33.4,"y":7,"note":"فحص البريد."},{"id":"GB-G01","k":"GB","x":3.6,"y":29.4,"note":"واجهة قاعة التدريب."},{"id":"GB-G02","k":"GB","x":16.4,"y":29.4,"note":"واجهة غرفة الانتظار."},{"id":"GB-G03","k":"GB","x":0.6,"y":15.6,"note":"الواجهة الغربية للقاعات."},{"id":"GB-G04","k":"GB","x":0.6,"y":0.6,"note":"نوافذ الواجهة الشمالية الخلفية."},{"id":"PB-G01","k":"PB","x":28,"y":16.4,"note":"مكتب الاستقبال."},{"id":"PB-G02","k":"PB","x":28.4,"y":29.4,"note":"نقطة الحراسة عند المدخل."},{"id":"PB-G03","k":"PB","x":35.4,"y":29.4,"note":"غرفة التحكم."},{"id":"MD-G01","k":"MD","x":20.5,"y":24,"note":"بوابة كشف المعادن."},{"id":"XR-G01","k":"XR","x":25.8,"y":24,"note":"جهاز أشعة الحقائب."},{"id":"XR-G02","k":"XR","x":31.2,"y":10,"note":"جهاز أشعة الطرود والتوريدات."},{"id":"GP-03","k":"GP","x":27.5,"y":28,"note":"الموقع 3: نقطة الحراسة عند المدخل."},{"id":"GP-04","k":"GP","x":23,"y":25.2,"note":"الموقع 4: الفحص الأمني."},{"id":"GP-05","k":"GP","x":32.5,"y":22,"note":"الموقع 5: مشغلا غرفة التحكم."},{"id":"GP-06","k":"GP","x":38,"y":24,"note":"مشرف الحراسة."},{"id":"GP-07","k":"GP","x":18.8,"y":1.6,"note":"الموقع 7: مدخل الموظفين في أوقات الذروة."},{"id":"TH-G01","k":"TH","x":29,"y":8.4,"note":"غرفة الاتصالات الفرعية."},{"id":"TH-G02","k":"TH","x":31,"y":3,"note":"الكهرباء الرئيسية."},{"id":"WL-G01","k":"WL","x":29,"y":10.2,"note":"غرفة الاتصالات الفرعية."}]},"1":{"facade":[[0,0,12,0,"lam"],[12,0,22,0,"solid"],[22,0,40,0,"lam"],[0,30,10,30,"lam"],[10,30,28,30,"film"],[28,30,40,30,"lam"],[0,0,0,30,"lam"],[40,0,40,30,"lam"]],"devices":[{"id":"CF-101","k":"CF","x":0.4,"y":13.5,"dir":0,"fov":35,"rng":22,"clip":["1-14"],"note":"الممر من الغرب."},{"id":"CF-102","k":"CF","x":39.6,"y":13.5,"dir":180,"fov":35,"rng":22,"clip":["1-14"],"note":"الممر من الشرق."},{"id":"CF-103","k":"CF","x":25,"y":14.6,"dir":270,"fov":100,"rng":6,"clip":["1-14"],"note":"أمام المصاعد؛ يوثق كل من يخرج إلى الطابق."},{"id":"CF-104","k":"CF","x":12.4,"y":9.4,"dir":30,"fov":90,"rng":5,"clip":["1-09"],"note":"داخل الغرفة العازلة؛ يتحقق المشغل من وجود شخص واحد."},{"id":"CF-105","k":"CF","x":21.6,"y":4.4,"dir":160,"fov":95,"rng":12,"clip":["1-08"],"note":"ممرات الخوادم."},{"id":"CF-106","k":"CF","x":12.4,"y":4.4,"dir":25,"fov":90,"rng":12,"clip":["1-08"],"note":"ممرات الخوادم من الزاوية المقابلة."},{"id":"CF-107","k":"CF","x":12.4,"y":0.4,"dir":15,"fov":70,"rng":11,"clip":["1-07"],"note":"غرفة الطاقة والبطاريات."},{"id":"CF-108","k":"CF","x":10.4,"y":15.4,"dir":40,"fov":90,"rng":21,"clip":["1-02"],"note":"مركز العمليات؛ موجهة لتصوير الأشخاص لا الشاشات."},{"id":"CF-109","k":"CF","x":27.6,"y":29.6,"dir":220,"fov":90,"rng":21,"clip":["1-02"],"note":"مركز العمليات من الزاوية المقابلة."},{"id":"CF-110","k":"CF","x":28.4,"y":15.4,"dir":45,"fov":90,"rng":11,"clip":["1-03"],"note":"غرفة الاستجابة للحوادث."},{"id":"CF-111","k":"CF","x":28.2,"y":6.2,"dir":75,"fov":64,"rng":6.5,"clip":["1-12"],"note":"غرفة الاتصالات الفرعية."},{"id":"AC-101","k":"AC","x":5,"y":15,"note":"تحليل التهديدات."},{"id":"AB-101","k":"AB","x":19,"y":15,"note":"مركز العمليات (Z4)."},{"id":"AB-102","k":"AB","x":32,"y":15,"note":"غرفة الاستجابة (Z4)."},{"id":"AC-102","k":"AC","x":28,"y":19,"note":"الباب الداخلي بين مركز العمليات وغرفة الاستجابة."},{"id":"AC-103","k":"AC","x":38,"y":15,"note":"مشرف المناوبة."},{"id":"AC-104","k":"AC","x":8,"y":12,"note":"حماية المعلومات والأنظمة."},{"id":"MT-101","k":"MT","x":14,"y":12,"note":"الباب الخارجي للغرفة العازلة، بقارئ ثنائي."},{"id":"MT-102","k":"MT","x":16,"y":10.5,"note":"الباب الداخلي إلى غرفة الخوادم، بقارئ ثنائي؛ لا يفتح قبل إغلاق الخارجي."},{"id":"AB-103","k":"AB","x":17,"y":4,"note":"غرفة الطاقة، من داخل غرفة الخوادم."},{"id":"AC-105","k":"AC","x":32,"y":12,"note":"تشغيل ومراقبة الأنظمة."},{"id":"AB-104","k":"AB","x":29,"y":12,"note":"غرفة الاتصالات الفرعية (Z4)."},{"id":"AC-106","k":"AC","x":2,"y":12,"note":"إعادة الدخول من الدرج (أ)."},{"id":"AC-107","k":"AC","x":38,"y":12,"note":"إعادة الدخول من الدرج (ب)."},{"id":"PIR-101","k":"PIR","x":21.4,"y":11.4,"note":"غرفة الخوادم؛ أي حركة دون دخول مسجل تنذر فورًا."},{"id":"PIR-102","k":"PIR","x":21.4,"y":0.6,"note":"غرفة الطاقة."},{"id":"PIR-103","k":"PIR","x":29,"y":7,"note":"غرفة الاتصالات الفرعية."},{"id":"AH-101","k":"AH","x":13,"y":6.6,"note":"وحدة تكييف دقيق (أ)."},{"id":"AH-102","k":"AH","x":21.2,"y":7.6,"note":"وحدة تكييف دقيق (ب)، احتياطية (N+1)."},{"id":"TH-101","k":"TH","x":16,"y":5.4,"note":"الممر البارد؛ المجال المستهدف 18–27 °م."},{"id":"TH-102","k":"TH","x":19,"y":7.6,"note":"الممر الساخن."},{"id":"WL-101","k":"WL","x":17.6,"y":8.4,"note":"كابل كشف تسرب تحت الأرضية المرتفعة."},{"id":"SD-101","k":"SD","x":14.4,"y":5.2,"note":"كشف دخان مبكر."},{"id":"GS-101","k":"GS","x":20.4,"y":5.2,"note":"إطفاء بالغاز النظيف لغرفة الخوادم."},{"id":"EPO-101","k":"EPO","x":17,"y":11.4,"note":"قرب الباب الداخلي."},{"id":"TH-103","k":"TH","x":14,"y":1.2,"note":"غرفة الطاقة والبطاريات."},{"id":"SD-102","k":"SD","x":19,"y":1.2,"note":"غرفة الطاقة والبطاريات."},{"id":"GS-102","k":"GS","x":16.5,"y":1.2,"note":"إطفاء بالغاز النظيف لغرفة الطاقة."},{"id":"TH-104","k":"TH","x":29,"y":8.6,"note":"غرفة الاتصالات الفرعية."},{"id":"TH-105","k":"TH","x":26.6,"y":28.6,"note":"مركز العمليات."}]},"2":{"facade":[[0,0,12,0,"lam"],[12,0,22,0,"solid"],[22,0,40,0,"lam"],[0,30,40,30,"lam"],[0,0,0,30,"lam"],[40,0,40,30,"lam"]],"devices":[{"id":"CF-201","k":"CF","x":0.4,"y":13.5,"dir":0,"fov":35,"rng":22,"clip":["2-15"],"note":"الممر من الغرب."},{"id":"CF-202","k":"CF","x":39.6,"y":13.5,"dir":180,"fov":35,"rng":22,"clip":["2-15"],"note":"الممر من الشرق."},{"id":"CF-203","k":"CF","x":25,"y":14.6,"dir":270,"fov":100,"rng":6,"clip":["2-15"],"note":"أمام المصاعد وباب قاعة الاجتماعات الإدارية."},{"id":"CF-204","k":"CF","x":12.4,"y":9.4,"dir":30,"fov":90,"rng":5,"clip":["2-10"],"note":"نقطة استلام السجلات؛ توثق كل تسليم واستلام."},{"id":"CF-205","k":"CF","x":21.6,"y":4.4,"dir":160,"fov":95,"rng":12,"clip":["2-09"],"note":"ممرات الأرشيف."},{"id":"CF-206","k":"CF","x":12.4,"y":4.4,"dir":25,"fov":90,"rng":12,"clip":["2-09"],"note":"ممرات الأرشيف من الزاوية المقابلة."},{"id":"CF-207","k":"CF","x":12.4,"y":0.4,"dir":15,"fov":70,"rng":11,"clip":["2-08"],"note":"خزنة الوسائط."},{"id":"CF-208","k":"CF","x":28.2,"y":6.2,"dir":75,"fov":64,"rng":6.5,"clip":["2-13"],"note":"غرفة الاتصالات الفرعية."},{"id":"AC-201","k":"AC","x":4,"y":15,"note":"البحث والابتكار."},{"id":"AC-202","k":"AC","x":12,"y":15,"note":"تحليل البيانات والتقارير."},{"id":"AC-203","k":"AC","x":19,"y":15,"note":"الاستراتيجية والتخطيط."},{"id":"AC-204","k":"AC","x":26,"y":15,"note":"قاعة الاجتماعات الإدارية؛ يفتحها المضيف للزائر المرافَق."},{"id":"AC-205","k":"AC","x":32.5,"y":15,"note":"السياسات والمعايير والضوابط."},{"id":"AC-206","k":"AC","x":37.5,"y":15,"note":"الالتزام والتقييمات."},{"id":"AC-207","k":"AC","x":8,"y":12,"note":"مخاطر وأصول المعلومات."},{"id":"MT-201","k":"MT","x":14,"y":12,"note":"باب نقطة الاستلام من الممر، بقارئ ثنائي."},{"id":"MT-202","k":"MT","x":16,"y":10.5,"note":"الباب الداخلي إلى الأرشيف، بقارئ ثنائي؛ لا يفتح قبل إغلاق الخارجي."},{"id":"AB-201","k":"AB","x":17,"y":4,"note":"خزنة الوسائط، من داخل الأرشيف."},{"id":"AC-208","k":"AC","x":32,"y":12,"note":"إدارة البيانات والخصوصية."},{"id":"AB-202","k":"AB","x":29,"y":12,"note":"غرفة الاتصالات الفرعية (Z4)."},{"id":"AC-209","k":"AC","x":2,"y":12,"note":"إعادة الدخول من الدرج (أ)."},{"id":"AC-210","k":"AC","x":38,"y":12,"note":"إعادة الدخول من الدرج (ب)."},{"id":"PIR-201","k":"PIR","x":21.4,"y":11.4,"note":"الأرشيف."},{"id":"PIR-202","k":"PIR","x":21.4,"y":0.6,"note":"خزنة الوسائط."},{"id":"PIR-203","k":"PIR","x":29,"y":7,"note":"غرفة الاتصالات الفرعية."},{"id":"TH-201","k":"TH","x":14.4,"y":5.4,"note":"الأرشيف؛ الرطوبة المستهدفة 40–55٪ لحفظ الورق."},{"id":"WL-201","k":"WL","x":17.6,"y":7,"note":"على سقف الأرشيف؛ يكشف تسرب مياه السطح."},{"id":"SD-201","k":"SD","x":19,"y":5.4,"note":"كشف دخان مبكر في الأرشيف."},{"id":"GS-201","k":"GS","x":21.2,"y":8,"note":"إطفاء بالغاز النظيف للأرشيف."},{"id":"TH-202","k":"TH","x":14,"y":1.2,"note":"خزنة الوسائط."},{"id":"TH-203","k":"TH","x":29,"y":8.6,"note":"غرفة الاتصالات الفرعية."}]}},"site":{"devices":[{"id":"CP-S1","k":"CP","x":0.8,"y":0.8,"dir":45,"fov":90,"rng":32,"note":"ركن السور الشمالي الغربي."},{"id":"CP-S2","k":"CP","x":79.2,"y":0.8,"dir":135,"fov":90,"rng":32,"note":"ركن السور الشمالي الشرقي."},{"id":"CP-S3","k":"CP","x":79.2,"y":59.2,"dir":225,"fov":90,"rng":32,"note":"ركن السور الجنوبي الشرقي."},{"id":"CP-S4","k":"CP","x":0.8,"y":59.2,"dir":315,"fov":90,"rng":32,"note":"ركن السور الجنوبي الغربي."},{"id":"CF-S1","k":"CF","x":46.6,"y":57.6,"dir":180,"fov":70,"rng":9,"note":"البوابة (1): وجه كل مشاة قبل الدخول."},{"id":"CF-S2","k":"CF","x":74,"y":11.4,"dir":320,"fov":70,"rng":10,"note":"البوابة (2): المركبة والسائق."},{"id":"LPR-S1","k":"LPR","x":77.6,"y":9.8,"dir":0,"fov":40,"rng":7,"note":"لوحات المركبات الداخلة من البوابة (2)."},{"id":"CF-S3","k":"CF","x":20.4,"y":43.6,"dir":25,"fov":80,"rng":22,"note":"ساحة المدخل من الغرب."},{"id":"CF-S4","k":"CF","x":59.6,"y":43.6,"dir":155,"fov":80,"rng":22,"note":"ساحة المدخل من الشرق."},{"id":"CF-S5","k":"CF","x":59.6,"y":14.4,"dir":55,"fov":90,"rng":22,"note":"ساحة الخدمة والمولد."},{"id":"CF-S6","k":"CF","x":20.4,"y":14.4,"dir":230,"fov":90,"rng":16,"note":"مواقف الموظفين ومخرج الدرج (أ)."},{"id":"CF-S7","k":"CF","x":40,"y":13.6,"dir":270,"fov":100,"rng":12,"note":"الطريق من المواقف إلى مدخل الموظفين."},{"id":"RB-S1","k":"RB","x":78.4,"y":6,"note":"ذراع بوابة وحاجز طريق هيدروليكي مصنف لمقاومة الاصطدام."},{"id":"GP-01","k":"GP","x":48.5,"y":57.5,"note":"الموقع 1: كشك البوابة (1)."},{"id":"GP-02","k":"GP","x":76,"y":12.5,"note":"الموقع 2: كشك البوابة (2)."},{"id":"FS-S1","k":"FS","x":0,"y":30,"note":"كابل اهتزاز على كامل محيط السور (280 م)، مقسم إلى ثمانية مقاطع."},{"id":"XR-S1","k":"XR","x":75.5,"y":14.2,"note":"مرآة فحص أسفل المركبات وجهاز أشعة صغير للطرود عند البوابة (2)."},{"id":"GP-08","k":"GP","x":63,"y":30,"note":"الموقع 8: الدورية المتحركة على مسارها حول المبنى؛ حارس نهارًا وحارسان ليلًا."}],"lights_spacing":14,"patrol":[[17,11],[63,11],[63,47],[17,47],[17,11]]},"guards":{"posts":[{"id":"GP-01","n":"كشك البوابة (1): المشاة والزوار","where":"الموقع العام","day":1,"night":1,"hours":"24 ساعة","duty":"مطابقة الزائر بقائمة الزيارات المسبقة، وتوجيهه إلى المدخل، ومنع المركبات."},{"id":"GP-02","n":"كشك البوابة (2): المركبات والتوريدات","where":"الموقع العام","day":2,"night":1,"hours":"24 ساعة","duty":"التحقق من السائق والمركبة، وفحص أسفلها، وتسجيل التوريدات؛ حارسان في ساعات الدوام لأن الفحص يحتاج شخصين."},{"id":"GP-03","n":"نقطة الحراسة عند المدخل","where":"الدور الأرضي","day":1,"night":0,"hours":"7:00 – 17:00","duty":"مراقبة البهو العازل، والتدخل الأول عند أي مشكلة في الفحص. يُقفل المدخل بعد الدوام."},{"id":"GP-04","n":"الفحص الأمني والتحقق من الهوية","where":"الدور الأرضي","day":1,"night":0,"hours":"7:00 – 17:00","duty":"تشغيل جهاز الأشعة وبوابة المعادن، ومطابقة الهوية، وإيداع الممنوعات في الخزائن."},{"id":"GP-05","n":"غرفة الحراسة والتحكم الأمني","where":"الدور الأرضي","day":2,"night":2,"hours":"24 ساعة","duty":"مشغل للكاميرات ومشغل للإنذارات والبوابات، وتنسيق مع مركز العمليات عند تصعيد أي حدث."},{"id":"GP-06","n":"مشرف المناوبة","where":"غرفة الحراس","day":1,"night":1,"hours":"24 ساعة","duty":"توزيع المهام، وقرار الاستجابة، والتقرير اليومي."},{"id":"GP-07","n":"مدخل الموظفين (الذروة)","where":"الدور الأرضي","day":1,"night":0,"hours":"6:30 – 9:00 و15:30 – 17:00","duty":"منع التتبع خلف الموظف وقت الازدحام؛ يتولاها حارس الدورية خارج الذروة."},{"id":"GP-08","n":"الدورية المتحركة","where":"المبنى والمحيط","day":1,"night":2,"hours":"24 ساعة","duty":"جولة كل ساعتين بمسار متغير على السور والطوابق، والتحقق من الأبواب والنوافذ؛ حارسان ليلًا لسلامتهما."}],"shifts":[["الصباحية","7:00 – 15:00","day"],["المسائية","15:00 – 23:00","night"],["الليلية","23:00 – 7:00","night"]],"relief_factor":1.4,"rules":["تغيير ترتيب الدوريات وتوقيتها يوميًا حتى لا يمكن التنبؤ بها.","كل حارس يحمل جهاز اتصال لاسلكي، وكل نقطة مربوطة بغرفة التحكم.","تسليم المناوبة كتابيًا: الأحداث المفتوحة، والزوار الموجودون، والأبواب المعطلة.","تدريب ربع سنوي على الإخلاء والاستجابة لاقتحام وحريق وتهديد بالقنابل."]},"visitor_procedure":[{"t":"التسجيل المسبق","d":"يسجل المضيف الزائر قبل 24 ساعة على الأقل: الاسم، ورقم الهوية، والجهة، والغرض، والمناطق المطلوبة. لا دخول دون تسجيل مسبق إلا بموافقة مشرف الأمن."},{"t":"البوابة (1)","d":"يطابق الحارس الاسم بقائمة اليوم، ويوجه الزائر سيرًا إلى المدخل الرئيسي. لا تدخل مركبة الزائر إلى الموقع."},{"t":"البهو العازل","d":"يمر الزائر عبر البابين المتتاليين تحت نظر نقطة الحراسة والكاميرا."},{"t":"التحقق من الهوية","d":"مطابقة الهوية الوطنية أو الإقامة بالشخص وبالتسجيل المسبق، والتقاط صورة للسجل."},{"t":"الفحص الأمني","d":"الحقائب عبر جهاز الأشعة، والزائر عبر بوابة كشف المعادن. يودع الهاتف ووسائط التخزين (USB) في الخزائن إذا كانت الزيارة تتجاوز الدور الأرضي."},{"t":"بطاقة الزائر","d":"بطاقة مؤقتة بلون مختلف عن بطاقة الموظف، صالحة ليوم واحد وللمناطق المسجلة فقط، تُعلق ظاهرة طوال الزيارة."},{"t":"المرافقة","d":"يستلم المضيف زائره من الردهة. أي عبور للبوابات الدوارة يكون مع المرافق، ولا يُترك الزائر وحده خارج المنطقة Z2."},{"t":"المغادرة","d":"يعيد الزائر البطاقة ويستلم أماناته، ويُسجل وقت الخروج. البطاقة غير المعادة تُلغى آليًا عند نهاية اليوم ويُبلغ المضيف."},{"t":"المقاولون وفنيو الصيانة","d":"تصريح عمل مسبق، ومرافقة مستمرة داخل أي منطقة Z4، وجرد الأدوات والأجهزة عند الدخول والخروج، ولا تخرج أي وسيطة تخزين دون إتلاف أو موافقة."}],"access_matrix":{"areas":["Z1 الاستقبال","Z2 القاعات والتدريب","Z3 الدور الأول","Z3 الدور الثاني","مركز العمليات والاستجابة","غرفة الخوادم","الأرشيف والخزنة","غرفة التحكم الأمني","الكهرباء والاتصالات"],"roles":[["زائر",["✓","مرافَق","✗","مرافَق*","✗","✗","✗","✗","✗"]],["مقاول أو فني صيانة",["✓","مرافَق","مرافَق","مرافَق","✗","مرافَق","✗","✗","مرافَق"]],["موظف الحوكمة والمخاطر",["✓","✓","✗","✓","✗","✗","✗","✗","✗"]],["محلل مركز العمليات",["✓","✓","✓","✗","✓ ثنائي","✗","✗","✗","✗"]],["مهندس الأنظمة والشبكات",["✓","✓","✓","✗","✗","✓ ثنائي","✗","✗","✓ ثنائي"]],["مسؤول السجلات",["✓","✓","✗","✓","✗","✗","✓ ثنائي","✗","✗"]],["فريق الحراسة",["✓","✓","دورية","دورية","✗","✗","✗","✓ ثنائي","دورية"]],["فني المرافق",["✓","✓","✓","✓","✗","مرافَق","✗","✗","✓ ثنائي"]],["الإدارة العليا",["✓","✓","✓","✓","✓ ثنائي","✗","✗","✗","✗"]]],"notes":["* الزائر في الدور الثاني لقاعة الاجتماعات الإدارية فقط، وبمرافقة المضيف.","«دورية» تعني صلاحية الممرات والأبواب الخارجية دون فتح المكاتب.","«✓ ثنائي» تعني بطاقة مع رمز سري أو بصمة، وتُراجع قائمة أصحابها شهريًا.","الإدارة العليا لا تدخل غرفة الخوادم ولا الأرشيف بصلاحيتها الوظيفية؛ مبدأ الحاجة إلى المعرفة (Need-to-know) لا يستثني أحدًا."]},"barriers":[{"t":"السور","d":"سور شبكي مضاد للتسلق بارتفاع 2.4 م، مع كابل كشف اهتزاز على كامل محيطه (280 م)، ومنطقة صافية بعرض 2 م على جانبيه بلا أشجار أو معدات يُستعان بها في التسلق.","req":"ت-3","std":"ISO 7.1 · ECC 2-14-2"},{"t":"البوابة (1)","d":"بوابة مشاة فقط بعرض 4 م، مع كشك حراسة وكاميرا؛ لا تمر منها مركبات.","req":"ت-3","std":"ISO 7.1، 7.2"},{"t":"البوابة (2)","d":"بوابة منزلقة، وذراع، وحاجز طريق هيدروليكي مصنف لمقاومة الاصطدام، ومنطقة فحص تتسع لمركبة واحدة بين الذراع والحاجز.","req":"ت-3","std":"ISO 7.1 · NIST PE-3"},{"t":"الحواجز الثابتة (Bollards)","d":"صف بفاصل 1.5 م عبر ساحة المدخل، مصنف لمقاومة الاصطدام، يترك ممرًا للمشاة فقط.","req":"ت-3","std":"ISO 7.1"},{"t":"النوافذ والواجهات (الشبابيك)","d":"زجاج مصفح في كل الواجهات؛ قضبان فولاذية داخلية لنوافذ الدور الأرضي الخلفية؛ لا نوافذ في الغرف عالية الحساسية؛ غشاء معتم على واجهة مركز العمليات. تظهر على المخططات بلون الواجهة.","req":"ت-3","std":"ISO 7.1، 7.3 · NIST PE-3"},{"t":"الأبواب","d":"أبواب فولاذية مقاومة للحريق للمناطق Z4 بمفصلات من الداخل، وأقفال كهرومغناطيسية تعمل مع قارئ البطاقات، وتفتح تلقائيًا عند إنذار الحريق في مسارات الإخلاء فقط.","req":"ت-3","std":"ISO 7.3"},{"t":"البهو العازل والبوابات الدوارة","d":"حواجز داخلية تمنع الاندفاع المباشر والدخول المزدوج، وتفرض المرور شخصًا بعد شخص.","req":"ت-3، ت-9","std":"ISO 7.2"}],"environment":[{"t":"الإضاءة المحيطية","d":"أعمدة إنارة كل 14 م تقريبًا على السور، وإنارة الساحة والمواقف وساحة الخدمة طوال الليل، بمستوى يكفي لتمييز الوجوه في الكاميرات. الإنارة تردع وتجعل الكاميرات فعالة ليلًا.","req":"ت-10","std":"ISO 7.1، 7.4"},{"t":"إنارة الطوارئ","d":"إنارة بطاريات للممرات والسلالم ولوحات المخارج المضيئة، تعمل 90 دقيقة على الأقل عند انقطاع الكهرباء.","req":"ت-10","std":"NIST PE-12"},{"t":"التهوية والتكييف العام","d":"تكييف مركزي للمكاتب، وفتحات سحب الهواء النقي على السطح بارتفاع لا تصل إليه اليد، فلا يمكن إدخال مادة ضارة عبرها. مراوح طرد الدخان في السلالم.","req":"ت-10","std":"ISO 7.5، 7.11 · NIST PE-14"},{"t":"التبريد الدقيق للغرف التقنية","d":"وحدتا تبريد دقيق (N+1) في غرفة الخوادم، وتكييف مستقل لغرف الاتصالات والطاقة؛ الحرارة المستهدفة 18–27 °م.","req":"ت-10","std":"ISO 7.8، 7.11 · NIST PE-14"},{"t":"الطاقة","d":"مصدر الشبكة، ثم مولد احتياطي في ساحة الخدمة يبدأ آليًا، وبينهما طاقة غير منقطعة (UPS) تغطي الخوادم ومركز العمليات والأنظمة الأمنية حتى يعمل المولد.","req":"ت-10","std":"ISO 7.11 · NIST PE-11"},{"t":"الحريق","d":"كواشف دخان في كل الغرف، ورشاشات مياه في المكاتب والممرات، وإطفاء بالغاز النظيف بلا ماء في غرفة الخوادم والطاقة والأرشيف، مع كشف دخان مبكر (VESDA).","req":"ت-10","std":"ISO 7.5 · NIST PE-13"},{"t":"المياه والرطوبة","d":"لا تمديدات مياه فوق الغرف التقنية والأرشيف؛ كابلات كشف تسرب تحت أرضية الخوادم وعلى سقف الأرشيف؛ رطوبة الأرشيف 40–55٪.","req":"ت-10","std":"ISO 7.5 · NIST PE-15"},{"t":"المراقبة المركزية","d":"كل حساسات البيئة مربوطة بنظام إدارة المبنى (BMS)، وإنذاراتها تصل إلى غرفة التحكم الأمني ومركز العمليات معًا.","req":"ت-10","std":"ISO 7.4، 7.5"}],"info_protection":[{"t":"المكتب النظيف والشاشة النظيفة","d":"لا مستندات على المكاتب بعد الدوام، وقفل الشاشة آليًا، وخزائن مقفلة في كل مكتب.","std":"ISO 7.7"},{"t":"وسائط التخزين","d":"تُحفظ النسخ الاحتياطية في خزنة الوسائط بخزائن مقاومة للحريق، ويُسجل كل إخراج وإعادة عند نقطة الاستلام.","std":"ISO 7.10 · ECC 2-14-3"},{"t":"الإتلاف الآمن","d":"الورق والوسائط تُتلف في غرفة الإتلاف قبل خروجها، تحت كاميرا، مع محضر إتلاف موقع.","std":"ISO 7.14 · ECC 2-14-3"},{"t":"حماية الأجهزة والكابلات","d":"الخوادم في خزائن مقفلة، والكابلات في مجارٍ مغلقة، ومنافذ الشبكة معطلة في المناطق Z1 وZ2 حتى لا يوصل زائر جهازًا بالشبكة.","std":"ISO 7.8، 7.12 · ECC 2-14-3"},{"t":"الأجهزة خارج المبنى","d":"الحواسيب المحمولة مشفرة، وتُسجل عند الخروج والعودة عبر مدخل الموظفين.","std":"ISO 7.9 · ECC 2-14-3"},{"t":"سجلات الدخول والكاميرات","d":"تُحفظ تسجيلات الكاميرات 90 يومًا وسجلات البطاقات سنة على الأقل في غرفة الخوادم، ولا يحذفها مشغل غرفة التحكم.","std":"ECC 2-14-3"},{"t":"المراجعة الدورية","d":"مراجعة ضوابط الحماية المادية وقوائم الصلاحيات كل ستة أشهر، وبعد أي حادث.","std":"ECC 2-14-4"}],"notes":{"site":["طبقة الردع والكشف الأولى على السور: كابل اهتزاز يحدد مقطع المحاولة، وأربع كاميرات متحركة في الأركان تتجه إليه آليًا.","البوابة (2) فيها ثلاث طبقات: ذراع يوقف المركبة، وكاميرا لوحات تسجلها، وحاجز طريق يصد الاقتحام. البوابة (1) للمشاة فقط.","إنارة محيطية على السور والساحة والمواقف؛ الكاميرا بلا إنارة لا تميز الوجوه ليلًا.","الدورية تدور حول المبنى بمسار متغير، وكشكا البوابتين مأهولان على مدار الساعة."],"G":["تسلسل المدخل: كاميرا الوجه، ثم البهو العازل تحت نظر الحارس، ثم الهوية والأشعة وبوابة المعادن، ثم البطاقة. أربع طبقات قبل الردهة.","كاميرا مقابل البوابات الدوارة تلتقط وجه كل عابر، فتطابق الصورة مع البطاقة المستخدمة.","أزرار استغاثة في الاستقبال ونقطة الحراسة وغرفة التحكم ترسل إنذارًا صامتًا.","كل مخارج الطوارئ للخروج فقط، وعليها حساسات تنذر عند فتحها.","نوافذ الواجهة الشمالية الخلفية بقضبان داخلية، والواجهة الشرقية مصمتة لأنها تقنية وخدمية."],"1":["غرفة الخوادم: غرفة عازلة بقارئين ثنائيين، وكاميرتان متقابلتان، وكاشف حركة، فلا دخول دون أن يُرى ويُسجل.","بيئة غرفة الخوادم: تبريد دقيق مزدوج، وحساسات حرارة للممرين البارد والساخن، وكشف تسرب تحت الأرضية، وكشف دخان مبكر، وإطفاء بالغاز.","كاميرات مركز العمليات موجهة لتصوير الحركة والأشخاص، لا محتوى الشاشات.","الواجهة الجنوبية لمركز العمليات بغشاء معتم، والواجهة الشمالية لغرفة الطاقة مصمتة."],"2":["الأرشيف يكرر نمط غرفة الخوادم: نقطة استلام تعمل كغرفة عازلة، وكاميرتان، وكاشف حركة، وقارئان ثنائيان.","حساس تسرب على سقف الأرشيف لأنه في الطابق الأخير، ورطوبة مضبوطة بين 40 و55٪ لحماية الورق.","كاميرا أمام المصاعد توثق الزائر المرافَق حتى يدخل قاعة الاجتماعات الإدارية.","كل الإدارات بقارئ بطاقة على بابها، فالوصول حسب الوظيفة لا حسب الطابق فقط."]}}</script>
+<script id="tourdata" type="application/json">{"tours":[{"id":"visitor","n":"رحلة الزائر","sub":"من الشارع إلى قاعة الاجتماعات الإدارية","steps":[{"floor":"site","focus":["GT-1"],"at":[43,0,60],"devices":["GP-01","CF-S1"],"t":"البوابة (1)","d":"يطابق الحارس اسم الزائر بقائمة الزيارات المسبقة. سيارته تبقى في مواقف الزوار خارج السور، والكاميرا تلتقط وجهه قبل أن يدخل."},{"floor":"site","focus":["S-04"],"at":[43,0,51],"devices":["CF-S3","CF-S4"],"t":"ساحة المدخل","d":"يمشي 16 م عبر ساحة الأمان ويعبر صف الحواجز الثابتة من ممر المشاة. تراه كاميرتان من طرفي الساحة."},{"floor":"G","focus":["G-09"],"devices":["CF-G01","CF-G15","DC-G01","GP-03"],"t":"البهو العازل","d":"بابان متتاليان لا يسمحان بالاندفاع. نقطة الحراسة ترى الداخلين، وكاميرا ثانية تراقب المسافة بين البابين."},{"floor":"G","focus":["G-08","G-10"],"devices":["MD-G01","XR-G01","GP-04","CF-G02"],"t":"الفحص والتحقق من الهوية","d":"مطابقة الهوية بالشخص وبالتسجيل المسبق. تمر الحقائب بجهاز الأشعة، ويمر الزائر ببوابة كشف المعادن، ويودع الهاتف ووسائط التخزين في الخزائن."},{"floor":"G","focus":["G-06"],"devices":["PB-G01","CF-G03","PIR-G01"],"t":"الردهة وبطاقة الزائر","d":"يستلم بطاقة زائر ليوم واحد ولمناطق محددة، وينتظر مضيفه. عند مكتب الاستقبال زر استغاثة صامت."},{"floor":"G","focus":["G-14","G-21"],"devices":["TS-G01","CF-G04"],"t":"البوابات الدوارة","d":"يعبر مع مضيفه شخصًا بعد شخص. كاميرا مقابل البوابات تطابق وجهه مع البطاقة المستخدمة."},{"floor":"2","focus":["2-12","2-15"],"devices":["CF-203"],"t":"المصعد إلى الدور الثاني","d":"بطاقة الزائر تفعّل الدور الثاني فقط. يخرج من المصعد أمام كاميرا توثق وصوله."},{"floor":"2","focus":["2-04"],"devices":["AC-204"],"t":"قاعة الاجتماعات الإدارية","d":"القاعة مقابل المصعد مباشرة، فلا يمر الزائر بأي مكتب ولا يرى أي مستند. يفتح المضيف بابها ببطاقته."}]},{"id":"server","n":"الطريق إلى غرفة الخوادم","sub":"مهندس الأنظمة من البوابة إلى الخوادم","steps":[{"floor":"site","focus":["GT-2"],"at":[78,0,7],"devices":["GP-02","LPR-S1","RB-S1","CF-S2"],"t":"البوابة (2)","d":"كاميرا اللوحات تتعرف على سيارته، والحارس يتحقق منه. لا يرتفع الذراع ولا ينخفض حاجز الطريق إلا بعد الفحص."},{"floor":"G","focus":["G-18","G-19"],"devices":["AC-G01","TS-G02","CF-G08","GP-07"],"t":"مدخل الموظفين","d":"بطاقة على الباب الخارجي، ثم بوابة دوارة لشخص واحد. في وقت الذروة يقف حارس لمنع التتبع خلف الموظف."},{"floor":"G","focus":["G-21"],"devices":["CF-G06","CF-G07"],"t":"المصعد","d":"صلاحيته تفعّل الدور الأول. كل خطوة في الممر مسجلة بكاميرتين."},{"floor":"1","focus":["1-14"],"devices":["CF-103","CF-101","CF-102"],"t":"ممر الدور الأول","d":"منطقة مقيدة (Z3) لا يدخلها زائر. باب كل وحدة عليه قارئ بطاقة."},{"floor":"1","focus":["1-09"],"devices":["MT-101","CF-104"],"t":"الغرفة العازلة","d":"بطاقة مع رمز سري أو بصمة. يُغلق الباب خلفه قبل أن يُسمح بفتح الباب الثاني، والكاميرا تتأكد أنه وحده."},{"floor":"1","focus":["1-08"],"devices":["MT-102","CF-105","CF-106","PIR-101","AH-101","AH-102","WL-101","SD-101","GS-101","EPO-101"],"t":"غرفة الخوادم","d":"تحقق ثنائي ثانٍ، وكاميرتان متقابلتان، وكاشف حركة. البيئة محمية بتبريد مزدوج وكشف تسرب ودخان وإطفاء بالغاز. أربع طبقات تحقق منذ البوابة، وكل خطوة لها سجل."}]},{"id":"incident","n":"محاولة تسلل ليلية","sub":"كيف يعمل الأمن المادي والسيبراني معًا","steps":[{"floor":"site","focus":[],"at":[80,0,30],"devices":["FS-S1","CP-S2","CP-S3"],"t":"الإنذار على السور","d":"الساعة 2:10 فجرًا يكشف حساس الاهتزاز محاولة تسلق في مقطع السور الشرقي. تتجه الكاميرتان المتحركتان إلى المقطع آليًا."},{"floor":"G","focus":["G-12"],"devices":["GP-05","CF-G12","PB-G03"],"t":"غرفة التحكم الأمني","d":"يرى المشغل الصورة الحية ويؤكد وجود شخص. يوجه الدورية ويسجل الحادث."},{"floor":"site","focus":["S-06"],"at":[66,0,26],"devices":["GP-08","CF-S5"],"t":"الدورية","d":"يصل حارسا الدورية الليلية إلى ساحة الخدمة. الإنارة المحيطية تجعل الشخص ظاهرًا للكاميرا وللحراس."},{"floor":"1","focus":["1-02"],"devices":["CF-108","CF-109"],"t":"مركز العمليات","d":"يستقبل المركز الحدث المادي ويربطه بسجلات الشبكة: هل حاول جهاز غريب الاتصال بالشبكة اللاسلكية من الجهة الشرقية في الوقت نفسه؟ هذا هو التقارب الأمني."},{"floor":"1","focus":["1-03"],"devices":["AB-102"],"t":"الاستجابة والمراجعة","d":"يُفتح ملف حادث في غرفة الاستجابة، ثم يُراجع في غرفة التنسيق: ما الذي نجح، وأي ضابط يحتاج تعزيزًا."}]}]}</script>
+<script>
+(function(){
+const D=JSON.parse(document.getElementById('data').textContent);
+const S=JSON.parse(document.getElementById('sec').textContent);
+const T=JSON.parse(document.getElementById('tourdata').textContent).tours;
+const C=S.catalog;
+const NS='http://www.w3.org/2000/svg';
+const svg=document.getElementById('scene');
+const FLOORS=D.floors; const IDX={G:0,'1':1,'2':2};
+const FH=4, EXPLODE=17, WALL_IN=1.0, WALL_EX=1.55;
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fmt=n=>(Math.round(n*10)/10).toLocaleString('ar-SA-u-nu-latn');
+function el(tag,a,p,t){ const e=document.createElementNS(NS,tag); for(const k in (a||{})) e.setAttribute(k,a[k]); if(t!=null) e.textContent=t; if(p) p.appendChild(e); return e; }
+function poly(r){ if(r.r){const [x,y,w,h]=r.r; return [[x,y],[x+w,y],[x+w,y+h],[x,y+h]];} return r.p; }
+function area(p){ let s=0; for(let i=0;i<p.length;i++){const a=p[i],b=p[(i+1)%p.length]; s+=a[0]*b[1]-b[0]*a[1];} return Math.abs(s)/2; }
+function centroid(p){ let a=0,cx=0,cy=0; for(let i=0;i<p.length;i++){const q=p[i],r=p[(i+1)%p.length]; const c=q[0]*r[1]-r[0]*q[1]; a+=c; cx+=(q[0]+r[0])*c; cy+=(q[1]+r[1])*c;} a/=2; return [cx/(6*a),cy/(6*a)]; }
+function pip(x,y,p){ let c=false; for(let i=0,j=p.length-1;i<p.length;j=i++){ const [xi,yi]=p[i],[xj,yj]=p[j]; if((yi>y)!==(yj>y)&&x<(xj-xi)*(y-yi)/(yj-yi)+xi) c=!c; } return c; }
+const ZC=z=>`var(--${z.toLowerCase()})`, ZS=z=>`var(--${z.toLowerCase()}s)`;
+const catOf=k=>C[k].cat;
+// local building coords -> world (X east, Z south), site coords -> world
+const bw=(x,y)=>[x-20,y-16];
+const sw=(x,y)=>[x-40,y-30];
+
+/* ---------- camera ---------- */
+const cam={yaw:-32,pitch:42,zoom:9,cx:0,cy:4,cz:0};
+let W=800,H=600;
+function proj(X,Y,Z){ const a=cam.yaw*Math.PI/180, p=cam.pitch*Math.PI/180; const c=Math.cos(a), s=Math.sin(a); const X0=X-cam.cx, Y0=Y-cam.cy, Z0=Z-cam.cz; const xr=X0*c-Z0*s, zr=X0*s+Z0*c; return [W/2+xr*cam.zoom, H/2+(zr*Math.sin(p)-Y0*Math.cos(p))*cam.zoom, zr*Math.cos(p)+Y0*Math.sin(p)]; }
+
+/* ---------- build scene ---------- */
+const layers={}; const drawables=[]; const tiles={}; const devEls={}; const roomInfo={};
+const root=el('g',{},svg);
+const gSite=el('g',{},root);
+const gSiteFlat=el('g',{},gSite), gSiteObj=el('g',{},gSite);
+const gFloors={};
+FLOORS.forEach(f=>{ const g=el('g',{'data-floor':f.id},root); gFloors[f.id]={g,slab:el('g',{},g),flat:el('g',{},g),paths:el('g',{class:'paths'},g),obj:el('g',{},g),lbls:el('g',{class:'lbls'},g)}; });
+const gFL=el('g',{},root);
+const gLbl=el('g',{class:'lbls'},root);
+
+function addPoly(parent,pts3,attrs,opt){ const e=el('polygon',attrs,parent); const d={e,pts:pts3,type:'poly',...(opt||{})}; drawables.push(d); return d; }
+function addLine(parent,pts3,attrs,opt){ const e=el('polyline',attrs,parent); const d={e,pts:pts3,type:'line',...(opt||{})}; drawables.push(d); return d; }
+function addDot(parent,p3,r,attrs,opt){ const e=el('circle',{r,...attrs},parent); const d={e,pts:[p3],type:'dot',r,...(opt||{})}; drawables.push(d); return d; }
+function addText(parent,p3,txt,attrs,opt){ const e=el('text',{'text-anchor':'middle',...attrs},parent,txt); const d={e,pts:[p3],type:'text',...(opt||{})}; drawables.push(d); return d; }
+function box(parent,x0,z0,x1,z1,y0,y1,fills,opt){ // axis aligned box: 4 sides + top
+  const s=[[[x0,y0,z0],[x1,y0,z0],[x1,y1,z0],[x0,y1,z0]],[[x1,y0,z0],[x1,y0,z1],[x1,y1,z1],[x1,y1,z0]],[[x1,y0,z1],[x0,y0,z1],[x0,y1,z1],[x1,y1,z1]],[[x0,y0,z1],[x0,y0,z0],[x0,y1,z0],[x0,y1,z1]]];
+  s.forEach((q,i)=>addPoly(parent,q,{fill:i%2?fills[1]:fills[0],stroke:fills[2]||'none','stroke-width':.6},{sort:true,...(opt||{})}));
+  addPoly(parent,[[x0,y1,z0],[x1,y1,z0],[x1,y1,z1],[x0,y1,z1]],{fill:fills[3]||fills[0],stroke:fills[2]||'none','stroke-width':.6},{sort:true,top:true,...(opt||{})});
+}
+
+// site
+(function(){
+  const g=gSiteFlat;
+  addPoly(g,[[-70,0,-60],[70,0,-60],[70,0,60],[-70,0,60]].map(p=>p),{fill:'var(--ground)'});
+  const kfill={street:'var(--road)',sidewalk:'var(--z0)',parkout:'var(--road)',plaza:'var(--z1)',parkin:'var(--road)',yard:'var(--z0)',gen:'var(--z0)',assembly:'none',drive:'var(--road)',green:'var(--green)'};
+  addPoly(g,[sw(0,0),sw(80,0),sw(80,60),sw(0,60)].map(([x,z])=>[x,0,z]),{fill:'var(--plot)'});
+  for(const e of D.site.elements){ if(e.k==='gen') continue; const [x,y,w,h]=e.r; const pts=[sw(x,y),sw(x+w,y),sw(x+w,y+h),sw(x,y+h)].map(([X,Z])=>[X,.02,Z]); const d=addPoly(g,pts,{fill:kfill[e.k],stroke:e.k==='assembly'?'var(--p-egress)':'none','stroke-width':1.2,'stroke-dasharray':e.k==='assembly'?'5 4':'none',class:'tile','data-site':e.id}); roomInfo[e.id]={site:e}; tiles[e.id]=d.e; d.e.addEventListener('click',ev=>{ev.stopPropagation(); selectSite(e.id);}); }
+  // street dashes
+  addLine(g,[[...sw(0,72.5)],[...sw(80,72.5)]].map(([X,Z])=>[X,.03,Z]),{fill:'none',stroke:'var(--sheet)','stroke-width':1.4,'stroke-dasharray':'10 8'});
+  // fence with gate gaps
+  const gaps={s:[41,45],e:[3,9]};
+  const fenceSeg=(a,b)=>{ const [x0,z0]=sw(...a),[x1,z1]=sw(...b); const len=Math.hypot(x1-x0,z1-z0), n=Math.max(1,Math.ceil(len/4)); for(let i=0;i<n;i++){ const t0=i/n,t1=(i+1)/n; const p0=[x0+(x1-x0)*t0,z0+(z1-z0)*t0],p1=[x0+(x1-x0)*t1,z0+(z1-z0)*t1]; addPoly(gSiteObj,[[p0[0],0,p0[1]],[p1[0],0,p1[1]],[p1[0],2.4,p1[1]],[p0[0],2.4,p0[1]]],{fill:'var(--fence)','fill-opacity':.14,stroke:'var(--fence)','stroke-width':.8,'stroke-opacity':.6},{sort:true}); } };
+  fenceSeg([0,0],[80,0]); fenceSeg([80,0],[80,3]); fenceSeg([80,9],[80,60]); fenceSeg([80,60],[45,60]); fenceSeg([41,60],[0,60]); fenceSeg([0,60],[0,0]);
+  // booths, generator
+  for(const gt of D.site.gates){ const [x,y,w,h]=gt.booth; const [X0,Z0]=sw(x,y),[X1,Z1]=sw(x+w,y+h); box(gSiteObj,X0,Z0,X1,Z1,0,2.6,['var(--wall-a)','var(--wall-b)','var(--wall-top)','var(--z3)'],{site:gt.id}); }
+  const gen=D.site.elements.find(e=>e.k==='gen'); { const [x,y,w,h]=gen.r; const [X0,Z0]=sw(x+1,y+1),[X1,Z1]=sw(x+w-1,y+h-1); box(gSiteObj,X0,Z0,X1,Z1,0,2.2,['var(--wall-a)','var(--wall-b)','var(--wall-top)','var(--z4)'],{}); }
+  // bollards
+  const [[bx1,by1],[bx2]]=D.site.bollards; for(let x=bx1;x<=bx2;x+=1.6){ if(x>41&&x<47) continue; const [X,Z]=sw(x,by1); addLine(gSiteObj,[[X,0,Z],[X,1,Z]],{stroke:'var(--d-bar)','stroke-width':3,'stroke-linecap':'round'},{sort:true}); }
+  // trees
+  const green=D.site.elements.find(e=>e.k==='green'); { const [x,y]=green.r; for(let i=0;i<6;i++){ const [X,Z]=sw(x+4+(i%2)*8,y+4+Math.floor(i/2)*10); addLine(gSiteObj,[[X,0,Z],[X,2.2,Z]],{stroke:'var(--wall-x)','stroke-width':2},{sort:true}); addDot(gSiteObj,[X,3.4,Z],1.6,{fill:'var(--tree)','fill-opacity':.9},{sort:true,scaleR:true}); } }
+  // site devices
+  for(const d of S.site.devices){ if(d.k==='FS') continue; const [X,Z]=sw(d.x,d.y); const h=catOf(d.k)==='cam'?3.2:1.4; const dd=addDot(gSiteObj,[X,h,Z],.55,{fill:`var(--d-${catOf(d.k)})`,stroke:'var(--sheet)','stroke-width':1.2,class:'dev devs','data-dev':d.id},{sort:true,scaleR:true,dev:true}); devEls[d.id]=dd.e; dd.e.addEventListener('click',ev=>{ev.stopPropagation(); selectDev(d.id,'site');}); el('title',{},dd.e,`${d.id} · ${C[d.k].ar}`); }
+})();
+
+// floors
+function wallsFor(f){
+  const rooms=f.rooms.map(r=>({r,p:poly(r)}));
+  const lines={h:{},v:{}};
+  const add=(o,c,a,b)=>{ (lines[o][c]=lines[o][c]||[]).push([Math.min(a,b),Math.max(a,b)]); };
+  for(const {p} of rooms) for(let i=0;i<p.length;i++){ const [x1,y1]=p[i],[x2,y2]=p[(i+1)%p.length]; if(y1===y2) add('h',y1,x1,x2); else add('v',x1,y1,y2); }
+  const doors={h:{},v:{}};
+  for(const r of f.rooms) for(const [x,y,o,w] of (r.d||[])){ if(o==='h') (doors.h[y]=doors.h[y]||[]).push([x-w/2,x+w/2]); else (doors.v[x]=doors.v[x]||[]).push([y-w/2,y+w/2]); }
+  for(const [x,y,len] of (f.special.turnstiles||[])) (doors.h[y]=doors.h[y]||[]).push([x,x+len]);
+  const roomAt=(x,y)=>rooms.find(o=>pip(x,y,o.p));
+  const out=[];
+  for(const o of ['h','v']) for(const c in lines[o]){
+    const cc=+c; const pts=new Set(); lines[o][c].forEach(([a,b])=>{pts.add(a);pts.add(b);}); (doors[o][c]||[]).forEach(([a,b])=>{pts.add(a);pts.add(b);});
+    const cov=lines[o][c]; const arr=[...pts].sort((a,b)=>a-b);
+    for(let i=0;i+1<arr.length;i++){ const a=arr[i],b=arr[i+1]; if(b-a<1e-6) continue; const m=(a+b)/2; if(!cov.some(([s,e])=>s<=m&&m<=e)) continue; if((doors[o][c]||[]).some(([s,e])=>s<=m&&m<=e)) continue;
+      const [x,y]=o==='h'?[m,cc]:[cc,m]; const A=o==='h'?roomAt(x,y-.05):roomAt(x-.05,y), B=o==='h'?roomAt(x,y+.05):roomAt(x+.05,y);
+      if(A&&B&&A.r.circ&&B.r.circ) continue;
+      const ext=!A||!B; out.push({o,c:cc,a,b,ext});
+    }
+  }
+  return out;
+}
+FLOORS.forEach(f=>{
+  const L=gFloors[f.id];
+  f._walls=wallsFor(f);
+  // slab sides
+  const sl=[[0,0],[40,0],[40,30],[0,30]].map(([x,y])=>bw(x,y));
+  for(let i=0;i<4;i++){ const a=sl[i],b=sl[(i+1)%4]; addPoly(L.slab,[[a[0],-.35,a[1]],[b[0],-.35,b[1]],[b[0],0,b[1]],[a[0],0,a[1]]],{fill:i%2?'var(--slab)':'var(--slab-b)'},{floor:f.id,sort:true,rel:true}); }
+  addPoly(L.slab,sl.map(([X,Z])=>[X,0,Z]),{fill:'var(--slab)'},{floor:f.id,rel:true});
+  // tiles
+  for(const r of f.rooms){ const p=poly(r); const pts=p.map(([x,y])=>{const [X,Z]=bw(x,y); return [X,.03,Z];}); const fill=r.lift?'var(--lift)':r.stair?'var(--stair)':ZC(r.z); const d=addPoly(L.flat,pts,{fill,stroke:'var(--wall-top)','stroke-width':.5,'stroke-opacity':.5,class:'tile','data-room':r.id},{floor:f.id,rel:true}); tiles[r.id]=d.e; roomInfo[r.id]={r,f}; d.e.addEventListener('click',ev=>{ev.stopPropagation(); selectRoom(r.id);}); }
+  // walls (split into short pieces for depth sorting)
+  for(const w of f._walls){ const h=w.ext?WALL_EX:WALL_IN; const n=Math.max(1,Math.ceil((w.b-w.a)/2.5)); for(let i=0;i<n;i++){ const a=w.a+(w.b-w.a)*i/n, b=w.a+(w.b-w.a)*(i+1)/n; const [x0,z0]=w.o==='h'?bw(a,w.c):bw(w.c,a), [x1,z1]=w.o==='h'?bw(b,w.c):bw(w.c,b); addPoly(L.obj,[[x0,0,z0],[x1,0,z1],[x1,h,z1],[x0,h,z0]],{fill:w.ext?(w.o==='h'?'var(--wall-x)':'var(--wall-xb)'):(w.o==='h'?'var(--wall-a)':'var(--wall-b)'),stroke:'var(--wall-top)','stroke-width':.5,'stroke-opacity':.55},{floor:f.id,sort:true,rel:true}); } }
+  // lifts as boxes
+  for(const r of f.rooms) if(r.lift){ const [x,y]=r.r; for(let i=0;i<3;i++){ const [X0,Z0]=bw(x+.25+i*1.95,y+.3),[X1,Z1]=bw(x+.25+i*1.95+1.6,y+2.5); box(L.obj,X0,Z0,X1,Z1,0,1.9,['var(--wall-x)','var(--wall-xb)','var(--wall-top)','var(--wall-a)'],{floor:f.id,rel:true}); } }
+  // stairs: treads
+  for(const r of f.rooms) if(r.stair){ const [x,y,w,h]=r.r; for(let t=0;t<9;t++){ const yy=y+.5+t*(h-1)/9; const step=t*.12; const [X0,Z0]=bw(x+.2,yy),[X1,Z1]=bw(x+w/2-.15,yy); addLine(L.obj,[[X0,.05+step,Z0],[X1,.05+step,Z1]],{stroke:'var(--wall-a)','stroke-width':1.4},{floor:f.id,sort:true,rel:true}); const [X2,Z2]=bw(x+w/2+.15,yy),[X3,Z3]=bw(x+w-.2,yy); addLine(L.obj,[[X2,1.1-step,Z2],[X3,1.1-step,Z3]],{stroke:'var(--wall-a)','stroke-width':1.4},{floor:f.id,sort:true,rel:true}); } }
+  // devices
+  for(const d of S.floors[f.id].devices){ const [X,Z]=bw(d.x,d.y); const cat=catOf(d.k); const h=cat==='cam'?2.3:cat==='env'?1.7:cat==='grd'?1.8:1.4; const dd=addDot(L.obj,[X,h,Z],.42,{fill:`var(--d-${cat})`,stroke:'var(--sheet)','stroke-width':1,class:'dev devs','data-dev':d.id},{floor:f.id,sort:true,rel:true,scaleR:true,dev:true}); devEls[d.id]=dd.e; dd.e.addEventListener('click',ev=>{ev.stopPropagation(); selectDev(d.id,f.id);}); el('title',{},dd.e,`${d.id} · ${C[d.k].ar}`); if(cat==='cam'||cat==='grd'||cat==='env'){ addLine(L.obj,[[X,0,Z],[X,h,Z]],{stroke:`var(--d-${cat})`,'stroke-width':.8,'stroke-opacity':.5,class:'devs'},{floor:f.id,sort:true,rel:true}); } }
+  // paths
+  for(const k in (f.special.paths||{})) for(const pts of f.special.paths[k]) addLine(L.paths,pts.map(([x,y])=>{const [X,Z]=bw(x,y); return [X,.12,Z];}),{fill:'none',stroke:`var(--p-${k})`,'stroke-width':2.2,'stroke-dasharray':'6 5','stroke-linecap':'round'},{floor:f.id,rel:true});
+  // labels
+  for(const r of f.rooms){ const p=poly(r); const a=area(p); if(r.circ&&!r.id.endsWith('14')&&!r.id.endsWith('15')) continue; if(r.lift||r.stair) continue; let [cx,cy]=r.r?[r.r[0]+r.r[2]/2,r.r[1]+r.r[3]/2]:centroid(p); if(r.circ) cx=8.5; const [X,Z]=bw(cx,cy); const big=a>=40; const t=addText(L.lbls,[X,.2,Z],big?r.n:r.id,{class:big?'lbl-name':'lbl-id','font-size':big?12:10},{floor:f.id,rel:true,label:true,area:a}); }
+  // floor name
+  const [fx,fz]=bw(-1.5,31.5); addText(gFL,[fx,0,fz],f.ar,{class:'flabel','font-size':15,'text-anchor':'end'},{floor:f.id,rel:true,flabel:true});
+});
+
+/* ---------- modes ---------- */
+let mode='site';
+function levelOf(fid){ const i=IDX[fid]; return mode==='explode'? i*EXPLODE : i*FH; }
+function visibleFloor(fid){ if(mode==='site'||mode==='explode') return true; return IDX[fid]<=IDX[mode]; }
+
+/* ---------- render ---------- */
+function render(){
+  for(const d of drawables){
+    if(d.floor && !visibleFloor(d.floor)){ d.hidden=true; continue; } d.hidden=false;
+    const yo=d.rel? levelOf(d.floor):0;
+    const P=d.pts.map(([x,y,z])=>proj(x,y+yo,z));
+    let dep=0; P.forEach(q=>dep+=q[2]); d.depth=dep/P.length;
+    if(d.type==='poly') d.e.setAttribute('points',P.map(q=>q[0].toFixed(1)+','+q[1].toFixed(1)).join(' '));
+    else if(d.type==='line') d.e.setAttribute('points',P.map(q=>q[0].toFixed(1)+','+q[1].toFixed(1)).join(' '));
+    else if(d.type==='dot'){ d.e.setAttribute('cx',P[0][0].toFixed(1)); d.e.setAttribute('cy',P[0][1].toFixed(1)); const r=d.scaleR? Math.max(2.5,Math.min(9,d.r*cam.zoom)):d.r; d.e.setAttribute('r',r.toFixed(1)); }
+    else if(d.type==='text'){ d.e.setAttribute('x',P[0][0].toFixed(1)); d.e.setAttribute('y',P[0][1].toFixed(1)); }
+  }
+  // hide floors
+  FLOORS.forEach(f=>{ gFloors[f.id].g.style.display=visibleFloor(f.id)?'':'none'; });
+  gFL.querySelectorAll('text').forEach(t=>{});
+  for(const d of drawables) if(d.flabel) d.e.style.display = (mode==='explode' && !d.hidden)?'':'none';
+  // labels: only on the focused floor (or the top floor in site mode), skip small at low zoom
+  for(const d of drawables) if(d.label){ const show = (mode===d.floor) || (mode==='site' && d.floor==='2' && d.area>=60) || false; d.e.style.display = show && (cam.zoom>6 || d.area>=60) ? '' : 'none'; }
+  // depth sort within sortable groups
+  const groups=new Map();
+  for(const d of drawables){ if(!d.sort||d.hidden) continue; const p=d.e.parentNode; if(!groups.has(p)) groups.set(p,[]); groups.get(p).push(d); }
+  for(const [p,arr] of groups){ arr.sort((a,b)=>(a.depth+(a.top?.01:0))-(b.depth+(b.top?.01:0))); for(const d of arr) p.appendChild(d.e); }
+  // floor order: higher floors after lower; site first
+  drawCompass();
+}
+let pending=false; function req(){ if(pending) return; pending=true; requestAnimationFrame(()=>{ pending=false; render(); }); }
+function drawCompass(){ const c=document.getElementById('compass'); c.innerHTML=''; const a=cam.yaw*Math.PI/180; const nx=-Math.sin(-a)*0, ny=0; const v=[ -Math.sin(a)*0, 0]; // north = -Z
+  const P=(X,Z)=>{ const c2=Math.cos(a), s2=Math.sin(a); const xr=X*c2-Z*s2, zr=X*s2+Z*c2; return [xr, zr*Math.sin(cam.pitch*Math.PI/180)]; };
+  const n=P(0,-1), m=Math.hypot(n[0],n[1])||1, ux=n[0]/m, uy=n[1]/m;
+  el('circle',{r:26,fill:'var(--sheet)',stroke:'var(--rule)','stroke-width':1.5},c);
+  el('path',{d:`M${ux*18} ${uy*18} L${-uy*6} ${ux*6} L${uy*6} ${-ux*6}Z`,fill:'var(--wall)'},c);
+  el('text',{x:ux*-16+ (0),y:uy*-16+4,'text-anchor':'middle','font-size':0,fill:'var(--ink-2)'},c,'');
+  el('text',{x:(ux*18+ux*0),y:uy*18+(uy<0?-4:12),'text-anchor':'middle','font-size':11,'font-weight':700,fill:'var(--ink)',transform:`translate(${ux*4} ${uy*0})`},c,'ش');
+}
+
+/* ---------- size ---------- */
+const viewer=document.getElementById('viewer');
+function resize(){ const r=svg.getBoundingClientRect(); W=Math.max(300,r.width); H=Math.max(300,r.height); svg.setAttribute('viewBox',`0 0 ${W} ${H}`); req(); }
+new ResizeObserver(resize).observe(viewer);
+
+/* ---------- interaction ---------- */
+const pointers=new Map(); let dragMoved=0, pinch0=null;
+svg.addEventListener('pointerdown',e=>{ pointers.set(e.pointerId,[e.clientX,e.clientY]); dragMoved=0; if(pointers.size===2){ const [a,b]=[...pointers.values()]; pinch0={d:Math.hypot(a[0]-b[0],a[1]-b[1]),z:cam.zoom}; } stopFly(); });
+svg.addEventListener('pointermove',e=>{ if(!pointers.has(e.pointerId)) return; const prev=pointers.get(e.pointerId); const dx=e.clientX-prev[0], dy=e.clientY-prev[1]; pointers.set(e.pointerId,[e.clientX,e.clientY]);
+  if(pointers.size===2&&pinch0){ const [a,b]=[...pointers.values()]; cam.zoom=clampZ(pinch0.z*Math.hypot(a[0]-b[0],a[1]-b[1])/pinch0.d); req(); return; }
+  dragMoved+=Math.abs(dx)+Math.abs(dy);
+  if(dragMoved>4 && !svg.hasPointerCapture(e.pointerId)) { try{ svg.setPointerCapture(e.pointerId); }catch(_){} }
+  if(e.shiftKey||e.buttons===2){ pan(dx,dy); } else { cam.yaw-=dx*.35; cam.pitch=Math.max(18,Math.min(82,cam.pitch+dy*.25)); }
+  req(); });
+const up=e=>{ pointers.delete(e.pointerId); if(pointers.size<2) pinch0=null; };
+svg.addEventListener('pointerup',up); svg.addEventListener('pointercancel',up);
+svg.addEventListener('contextmenu',e=>e.preventDefault());
+svg.addEventListener('click',e=>{ if(dragMoved>6){ e.stopPropagation(); } },true);
+svg.addEventListener('click',e=>{ if(e.target===svg) clearSel(); });
+svg.addEventListener('wheel',e=>{ e.preventDefault(); cam.zoom=clampZ(cam.zoom*Math.exp(-e.deltaY*.0015)); req(); },{passive:false});
+svg.addEventListener('keydown',e=>{ const k=e.key; if(k==='ArrowLeft'){cam.yaw+=8;} else if(k==='ArrowRight'){cam.yaw-=8;} else if(k==='ArrowUp'){cam.pitch=Math.min(82,cam.pitch+5);} else if(k==='ArrowDown'){cam.pitch=Math.max(18,cam.pitch-5);} else if(k==='+'||k==='='){cam.zoom=clampZ(cam.zoom*1.15);} else if(k==='-'){cam.zoom=clampZ(cam.zoom/1.15);} else return; e.preventDefault(); req(); });
+function clampZ(z){ return Math.max(3,Math.min(60,z)); }
+function pan(dx,dy){ const a=cam.yaw*Math.PI/180, p=cam.pitch*Math.PI/180; const c=Math.cos(a), s=Math.sin(a); const mx=-dx/cam.zoom, my=-dy/cam.zoom/Math.max(.3,Math.sin(p)); cam.cx+=mx*c+my*s; cam.cz+=-mx*s+my*c; }
+document.getElementById('rotL').onclick=()=>flyTo({yaw:cam.yaw+45});
+document.getElementById('rotR').onclick=()=>flyTo({yaw:cam.yaw-45});
+document.getElementById('zin').onclick=()=>flyTo({zoom:clampZ(cam.zoom*1.35)});
+document.getElementById('zout').onclick=()=>flyTo({zoom:clampZ(cam.zoom/1.35)});
+document.getElementById('reset').onclick=()=>setMode(mode,true);
+
+/* ---------- fly ---------- */
+let flyRAF=null;
+function stopFly(){ if(flyRAF) cancelAnimationFrame(flyRAF); flyRAF=null; }
+function flyTo(t,ms=750){ stopFly(); const from={...cam}; const to={...cam,...t}; let dyaw=((to.yaw-from.yaw)%360+540)%360-180; to.yaw=from.yaw+dyaw;
+  if(reduce||ms===0){ Object.assign(cam,to); req(); return; }
+  const t0=performance.now(); const step=now=>{ const k=Math.min(1,(now-t0)/ms); const e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2; for(const key of ['yaw','pitch','zoom','cx','cy','cz']) cam[key]=from[key]+(to[key]-from[key])*e; render(); if(k<1) flyRAF=requestAnimationFrame(step); else flyRAF=null; }; flyRAF=requestAnimationFrame(step); }
+function fitZoom(span){ return clampZ(Math.min(W,H)/span); }
+
+/* ---------- modes UI ---------- */
+const MODE_TXT={site:['المبنى كاملًا في موقعه','السور والبوابات وثلاثة طوابق بارتفاعها الحقيقي'],explode:['الطوابق مفصولة','مسافة بين الطوابق لرؤيتها معًا']};
+function setMode(m,recenter){
+  mode=m; document.querySelectorAll('.elev button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===m)));
+  if(m==='site'||m==='explode'){ document.getElementById('where-t').textContent=MODE_TXT[m][0]; document.getElementById('where-s').textContent=MODE_TXT[m][1]; }
+  else { const f=FLOORS.find(x=>x.id===m); document.getElementById('where-t').textContent=f.ar; document.getElementById('where-s').textContent=f.theme; }
+  if(recenter!==false){
+    if(m==='site') flyTo({cx:0,cy:4,cz:0,zoom:fitZoom(95),pitch:40});
+    else if(m==='explode') flyTo({cx:0,cy:17,cz:0,zoom:fitZoom(88),pitch:30});
+    else flyTo({cx:0,cy:levelOf(m),cz:0,zoom:fitZoom(52),pitch:Math.max(cam.pitch,48)});
+  }
+  buildDir(); req();
+}
+document.querySelectorAll('.elev button').forEach(b=>b.onclick=()=>{ endTour(); setMode(b.dataset.mode); });
+
+/* ---------- layers & legend ---------- */
+const lay=k=>document.getElementById('t-'+k);
+['zones','labels','devices','paths'].forEach(k=>lay(k).addEventListener('change',()=>{ viewer.classList.toggle('off-'+k,!lay(k).checked); }));
+viewer.classList.toggle('off-paths',true);
+document.getElementById('legend').innerHTML=['Z1','Z2','Z3','Z4'].map(z=>`<span><i style="background:${ZC(z)};border-color:${ZS(z)}"></i>${z} ${D.zones[z].ar}</span>`).join('')+Object.entries(S.categories).filter(([c])=>c!=='bar').map(([c,v])=>`<span><i style="background:var(--d-${c});border-color:var(--d-${c});border-radius:50%"></i>${v.ar}</span>`).join('');
+
+/* ---------- inspector ---------- */
+const inspect=document.getElementById('inspect');
+let selRoom=null, selDev=null;
+function clearSel(){ document.querySelectorAll('.tile.sel').forEach(t=>t.classList.remove('sel')); selRoom=selDev=null; document.querySelectorAll('.dir button.on').forEach(b=>b.classList.remove('on')); inspect.innerHTML=summaryCard(); bindCard(); }
+function summaryCard(){ const nRooms=FLOORS.reduce((s,f)=>s+f.rooms.filter(r=>!r.circ).length,0); const nDev=Object.keys(devEls).length;
+  return `<span class="id">RASIN · MODEL</span><h3>استكشف المبنى</h3><p class="hint">اختر طابقًا من لوحة المصعد، ثم انقر على أي غرفة لعرض وظيفتها ومنطقتها الأمنية وأجهزتها، أو ابدأ جولة موجّهة.</p><dl class="kv"><dt>الطوابق</dt><dd>3 · <span class="mono">3,600</span> م²</dd><dt>الغرف والفراغات</dt><dd><span class="mono">${nRooms}</span></dd><dt>الأجهزة الأمنية</dt><dd><span class="mono">${nDev}</span></dd></dl>`; }
+function devicesIn(r,f){ const p=poly(r); const onEdge=d=>{ for(let i=0;i<p.length;i++){ const [x1,y1]=p[i],[x2,y2]=p[(i+1)%p.length]; if(d.x<Math.min(x1,x2)-1e-6||d.x>Math.max(x1,x2)+1e-6||d.y<Math.min(y1,y2)-1e-6||d.y>Math.max(y1,y2)+1e-6) continue; if(Math.abs((x2-x1)*(d.y-y1)-(y2-y1)*(d.x-x1))<1e-6) return true; } return false; }; return S.floors[f.id].devices.filter(d=>pip(d.x,d.y,p)||onEdge(d)); }
+function devRow(d){ return `<li><button type="button" data-dev="${d.id}"><span class="dot" style="background:var(--d-${catOf(d.k)})"></span><span class="mono">${d.id}</span><span>${C[d.k].ar}</span></button></li>`; }
+function roomCard(r,f){ const p=poly(r); const Z=D.zones[r.z]; const devs=devicesIn(r,f);
+  return `<span class="id">${r.id} · ${f.ar}</span><h3>${r.n}</h3><div class="en">${r.e}</div><div><span class="chip" style="background:${ZC(r.z)};border-color:${ZS(r.z)}">${r.z} · ${Z.ar}</span></div>
+  <p style="margin:0;font-size:14px">${r.f}</p>
+  <dl class="kv"><dt>التحقق</dt><dd>${Z.auth}</dd><dt>المساحة</dt><dd><span class="mono">${fmt(area(p))}</span> م²</dd><dt>المصدر</dt><dd>[${r.t}] ${D.tags[r.t]}</dd></dl>
+  <div><p class="hint" style="margin-bottom:4px">الأجهزة في الغرفة وعلى أبوابها (${devs.length})</p><ul class="devlist">${devs.map(devRow).join('')||'<li class="hint">لا أجهزة</li>'}</ul></div>
+  <button type="button" class="linkbtn" id="clear">إلغاء التحديد</button>`; }
+function devCard(d,sheet){ const v=C[d.k]; let where='الموقع العام'; if(sheet!=='site'){ const f=FLOORS.find(x=>x.id===sheet); const r=f.rooms.find(r=>pip(d.x,d.y,poly(r))); where=r?`${r.n} · ${f.ar}`:f.ar; }
+  return `<span class="id">${d.id}</span><h3>${v.ar}</h3><div class="en">${v.en}</div><div>${v.fn.map(x=>`<span class="fn">${x}</span>`).join('')}</div><p style="margin:0;font-size:14px">${d.note||''}</p><dl class="kv"><dt>الموقع</dt><dd>${where}</dd><dt>ECC</dt><dd>${v.std.ecc}</dd><dt>ISO 27001</dt><dd class="mono" style="text-align:right">${v.std.iso}</dd><dt>NIST</dt><dd class="mono" style="text-align:right">${v.std.nist}</dd></dl><p class="hint">${v.why}</p><button type="button" class="linkbtn" id="clear">إلغاء التحديد</button>`; }
+function siteCard(id){ const e=D.site.elements.find(x=>x.id===id); return `<span class="id">${id}</span><h3>${e.n}</h3><p style="margin:0;font-size:14px">${e.f||'جزء من الموقع العام (المنطقة Z0).'}</p><button type="button" class="linkbtn" id="clear">إلغاء التحديد</button>`; }
+function bindCard(){ const c=document.getElementById('clear'); if(c) c.onclick=clearSel; inspect.querySelectorAll('.devlist button').forEach(b=>b.onclick=()=>{ const [d,sh]=findDev(b.dataset.dev); if(d) selectDev(d.id,sh); }); }
+function findDev(id){ for(const f of FLOORS){ const d=S.floors[f.id].devices.find(x=>x.id===id); if(d) return [d,f.id]; } const d=S.site.devices.find(x=>x.id===id); return d?[d,'site']:[null,null]; }
+function selectRoom(id,fly){ const info=roomInfo[id]; if(!info||!info.r) return; clearSel(); selRoom=id; tiles[id].classList.add('sel'); inspect.innerHTML=roomCard(info.r,info.f); bindCard(); const b=document.querySelector(`.dir button[data-room="${id}"]`); if(b) b.classList.add('on'); if(fly){ if(mode!==info.f.id) setMode(info.f.id,false); focusRooms([id]); } }
+function selectSite(id){ clearSel(); tiles[id].classList.add('sel'); inspect.innerHTML=siteCard(id); bindCard(); }
+function selectDev(id,sheet){ const [d]=findDev(id); if(!d) return; clearSel(); selDev=id; inspect.innerHTML=devCard(d,sheet); bindCard(); const e=devEls[id]; if(e){ e.classList.add('hi'); setTimeout(()=>e.classList.remove('hi'),1600); } }
+function focusRooms(ids,at,sheet){ let pts=[]; let level=0; for(const id of ids){ const info=roomInfo[id]; if(info&&info.r){ const [cx,cy]=centroid(poly(info.r)); pts.push(bw(cx,cy)); level=levelOf(info.f.id); } else if(info&&info.site){ const [x,y,w,h]=info.site.r; pts.push(sw(x+w/2,y+h/2)); } else { const g=D.site.gates.find(x=>x.id===id); if(g) pts.push(sw(...g.at)); } }
+  if(at) pts=[sw(at[0],at[2])];
+  if(!pts.length) return; const cx=pts.reduce((s,p)=>s+p[0],0)/pts.length, cz=pts.reduce((s,p)=>s+p[1],0)/pts.length;
+  flyTo({cx,cz,cy:level,zoom:fitZoom(sheet==='site'?44:32),pitch:Math.max(46,cam.pitch)},900); }
+
+/* ---------- directory ---------- */
+function buildDir(){ const ul=document.getElementById('dir'); const t=document.getElementById('dir-title');
+  if(mode==='site'||mode==='explode'){ t.textContent='كل الطوابق: الغرف عالية الحساسية'; const rows=[]; FLOORS.forEach(f=>f.rooms.filter(r=>r.z==='Z4').forEach(r=>rows.push([r,f]))); ul.innerHTML=rows.map(([r,f])=>`<li><button type="button" data-room="${r.id}"><span class="mono">${r.id}</span><span>${r.n}</span><span class="sw" style="background:${ZC(r.z)};border-color:${ZS(r.z)}"></span></button></li>`).join(''); }
+  else { const f=FLOORS.find(x=>x.id===mode); t.textContent=`غرف ${f.ar}`; ul.innerHTML=f.rooms.filter(r=>!r.circ).map(r=>`<li><button type="button" data-room="${r.id}"><span class="mono">${r.id}</span><span>${r.n}</span><span class="sw" style="background:${ZC(r.z)};border-color:${ZS(r.z)}"></span></button></li>`).join(''); }
+  ul.querySelectorAll('button').forEach(b=>b.onclick=()=>{ endTour(); selectRoom(b.dataset.room,true); }); }
+
+/* ---------- tours ---------- */
+const tourWrap=document.getElementById('tours'); const card=document.getElementById('tourcard');
+tourWrap.innerHTML=T.map(t=>`<button type="button" data-tour="${t.id}" aria-pressed="false"><b>${t.n}</b><span>${t.sub} · ${t.steps.length} خطوات</span></button>`).join('');
+tourWrap.querySelectorAll('button').forEach(b=>b.onclick=()=>startTour(b.dataset.tour));
+let tour=null, ti=0;
+function clearHi(){ document.querySelectorAll('.tile.hi').forEach(t=>t.classList.remove('hi')); document.querySelectorAll('.dev.hi').forEach(t=>t.classList.remove('hi')); }
+function startTour(id){ tour=T.find(t=>t.id===id); ti=0; tourWrap.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.tour===id))); if(!lay('devices').checked){ lay('devices').checked=true; viewer.classList.remove('off-devices'); } showStep(); }
+function endTour(){ if(!tour) return; tour=null; card.hidden=true; clearHi(); tourWrap.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed','false')); }
+function showStep(){ const s=tour.steps[ti]; clearHi();
+  setMode(s.floor==='site'?'site':s.floor,false);
+  s.focus.forEach(id=>{ if(tiles[id]) tiles[id].classList.add('hi'); });
+  s.devices.forEach(id=>{ if(devEls[id]) devEls[id].classList.add('hi'); });
+  focusRooms(s.focus,s.at,s.floor);
+  const devs=s.devices.map(id=>findDev(id)[0]).filter(Boolean);
+  card.hidden=false;
+  card.innerHTML=`<div class="meta"><span>${tour.n}</span><span class="mono">${ti+1} / ${tour.steps.length}</span></div><div class="prog">${tour.steps.map((_,i)=>`<i class="${i<=ti?'on':''}"></i>`).join('')}</div><h3>${s.t}</h3><p>${s.d}</p>${devs.length?`<p class="hint">الضوابط في هذه الخطوة: ${devs.map(d=>C[d.k].ar).filter((v,i,a)=>a.indexOf(v)===i).join('، ')}</p>`:''}<div class="nav"><div><button type="button" class="btn" id="tprev" ${ti===0?'disabled':''}>السابق</button><button type="button" class="btn primary" id="tnext">${ti===tour.steps.length-1?'إنهاء الجولة':'التالي'}</button></div><button type="button" class="linkbtn" id="tend">إغلاق</button></div>`;
+  document.getElementById('tprev').onclick=()=>{ if(ti>0){ti--; showStep();} };
+  document.getElementById('tnext').onclick=()=>{ if(ti<tour.steps.length-1){ti++; showStep();} else endTour(); };
+  document.getElementById('tend').onclick=endTour;
+  const r=s.focus.find(id=>roomInfo[id]&&roomInfo[id].r); if(r){ const info=roomInfo[r]; inspect.innerHTML=roomCard(info.r,info.f); bindCard(); } else if(devs[0]){ inspect.innerHTML=devCard(devs[0],s.floor); bindCard(); }
+}
+document.addEventListener('keydown',e=>{ if(!tour) return; if(e.target.closest&&e.target.closest('input,textarea')) return; if(e.key==='PageDown'||(e.key==='ArrowLeft'&&e.target===document.body)){ document.getElementById('tnext').click(); } else if(e.key==='PageUp'||(e.key==='ArrowRight'&&e.target===document.body)){ if(ti>0){ti--; showStep();} } else if(e.key==='Escape') endTour(); });
+
+/* ---------- start ---------- */
+inspect.innerHTML=summaryCard(); bindCard();
+resize();
+cam.zoom=fitZoom(95);
+setMode('site',false);
+render();
+})();
+</script>
+
+</body>
+</html>

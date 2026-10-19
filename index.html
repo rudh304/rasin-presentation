@@ -1,0 +1,703 @@
+<!doctype html>
+<!--
+  index.html — the RASIN presentation itself: fixed top bar (brand, section nav, theme / language / present
+  buttons) followed by the eight presentation sections stacked vertically. Arabic text lives inline as the
+  default; English (and Arabic, for switching back) comes from assets/i18n/*.json via data-i18n keys.
+-->
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="meta.title">مركز رَصين للأمن والحماية المتكاملة</title>
+<meta name="description" content="عرض تقديمي لمشروع الأمن المادي — مركز رَصين للأمن والحماية المتكاملة">
+<meta name="color-scheme" content="light dark">
+<script>
+  /* Applied before first paint so there is no flash of the wrong theme or direction. */
+  (function () {
+    var d = document.documentElement, t = null, l = null;
+    d.classList.add('js');
+    try { t = localStorage.getItem('rasin-theme'); l = localStorage.getItem('rasin-lang'); } catch (e) {}
+    if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    d.setAttribute('data-theme', t);
+    if (l === 'en') { d.lang = 'en'; d.dir = 'ltr'; }
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Loaded without blocking render: offline, the system fallback fonts are used immediately. -->
+<link rel="stylesheet" media="print" onload="this.media='all'"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@500;700;800&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#s1" data-i18n="ui.skip">تخطَّ إلى المحتوى</a>
+
+<!-- ========================= Top bar ========================= -->
+<header class="topbar" id="topbar">
+  <a class="brand" href="#s1" aria-label="رَصين — RASIN" data-i18n-aria="brand.aria">
+    <span class="brand-name">رَصين</span>
+    <span class="brand-latin">RASIN</span>
+  </a>
+
+  <nav class="nav" id="nav" aria-label="أقسام العرض" data-i18n-aria="nav.aria">
+    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navList">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <span class="nav-toggle-num" id="navToggleNum">01</span>
+      <span class="nav-toggle-label" id="navToggleLabel" data-i18n="nav.s1">المقدمة</span>
+    </button>
+    <ol class="nav-list" id="navList">
+      <li><a href="#s1"><span class="num">01</span><span data-i18n="nav.s1">المقدمة</span></a></li>
+      <li><a href="#s2"><span class="num">02</span><span data-i18n="nav.s2">الجهة المختارة</span></a></li>
+      <li><a href="#s3"><span class="num">03</span><span data-i18n="nav.s3">المخطط المعماري وثلاثية CIA</span></a></li>
+      <li><a href="#s4"><span class="num">04</span><span data-i18n="nav.s4">التصميم الأمني</span></a></li>
+      <li><a href="#s5"><span class="num">05</span><span data-i18n="nav.s5">تطبيق المعايير</span></a></li>
+      <li><a href="#s6"><span class="num">06</span><span data-i18n="nav.s6">الجولات التفاعلية</span></a></li>
+      <li><a href="#s7"><span class="num">07</span><span data-i18n="nav.s7">الرسائل الختامية</span></a></li>
+      <li><a href="#s8"><span class="num">08</span><span data-i18n="nav.s8">لفتة وطنية</span></a></li>
+    </ol>
+  </nav>
+
+  <div class="tools">
+    <button class="tool" id="themeBtn" type="button" aria-label="التبديل إلى الوضع الداكن">
+      <!-- Moon: shown in light mode -->
+      <svg class="ic-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <!-- Sun: shown in dark mode -->
+      <svg class="ic-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg>
+    </button>
+    <button class="tool tool-lang" id="langBtn" type="button" aria-label="Switch to English">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9M12 3C9.4 5.6 8.2 8.6 8.2 12s1.2 6.4 3.8 9"/></svg>
+      <span class="lang-glyph" id="langGlyph">EN</span>
+    </button>
+    <button class="tool" id="presentBtn" type="button" aria-pressed="false" aria-label="تشغيل وضع العرض">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8V3h5M16 3h5v5M21 16v5h-5M8 21H3v-5"/><path d="M10 9.5v5l4.5-2.5z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ========================= SEC-01 · Opening ========================= -->
+  <section class="sec sec-hero" id="s1" aria-labelledby="s1-title">
+    <div class="hero-bg" id="heroBg" aria-hidden="true">
+      <!-- Static fallback drawing: visible until (or unless) the live model loads -->
+      <svg class="hero-fallback" viewBox="0 0 800 520" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <g class="fb-dim">
+          <path d="M120 470H680"/>
+          <path d="M120 478v-16M680 478v-16"/>
+          <path d="M80 110V450M72 110h16M72 450h16"/>
+        </g>
+        <g class="fb-ground"><path d="M40 450H760"/></g>
+        <g class="fb-wall">
+          <rect x="120" y="110" width="560" height="340"/>
+          <path d="M120 223H680M120 337H680"/>
+          <path d="M330 110v340M470 110v340"/>
+        </g>
+        <g class="fb-open">
+          <path d="M160 150h60v40h-60zM250 150h50v40h-50zM500 150h60v40h-60zM590 150h50v40h-50z"/>
+          <path d="M160 263h60v40h-60zM250 263h50v40h-50zM500 263h60v40h-60zM590 263h50v40h-50z"/>
+          <path d="M370 380h60v70h-60z"/>
+        </g>
+        <g class="fb-label">
+          <text x="96" y="172">L2</text>
+          <text x="96" y="286">L1</text>
+          <text x="96" y="400">L0</text>
+        </g>
+      </svg>
+      <iframe class="hero-frame" id="heroFrame" src="embeds/model.html" loading="lazy"
+              tabindex="-1" title="" aria-hidden="true"></iframe>
+    </div>
+
+    <div class="hero-inner">
+      <div class="sheet hero-sheet">
+        <div class="plate-row">
+          <span class="plate instructor">
+            <!-- small crown centred above the label; absolutely positioned so the label itself doesn't move -->
+            <svg class="crown" viewBox="0 0 24 16" aria-hidden="true" focusable="false"><path d="M3 13.5h18M4 13.5 2.5 4l5.5 4.5L12 2l4 6.5L21.5 4 20 13.5"/></svg>
+            <span data-i18n="s1.instructor">أستاذة المقرر: د. منى اليامي</span>
+          </span>
+          <span class="plate-name" data-i18n="nav.s1">المقدمة</span>
+        </div>
+
+        <h1 class="hero-title" id="s1-title">
+          <svg class="title-lock" viewBox="0 0 24 28" aria-hidden="true" focusable="false"><rect x="3" y="12" width="18" height="14" rx="1.5"/><path d="M7 12V8a5 5 0 0 1 10 0v4M12 17.5v4"/></svg>
+          <span data-i18n="s1.title">مركز رَصين للأمن والحماية المتكاملة</span>
+        </h1>
+        <p class="hero-latin">RASIN Integrated Security Center</p>
+        <p class="hero-tagline" data-i18n="s1.tagline">تصميم أمن مادي متكامل يحمي المعلومات قبل أن تصل إليها يد غير مصرح لها</p>
+
+        <dl class="stats">
+          <div class="stat"><dt data-i18n="s1.stat.floors">طوابق</dt><dd class="stat-num">3</dd></div>
+          <div class="stat"><dt data-i18n="s1.stat.rooms">غرفة</dt><dd class="stat-num">54</dd></div>
+          <div class="stat"><dt data-i18n="s1.stat.devices">جهازًا أمنيًا</dt><dd class="stat-num">144</dd></div>
+          <div class="stat"><dt data-i18n="s1.stat.zones">مناطق أمنية</dt><dd class="stat-num">5</dd></div>
+        </dl>
+
+        <!-- Drawing-sheet title block -->
+        <dl class="titleblock">
+          <div><dt data-i18n="tb.course">المقرر</dt><dd data-i18n="tb.courseVal">أمن المعلومات وإدارة المخاطر</dd></div>
+          <div><dt data-i18n="tb.project">المشروع</dt><dd data-i18n="tb.projectVal">مشروع الفصل الخامس: الأمن المادي ومعايير الأمن المادي</dd></div>
+          <div><dt data-i18n="tb.dept">القسم</dt><dd data-i18n="tb.deptVal">قسم نظم المعلومات الإدارية، كلية إدارة الأعمال، جامعة الطائف</dd></div>
+          <div><dt data-i18n="tb.sheet">اللوحة</dt><dd class="mono">SEC-01 / 08</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= SEC-02 · Selected organization ========================= -->
+  <section class="sec" id="s2" aria-labelledby="s2-title">
+    <div class="sec-inner">
+      <header class="sec-head"><span class="plate">SEC-02</span><h2 id="s2-title" data-i18n="nav.s2">الجهة المختارة</h2></header>
+
+      <div class="s2-grid">
+        <div class="s2-text">
+          <p class="s2-lead" data-i18n="s2.lead">مركز افتراضي متخصص في الأمن السيبراني وحماية المعلومات.</p>
+
+          <div class="s2-why">
+            <h3 class="label" data-i18n="s2.whyTitle">لماذا هذه الجهة؟</h3>
+            <p data-i18n="s2.why">رَصين جهة افتراضية وُلدت من رحم الخيال، تتبنى موضوع المقرر: أمن المعلومات. توظّف مفهوم إنترنت الأشياء (IoT) لكونه متسيّد العصر، وتقوم بدورها في حماية البيانات والتصدي للهجمات السيبرانية الرقمية.</p>
+          </div>
+
+          <blockquote class="goal">
+            <p class="label" data-i18n="s2.goalLabel">هدف التكليف</p>
+            <p class="goal-text" data-i18n="s2.goal">«تطبيق مفاهيم الحماية المادية للبيانات»</p>
+          </blockquote>
+        </div>
+
+        <!-- Schematic section through the building: three floors, top to bottom -->
+        <figure class="sheet building">
+          <figcaption class="building-cap">
+            <span data-i18n="s2.building">مبنى مستقل من ثلاثة طوابق</span>
+          </figcaption>
+          <ol class="floors">
+            <li class="floor">
+              <span class="plate">A-103</span>
+              <span class="floor-name" data-i18n="s2.f2">الطابق الثاني</span>
+              <span class="floor-use" data-i18n="s2.f2use">الحوكمة والمخاطر والتطوير</span>
+            </li>
+            <li class="floor">
+              <span class="plate">A-102</span>
+              <span class="floor-name" data-i18n="s2.f1">الطابق الأول</span>
+              <span class="floor-use" data-i18n="s2.f1use">العمليات السيبرانية والتهديدات</span>
+            </li>
+            <li class="floor">
+              <span class="plate">A-101</span>
+              <span class="floor-name" data-i18n="s2.f0">الطابق الأرضي</span>
+              <span class="floor-use" data-i18n="s2.f0use">الاستقبال والتمكين السيبراني</span>
+            </li>
+          </ol>
+          <div class="ground" aria-hidden="true"></div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= SEC-03 · Architectural plan & the CIA triad ========================= -->
+  <section class="sec" id="s3" aria-labelledby="s3-title">
+    <div class="sec-inner">
+      <header class="sec-head"><span class="plate">SEC-03</span><h2 id="s3-title" data-i18n="nav.s3">المخطط المعماري وثلاثية CIA</h2></header>
+
+      <!-- Idea + zones -->
+      <div class="s3-idea">
+        <div>
+          <p class="s3-thesis" data-i18n="s3.thesis">«المعمار هو أول ضابط أمني»</p>
+          <p class="s3-explain" data-i18n="s3.explain">ترتفع الحساسية مع الارتفاع، وكلما صعد الشخص زادت نقاط التحقق التي يمر بها.</p>
+          <p class="s3-did"><span data-i18n="s3.did">الدفاع في العمق</span> <span class="mono dup-en">Defense in Depth</span></p>
+        </div>
+
+        <figure class="zones">
+          <figcaption class="label" data-i18n="s3.zonesTitle">المناطق الأمنية الخمس</figcaption>
+          <ol class="zone-steps">
+            <li class="zone z0"><span class="zone-code">Z0</span><span class="zone-name" data-i18n="zone.z0">المحيط الخارجي</span></li>
+            <li class="zone z1"><span class="zone-code">Z1</span><span class="zone-name" data-i18n="zone.z1">عامة</span></li>
+            <li class="zone z2"><span class="zone-code">Z2</span><span class="zone-name" data-i18n="zone.z2">شبه مقيدة</span></li>
+            <li class="zone z3"><span class="zone-code">Z3</span><span class="zone-name" data-i18n="zone.z3">مقيدة</span></li>
+            <li class="zone z4"><span class="zone-code">Z4</span><span class="zone-name" data-i18n="zone.z4">عالية الحساسية</span></li>
+          </ol>
+          <p class="zones-axis" aria-hidden="true"><span data-i18n="s3.axis">الحساسية ونقاط التحقق</span><svg viewBox="0 0 40 10"><path d="M0 5h37M32 1l5 4-5 4"/></svg></p>
+        </figure>
+      </div>
+
+      <!-- CIA triad -->
+      <h3 class="sub-title"><span data-i18n="s3.ciaTitle">ثلاثية CIA</span> <span class="mono sub-latin dup-en">CIA Triad</span></h3>
+      <div class="cia-cards">
+        <article class="cia-card cia-c">
+          <header>
+            <span class="cia-letter" aria-hidden="true">C</span>
+            <h4><span data-i18n="cia.c">السرية</span> <span class="mono dup-en">Confidentiality</span></h4>
+          </header>
+          <p class="cia-def" data-i18n="cia.c.def">ضمان ألّا يطّلع على المعلومات إلا المصرح لهم.</p>
+          <p class="label" data-i18n="s3.howArch">دور التصميم المعماري</p>
+          <ul class="ticks">
+            <li data-i18n="cia.c.1">فصل الزوار جنوب خط البوابات الدوارة.</li>
+            <li data-i18n="cia.c.2">المصاعد والسلالم كلها خلف الخط.</li>
+            <li data-i18n="cia.c.3">قاعة الاجتماعات الإدارية مقابل المصعد، فلا يرى الزائر المكاتب.</li>
+            <li data-i18n="cia.c.4">زجاج معتم لواجهة مركز العمليات.</li>
+          </ul>
+        </article>
+        <article class="cia-card cia-i">
+          <header>
+            <span class="cia-letter" aria-hidden="true">I</span>
+            <h4><span data-i18n="cia.i">السلامة</span> <span class="mono dup-en">Integrity</span></h4>
+          </header>
+          <p class="cia-def" data-i18n="cia.i.def">حماية المعلومات من التعديل أو الإتلاف غير المصرح به.</p>
+          <p class="label" data-i18n="s3.howArch">دور التصميم المعماري</p>
+          <ul class="ticks">
+            <li data-i18n="cia.i.1">غرفة الخوادم والأرشيف خلف غرفة عازلة (Mantrap) بتحقق ثنائي.</li>
+            <li data-i18n="cia.i.2">نقطة واحدة مسجلة لاستلام السجلات.</li>
+            <li data-i18n="cia.i.3">غرفة إتلاف آمن تحت كاميرا.</li>
+          </ul>
+        </article>
+        <article class="cia-card cia-a">
+          <header>
+            <span class="cia-letter" aria-hidden="true">A</span>
+            <h4><span data-i18n="cia.a">التوافر</span> <span class="mono dup-en">Availability</span></h4>
+          </header>
+          <p class="cia-def" data-i18n="cia.a.def">ضمان وصول المصرح لهم إلى المعلومات والأنظمة متى احتاجوها.</p>
+          <p class="label" data-i18n="s3.howArch">دور التصميم المعماري</p>
+          <ul class="ticks">
+            <li data-i18n="cia.a.1">«عمود رأسي محمي»: غرف جافة في الأرضي، ثم غرفة الخوادم في الأول، ثم الأرشيف في الثاني، بلا تمديدات مياه.</li>
+            <li data-i18n="cia.a.2">غرفة طاقة غير منقطعة (UPS) ومولد احتياطي.</li>
+            <li data-i18n="cia.a.3">درجان متباعدان للإخلاء.</li>
+          </ul>
+        </article>
+      </div>
+
+      <!-- CIA focus per floor -->
+      <h3 class="sub-title" data-i18n="s3.focusTitle">تركيز CIA في كل طابق</h3>
+      <div class="table-wrap">
+        <table class="schedule">
+          <thead>
+            <tr>
+              <th scope="col" data-i18n="s3.th.floor">الطابق</th>
+              <th scope="col" data-i18n="s3.th.focus">التركيز</th>
+              <th scope="col" data-i18n="s3.th.why">السبب</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row"><span class="plate">A-101</span> <span data-i18n="s2.f0">الطابق الأرضي</span></th>
+              <td><span class="chip cia-c" data-i18n="cia.c">السرية</span></td>
+              <td data-i18n="s3.focus.f0">إبعاد الأشخاص عن المعلومات</td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="plate">A-102</span> <span data-i18n="s2.f1">الطابق الأول</span></th>
+              <td><span class="chip cia-i" data-i18n="cia.i">السلامة</span> <span class="chip cia-a" data-i18n="cia.a">التوافر</span></td>
+              <td data-i18n="s3.focus.f1">الأنظمة والخوادم</td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="plate">A-103</span> <span data-i18n="s2.f2">الطابق الثاني</span></th>
+              <td><span class="chip cia-c" data-i18n="cia.c">السرية</span> <span class="chip cia-i" data-i18n="cia.i">السلامة</span></td>
+              <td data-i18n="s3.focus.f2">السجلات والوثائق</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Architectural drawings -->
+      <div class="embed">
+        <p class="embed-note" data-i18n="ui.embedNote">Interactive drawings are in Arabic</p>
+        <iframe class="embed-frame" src="embeds/plans.html" loading="lazy"
+                title="مخططات رَصين المعمارية" data-i18n-title="s3.embedTitle"></iframe>
+        <a class="embed-open" href="embeds/plans.html" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg>
+          <span data-i18n="ui.openFull">فتح في صفحة كاملة</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= SEC-04 … SEC-08 · placeholders (built in later steps) ========================= -->
+  <!-- ========================= SEC-04 · Security design =========================
+       "What" comes from the brief; "where / why / function" from the project's own data in embeds/security.html. -->
+  <section class="sec" id="s4" aria-labelledby="s4-title">
+    <div class="sec-inner">
+      <header class="sec-head"><span class="plate">SEC-04</span><h2 id="s4-title" data-i18n="nav.s4">التصميم الأمني</h2></header>
+      <p class="sec-lead" data-i18n="s4.lead">ستة عناصر للأمن المادي يطلبها التكليف: ماذا وضعنا، وأين، ولماذا، ووظيفة كل عنصر، وما يحميه من ثلاثية CIA.</p>
+
+      <div class="el-cards">
+
+        <!-- 1 · Barriers -->
+        <article class="el-card">
+          <header class="el-head">
+            <span class="el-num mono">01</span>
+            <h3 data-i18n="s4.c1.title">الحواجز المادية</h3>
+          </header>
+          <dl class="el-body">
+            <div><dt data-i18n="s4.what">ماذا وضعنا</dt><dd><ul class="ticks">
+              <li data-i18n="s4.c1.w1">سور مضاد للتسلق بارتفاع 2.4 م، عليه حساس اهتزاز.</li>
+              <li data-i18n="s4.c1.w2">بوابتان: للمشاة، وللمركبات مع حاجز طريق هيدروليكي.</li>
+              <li data-i18n="s4.c1.w3">حواجز ثابتة (Bollards) أمام المدخل.</li>
+              <li data-i18n="s4.c1.w4">زجاج مصفح، وقضبان على نوافذ الأرضي الخلفية.</li>
+            </ul></dd></div>
+            <div><dt data-i18n="s4.where">أين</dt><dd data-i18n="s4.c1.where">على كامل محيط الموقع (280 م)، وعند البوابتين، وعبر ساحة المدخل، وفي واجهات المبنى.</dd></div>
+            <div><dt data-i18n="s4.why">لماذا</dt><dd data-i18n="s4.c1.why">حاجز الطريق يوقف المركبة حتى ينتهي فحصها ويصدّ محاولة الاقتحام بالمركبة، وكابل الاهتزاز يحدد مقطع محاولة التسلق أو القطع فتتجه إليه الكاميرا المتحركة.</dd></div>
+          </dl>
+          <footer class="el-foot">
+            <ul class="fn" aria-label="الوظيفة" data-i18n-aria="s4.fn">
+              <li class="on" data-i18n="fn.deter">ردع</li><li class="on" data-i18n="fn.detect">كشف</li><li class="on" data-i18n="fn.delay">تأخير</li><li aria-hidden="true" data-i18n="fn.respond">استجابة</li>
+            </ul>
+            <ul class="cia-mini" aria-label="يحمي" data-i18n-aria="s4.protects">
+              <li class="cia-c"><span aria-hidden="true">C</span><span class="sr-only" data-i18n="cia.c">السرية</span></li>
+              <li class="cia-i"><span aria-hidden="true">I</span><span class="sr-only" data-i18n="cia.i">السلامة</span></li>
+            </ul>
+          </footer>
+        </article>
+
+        <!-- 2 · Surveillance -->
+        <article class="el-card">
+          <header class="el-head">
+            <span class="el-num mono">02</span>
+            <h3 data-i18n="s4.c2.title">المراقبة</h3>
+          </header>
+          <dl class="el-body">
+            <div><dt data-i18n="s4.what">ماذا وضعنا</dt><dd><ul class="ticks">
+              <li data-i18n="s4.c2.w1">46 كاميرا ثابتة ومتحركة.</li>
+              <li data-i18n="s4.c2.w2">كل غرفة Z4 مغطاة بنسبة 80٪ أو أكثر؛ غرفة الخوادم والأرشيف 100٪، ومركز العمليات 99٪.</li>
+            </ul></dd></div>
+            <div><dt data-i18n="s4.where">أين</dt><dd data-i18n="s4.c2.where">كاميرات متحركة على أركان السور، وكاميرا قراءة اللوحات عند بوابة المركبات، وكاميرا مقابل البوابات الدوارة، وكاميرتان متقابلتان في غرفة الخوادم وفي الأرشيف.</dd></div>
+            <div><dt data-i18n="s4.why">لماذا</dt><dd data-i18n="s4.c2.why">مراقبة مستمرة وتسجيل دليل لكل حدث؛ وجودها الظاهر يردع قبل أن يكشف. وكاميرات مركز العمليات موجهة لتصوير الحركة والأشخاص، لا محتوى الشاشات.</dd></div>
+          </dl>
+          <footer class="el-foot">
+            <ul class="fn" aria-label="الوظيفة" data-i18n-aria="s4.fn">
+              <li class="on" data-i18n="fn.deter">ردع</li><li class="on" data-i18n="fn.detect">كشف</li><li aria-hidden="true" data-i18n="fn.delay">تأخير</li><li class="on" data-i18n="fn.respond">استجابة</li>
+            </ul>
+            <ul class="cia-mini" aria-label="يحمي" data-i18n-aria="s4.protects">
+              <li class="cia-c"><span aria-hidden="true">C</span><span class="sr-only" data-i18n="cia.c">السرية</span></li>
+              <li class="cia-i"><span aria-hidden="true">I</span><span class="sr-only" data-i18n="cia.i">السلامة</span></li>
+            </ul>
+          </footer>
+        </article>
+
+        <!-- 3 · Intrusion detection -->
+        <article class="el-card">
+          <header class="el-head">
+            <span class="el-num mono">03</span>
+            <h3 data-i18n="s4.c3.title">كشف التسلل</h3>
+          </header>
+          <dl class="el-body">
+            <div><dt data-i18n="s4.what">ماذا وضعنا</dt><dd><ul class="ticks">
+              <li data-i18n="s4.c3.w1">24 حساسًا وزر إنذار: حساسات حركة، وحساسات فتح الأبواب، وكواشف كسر الزجاج، وأزرار استغاثة صامتة.</li>
+            </ul></dd></div>
+            <div><dt data-i18n="s4.where">أين</dt><dd data-i18n="s4.c3.where">على كامل السور، ونوافذ الدور الأرضي، ومخارج الطوارئ، وغرفة الخوادم والأرشيف؛ وأزرار الاستغاثة في الاستقبال ونقطة الحراسة وغرفة التحكم.</dd></div>
+            <div><dt data-i18n="s4.why">لماذا</dt><dd data-i18n="s4.c3.why">كاشف الحركة يكشف أي حركة في الغرفة خارج ساعات العمل أو بلا دخول مسجل، وزر الاستغاثة يرسل إنذارًا صامتًا إلى غرفة التحكم دون أن يلاحظ المهدِّد.</dd></div>
+          </dl>
+          <footer class="el-foot">
+            <ul class="fn" aria-label="الوظيفة" data-i18n-aria="s4.fn">
+              <li aria-hidden="true" data-i18n="fn.deter">ردع</li><li class="on" data-i18n="fn.detect">كشف</li><li aria-hidden="true" data-i18n="fn.delay">تأخير</li><li class="on" data-i18n="fn.respond">استجابة</li>
+            </ul>
+            <ul class="cia-mini" aria-label="يحمي" data-i18n-aria="s4.protects">
+              <li class="cia-c"><span aria-hidden="true">C</span><span class="sr-only" data-i18n="cia.c">السرية</span></li>
+              <li class="cia-i"><span aria-hidden="true">I</span><span class="sr-only" data-i18n="cia.i">السلامة</span></li>
+            </ul>
+          </footer>
+        </article>
+
+        <!-- 4 · Guarding & screening -->
+        <article class="el-card">
+          <header class="el-head">
+            <span class="el-num mono">04</span>
+            <h3 data-i18n="s4.c4.title">الحراسة والفحص</h3>
+          </header>
+          <dl class="el-body">
+            <div><dt data-i18n="s4.what">ماذا وضعنا</dt><dd><ul class="ticks">
+              <li data-i18n="s4.c4.w1">8 مواقع حراسة، والقوة المطلوبة نحو 34 حارسًا.</li>
+              <li data-i18n="s4.c4.w2">تسع خطوات لفحص الزائر، وأربع طبقات تحقق قبل الردهة.</li>
+            </ul></dd></div>
+            <div><dt data-i18n="s4.where">أين</dt><dd data-i18n="s4.c4.where">كشكا البوابتين في الموقع العام على مدار الساعة، ونقاط المدخل والفحص وغرفة التحكم في الدور الأرضي، ودورية متحركة على المبنى والمحيط.</dd></div>
+            <div><dt data-i18n="s4.why">لماذا</dt><dd data-i18n="s4.c4.why">العنصر البشري يتحقق ويقرر ويستجيب حيث لا تكفي الأجهزة. وطبقات المدخل الأربع: كاميرا الوجه، ثم البهو العازل تحت نظر الحارس، ثم الهوية والأشعة وبوابة المعادن، ثم البطاقة.</dd></div>
+          </dl>
+          <footer class="el-foot">
+            <ul class="fn" aria-label="الوظيفة" data-i18n-aria="s4.fn">
+              <li class="on" data-i18n="fn.deter">ردع</li><li class="on" data-i18n="fn.detect">كشف</li><li aria-hidden="true" data-i18n="fn.delay">تأخير</li><li class="on" data-i18n="fn.respond">استجابة</li>
+            </ul>
+            <ul class="cia-mini" aria-label="يحمي" data-i18n-aria="s4.protects">
+              <li class="cia-c"><span aria-hidden="true">C</span><span class="sr-only" data-i18n="cia.c">السرية</span></li>
+            </ul>
+          </footer>
+        </article>
+
+        <!-- 5 · Access control -->
+        <article class="el-card">
+          <header class="el-head">
+            <span class="el-num mono">05</span>
+            <h3 data-i18n="s4.c5.title">التحكم في الوصول</h3>
+          </header>
+          <dl class="el-body">
+            <div><dt data-i18n="s4.what">ماذا وضعنا</dt><dd><ul class="ticks">
+              <li data-i18n="s4.c5.w1">40 نقطة: قارئات بطاقات، وقارئات ثنائية، وبوابات دوارة، وغرف عازلة.</li>
+              <li data-i18n="s4.c5.w2">مصفوفة صلاحيات لتسعة أدوار وظيفية.</li>
+            </ul></dd></div>
+            <div><dt data-i18n="s4.where">أين</dt><dd data-i18n="s4.c5.where">البوابات الدوارة في الدور الأرضي، وقارئ بطاقة على باب كل إدارة، وغرفة عازلة بقارئين ثنائيين أمام غرفة الخوادم والأرشيف.</dd></div>
+            <div><dt data-i18n="s4.why">لماذا</dt><dd data-i18n="s4.c5.why">البطاقة المسروقة وحدها لا تكفي لدخول منطقة Z4، ولا يفتح الباب الثاني للغرفة العازلة قبل إغلاق الأول، فلا يدخل شخصان ببطاقة واحدة. والوصول حسب الوظيفة لا حسب الطابق فقط.</dd></div>
+          </dl>
+          <footer class="el-foot">
+            <ul class="fn" aria-label="الوظيفة" data-i18n-aria="s4.fn">
+              <li aria-hidden="true" data-i18n="fn.deter">ردع</li><li aria-hidden="true" data-i18n="fn.detect">كشف</li><li class="on" data-i18n="fn.delay">تأخير</li><li aria-hidden="true" data-i18n="fn.respond">استجابة</li>
+            </ul>
+            <ul class="cia-mini" aria-label="يحمي" data-i18n-aria="s4.protects">
+              <li class="cia-c"><span aria-hidden="true">C</span><span class="sr-only" data-i18n="cia.c">السرية</span></li>
+              <li class="cia-i"><span aria-hidden="true">I</span><span class="sr-only" data-i18n="cia.i">السلامة</span></li>
+            </ul>
+          </footer>
+        </article>
+
+        <!-- 6 · Environmental factors -->
+        <article class="el-card">
+          <header class="el-head">
+            <span class="el-num mono">06</span>
+            <h3 data-i18n="s4.c6.title">العوامل البيئية</h3>
+          </header>
+          <dl class="el-body">
+            <div><dt data-i18n="s4.what">ماذا وضعنا</dt><dd><ul class="ticks">
+              <li data-i18n="s4.c6.w1">22 حساسًا ونظامًا.</li>
+              <li data-i18n="s4.c6.w2">الإضاءة المحيطية وإضاءة الطوارئ، والتهوية مع فتحات سحب هواء محمية على السطح.</li>
+              <li data-i18n="s4.c6.w3">تبريد دقيق مزدوج (N+1)، ومولد وطاقة غير منقطعة.</li>
+              <li data-i18n="s4.c6.w4">إطفاء بالغاز النظيف، وكشف تسرب المياه.</li>
+            </ul></dd></div>
+            <div><dt data-i18n="s4.where">أين</dt><dd data-i18n="s4.c6.where">غرفة الخوادم والطاقة والأرشيف، والمولد الاحتياطي في ساحة الخدمة، وفتحات سحب الهواء على السطح، والإنارة على السور والساحة والمواقف.</dd></div>
+            <div><dt data-i18n="s4.why">لماذا</dt><dd data-i18n="s4.c6.why">الغاز النظيف يطفئ الحريق دون ماء، فلا يتلف الخوادم أو الورق. والإنارة تردع وتجعل الكاميرات فعالة ليلًا.</dd></div>
+          </dl>
+          <footer class="el-foot">
+            <ul class="fn" aria-label="الوظيفة" data-i18n-aria="s4.fn">
+              <li class="on" data-i18n="fn.deter">ردع</li><li class="on" data-i18n="fn.detect">كشف</li><li aria-hidden="true" data-i18n="fn.delay">تأخير</li><li class="on" data-i18n="fn.respond">استجابة</li>
+            </ul>
+            <ul class="cia-mini" aria-label="يحمي" data-i18n-aria="s4.protects">
+              <li class="cia-a"><span aria-hidden="true">A</span><span class="sr-only" data-i18n="cia.a">التوافر</span></li>
+              <li class="cia-i"><span aria-hidden="true">I</span><span class="sr-only" data-i18n="cia.i">السلامة</span></li>
+            </ul>
+          </footer>
+        </article>
+      </div>
+
+      <!-- Security drawings -->
+      <div class="embed">
+        <p class="embed-note" data-i18n="ui.embedNote">Interactive drawings are in Arabic</p>
+        <iframe class="embed-frame" src="embeds/security.html" loading="lazy"
+                title="مخطط رَصين للأمن المادي" data-i18n-title="s4.embedTitle"></iframe>
+        <a class="embed-open" href="embeds/security.html" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg>
+          <span data-i18n="ui.openFull">فتح في صفحة كاملة</span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- ========================= SEC-05 · Applying the standards =========================
+       Control → project mapping comes from the standards fields in embeds/security.html. -->
+  <section class="sec" id="s5" aria-labelledby="s5-title">
+    <div class="sec-inner">
+      <header class="sec-head"><span class="plate">SEC-05</span><h2 id="s5-title" data-i18n="nav.s5">تطبيق المعايير</h2></header>
+
+      <!-- ECC -->
+      <div class="std">
+        <header class="std-head">
+          <span class="std-code mono">ECC-2:2024</span>
+          <div>
+            <h3 data-i18n="s5.ecc.name">الضوابط الأساسية للأمن السيبراني</h3>
+            <p data-i18n="s5.ecc.scope">الهيئة الوطنية للأمن السيبراني · المكون الفرعي 2-14 الأمن المادي</p>
+          </div>
+        </header>
+        <div class="table-wrap">
+          <table class="schedule std-table">
+            <thead><tr><th scope="col" data-i18n="s5.th.control">الضابط</th><th scope="col" data-i18n="s5.th.applied">ما طبقناه في رَصين</th></tr></thead>
+            <tbody>
+              <tr><th scope="row"><span class="ctl">2-14-1</span><span data-i18n="ecc.1">تحديد متطلبات الحماية المادية وتوثيقها واعتمادها.</span></th><td data-i18n="ecc.1.a">تحديد متطلبات الحماية المادية وتوثيقها واعتمادها.</td></tr>
+              <tr><th scope="row"><span class="ctl">2-14-2</span><span data-i18n="ecc.2">تطبيقها.</span></th><td data-i18n="ecc.2.a">السور وحساس اهتزازه، وحاجز الطريق، وكواشف التسلل، وأزرار الاستغاثة، ومواقع الحراسة.</td></tr>
+              <tr><th scope="row"><span class="ctl">2-14-3</span><span data-i18n="ecc.3">مجالات التطبيق: التحكم بالوصول إلى المناطق الحساسة، وتسجيل الدخول والخروج والمراقبة بالكاميرات، وحماية السجلات، والإتلاف الآمن، وحماية الأجهزة.</span></th><td data-i18n="ecc.3.a">قارئات البطاقات والقارئات الثنائية والغرف العازلة، والكاميرات وكاميرا قراءة اللوحات، وخزنة الوسائط، وغرفة الإتلاف الآمن، وحساسات البيئة والإطفاء لحماية الأجهزة.</td></tr>
+              <tr><th scope="row"><span class="ctl">2-14-4</span><span data-i18n="ecc.4">المراجعة الدورية.</span></th><td data-i18n="ecc.4.a">مراجعة ضوابط الحماية المادية وقوائم الصلاحيات كل ستة أشهر، وبعد أي حادث.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ISO -->
+      <div class="std">
+        <header class="std-head">
+          <span class="std-code mono">ISO/IEC 27001:2022</span>
+          <div>
+            <h3 data-i18n="s5.iso.name">الملحق A — الضوابط المادية</h3>
+            <p data-i18n="s5.iso.scope">الضوابط من 7.1 إلى 7.14</p>
+          </div>
+        </header>
+        <div class="table-wrap">
+          <table class="schedule std-table">
+            <thead><tr><th scope="col" data-i18n="s5.th.control">الضابط</th><th scope="col" data-i18n="s5.th.applied">ما طبقناه في رَصين</th></tr></thead>
+            <tbody>
+              <tr><th scope="row"><span class="ctl">7.1</span><span data-i18n="iso.1">محيطات الأمن المادي</span></th><td data-i18n="iso.1.a">السور وحساس اهتزازه، والبوابتان، والحواجز الثابتة، وحاجز الطريق، والنوافذ والواجهات، والإضاءة المحيطية.</td></tr>
+              <tr><th scope="row"><span class="ctl">7.2</span><span data-i18n="iso.2">الدخول المادي</span></th><td data-i18n="iso.2.a">البوابة (1)، والبهو العازل والبوابات الدوارة، وقارئات البطاقات، وكاميرا قراءة اللوحات، وبوابة كشف المعادن، وجهاز الأشعة، ومواقع الحراسة.</td></tr>
+              <tr><th scope="row"><span class="ctl">7.3</span><span data-i18n="iso.3">تأمين المكاتب والغرف والمرافق</span></th><td data-i18n="iso.3.a">الأبواب الفولاذية للمناطق Z4، والقارئات الثنائية، والغرف العازلة، والنوافذ والواجهات.</td></tr>
+              <tr><th scope="row"><span class="ctl">7.4</span><span data-i18n="iso.4">مراقبة الأمن المادي</span></th><td data-i18n="iso.4.a">الكاميرات الثابتة والمتحركة، وكواشف الحركة وفتح الأبواب وكسر الزجاج، وأزرار الاستغاثة، والإضاءة المحيطية، والمراقبة المركزية (BMS).</td></tr>
+              <tr><th scope="row"><span class="ctl">7.5</span><span data-i18n="iso.5">الحماية من التهديدات المادية والبيئية</span></th><td data-i18n="iso.5.a">حساسات الحرارة والرطوبة وتسرب المياه، وكشف الدخان المبكر، والإطفاء بالغاز النظيف، والتهوية، والمراقبة المركزية.</td></tr>
+              <tr><th scope="row"><span class="ctl">7.6</span><span data-i18n="iso.6">العمل في المناطق الآمنة</span></th><td data-i18n="iso.6.a">منع الزوار من غير مرافق في المنطقة Z4، وسياسة المكتب النظيف.</td></tr>
+              <tr><th scope="row"><span class="ctl">7.7</span><span data-i18n="iso.7">المكتب النظيف والشاشة النظيفة</span></th><td data-i18n="iso.7.a">لا مستندات على المكاتب بعد الدوام، وقفل الشاشة آليًا، وخزائن مقفلة في كل مكتب.</td></tr>
+              <tr><th scope="row"><span class="ctl">7.8</span><span data-i18n="iso.8">موقع المعدات وحمايتها</span></th><td data-i18n="iso.8.a">التبريد الدقيق للغرف التقنية، والخوادم في خزائن مقفلة.</td></tr>
+              <tr><th scope="row"><span class="ctl">7.9</span><span data-i18n="iso.9">أمن الأصول خارج المقر</span></th><td data-i18n="iso.9.a">الحواسيب المحمولة مشفرة، وتُسجل عند الخروج والعودة عبر مدخل الموظفين.</td></tr>
+              <tr><th scope="row"><span class="ctl">7.10</span><span data-i18n="iso.10">وسائط التخزين</span></th><td data-i18n="iso.10.a">النسخ الاحتياطية في خزنة الوسائط بخزائن مقاومة للحريق، وكل إخراج وإعادة مسجل عند نقطة الاستلام.</td></tr>
+              <tr><th scope="row"><span class="ctl">7.11</span><span data-i18n="iso.11">المرافق الداعمة</span></th><td data-i18n="iso.11.a">المولد الاحتياطي والطاقة غير المنقطعة، والتكييف الدقيق، والتهوية، ومفتاح فصل الطاقة الطارئ.</td></tr>
+              <tr><th scope="row"><span class="ctl">7.12</span><span data-i18n="iso.12">أمن الكابلات</span></th><td data-i18n="iso.12.a">الكابلات في مجارٍ مغلقة، ومنافذ الشبكة معطلة في المناطق Z1 وZ2.</td></tr>
+              <tr><th scope="row"><span class="ctl">7.13</span><span data-i18n="iso.13">صيانة المعدات</span></th><td data-i18n="iso.13.a">مرافقة فنيي الصيانة داخل المناطق Z4، وجرد الأدوات عند الدخول والخروج.</td></tr>
+              <tr><th scope="row"><span class="ctl">7.14</span><span data-i18n="iso.14">الإتلاف الآمن للمعدات أو إعادة استخدامها</span></th><td data-i18n="iso.14.a">الورق والوسائط تُتلف في غرفة الإتلاف قبل خروجها، تحت كاميرا، مع محضر إتلاف موقع.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- NIST -->
+      <div class="std">
+        <header class="std-head">
+          <span class="std-code mono">NIST SP 800-53 Rev.5</span>
+          <div>
+            <h3 data-i18n="s5.nist.name">عائلة الحماية المادية والبيئية (PE)</h3>
+            <p data-i18n="s5.nist.scope">الضوابط التي يطبقها التصميم</p>
+          </div>
+        </header>
+        <div class="table-wrap">
+          <table class="schedule std-table">
+            <thead><tr><th scope="col" data-i18n="s5.th.control">الضابط</th><th scope="col" data-i18n="s5.th.applied">ما طبقناه في رَصين</th></tr></thead>
+            <tbody>
+              <tr><th scope="row"><span class="ctl">PE-3</span><span data-i18n="pe.3">التحكم في الوصول المادي</span></th><td data-i18n="pe.3.a">قارئات البطاقات والقارئات الثنائية، والبوابات الدوارة، والغرف العازلة، ومواقع الحراسة، وحاجز الطريق، والنوافذ والواجهات.</td></tr>
+              <tr><th scope="row"><span class="ctl">PE-6</span><span data-i18n="pe.6">مراقبة الوصول المادي</span></th><td data-i18n="pe.6.a">الكاميرات الثابتة والمتحركة وكاميرا قراءة اللوحات، وكواشف التسلل، وأزرار الاستغاثة.</td></tr>
+              <tr><th scope="row"><span class="ctl">PE-8</span><span data-i18n="pe.8">سجلات وصول الزوار</span></th><td data-i18n="pe.8.a">بوابة كشف المعادن.</td></tr>
+              <tr><th scope="row"><span class="ctl">PE-10</span><span data-i18n="pe.10">الإيقاف الطارئ</span></th><td data-i18n="pe.10.a">مفتاح فصل الطاقة الطارئ قرب الباب، بغطاء يمنع الضغط العرضي.</td></tr>
+              <tr><th scope="row"><span class="ctl">PE-11</span><span data-i18n="pe.11">الطاقة الطارئة</span></th><td data-i18n="pe.11.a">مولد احتياطي يبدأ آليًا، وطاقة غير منقطعة (UPS) للخوادم ومركز العمليات والأنظمة الأمنية حتى يعمل المولد.</td></tr>
+              <tr><th scope="row"><span class="ctl">PE-12</span><span data-i18n="pe.12">إضاءة الطوارئ</span></th><td data-i18n="pe.12.a">إنارة بطاريات للممرات والسلالم ولوحات المخارج المضيئة.</td></tr>
+              <tr><th scope="row"><span class="ctl">PE-13</span><span data-i18n="pe.13">الحماية من الحريق</span></th><td data-i18n="pe.13.a">كواشف الدخان، وكشف الدخان المبكر (VESDA)، والإطفاء بالغاز النظيف في غرفة الخوادم والطاقة والأرشيف.</td></tr>
+              <tr><th scope="row"><span class="ctl">PE-14</span><span data-i18n="pe.14">الضوابط البيئية</span></th><td data-i18n="pe.14.a">حساسات الحرارة والرطوبة، والتبريد الدقيق (N+1)، والتهوية والتكييف العام.</td></tr>
+              <tr><th scope="row"><span class="ctl">PE-15</span><span data-i18n="pe.15">الحماية من أضرار المياه</span></th><td data-i18n="pe.15.a">لا تمديدات مياه فوق الغرف التقنية والأرشيف، وكابلات كشف تسرب تحت أرضية الخوادم وعلى سقف الأرشيف.</td></tr>
+              <tr><th scope="row"><span class="ctl">PE-16</span><span data-i18n="pe.16">التسليم والإخراج</span></th><td data-i18n="pe.16.a">جهاز أشعة للحقائب والطرود.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ========================= SEC-06 · Interactive tours ========================= -->
+  <section class="sec sec-wide" id="s6" aria-labelledby="s6-title">
+    <div class="sec-inner">
+      <header class="sec-head"><span class="plate">SEC-06</span><h2 id="s6-title" data-i18n="nav.s6">الجولات التفاعلية</h2></header>
+
+      <ol class="tours">
+        <li class="tour">
+          <span class="plate">T-01</span>
+          <h3 data-i18n="s6.t1">رحلة الزائر</h3>
+          <p class="tour-steps"><span class="mono">8</span> <span data-i18n="s6.steps8">خطوات</span></p>
+        </li>
+        <li class="tour">
+          <span class="plate">T-02</span>
+          <h3 data-i18n="s6.t2">الطريق إلى غرفة الخوادم</h3>
+          <p class="tour-steps"><span class="mono">6</span> <span data-i18n="s6.steps6">خطوات</span></p>
+        </li>
+        <li class="tour">
+          <span class="plate">T-03</span>
+          <h3 data-i18n="s6.t3">محاولة تسلل ليلية</h3>
+          <p class="tour-steps"><span class="mono">5</span> <span data-i18n="s6.steps5">خطوات</span></p>
+          <p class="tour-note"><span data-i18n="s6.t3note">تبين التقارب بين الأمن المادي والسيبراني</span> <span class="mono dup-en">Security Convergence</span></p>
+        </li>
+      </ol>
+
+      <p class="tour-howto">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>
+        <span data-i18n="s6.howto">اختر الجولة من داخل النموذج</span>
+      </p>
+
+      <div class="embed embed-xl">
+        <p class="embed-note" data-i18n="ui.embedNote">Interactive drawings are in Arabic</p>
+        <iframe class="embed-frame" src="embeds/model.html" loading="lazy"
+                title="نموذج رَصين التفاعلي" data-i18n-title="s6.embedTitle"></iframe>
+        <a class="embed-open" href="embeds/model.html" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg>
+          <span data-i18n="ui.openFull">فتح في صفحة كاملة</span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- ========================= SEC-07 · Closing messages ========================= -->
+  <section class="sec" id="s7" aria-labelledby="s7-title">
+    <div class="sec-inner">
+      <header class="sec-head"><span class="plate">SEC-07</span><h2 id="s7-title" data-i18n="nav.s7">الرسائل الختامية</h2></header>
+
+      <ol class="takeaways">
+        <li><span class="mono">01</span><p data-i18n="s7.m1">المعمار أول خط دفاع أمني.</p><p class="takeaway-sub" data-i18n="s7.m1s">تبدأ الحماية من تصميم المكان.</p></li>
+        <li><span class="mono">02</span><p data-i18n="s7.m2">كل معلومة أمانة، وكل جهاز مسؤولية.</p><p class="takeaway-sub" data-i18n="s7.m2s">حماية البيانات لا تقتصر على الأنظمة الرقمية؛ فكل أصل يحمل قيمة تستحق الحماية.</p></li>
+        <li><span class="mono">03</span><p data-i18n="s7.m3">الأمن المادي والمعلوماتي منظومة واحدة.</p><p class="takeaway-sub" data-i18n="s7.m3s">لا تكتمل الحماية بجدار آمن أو نظام رقمي متطور، بل بتكامل التصميم الهندسي والأمن السيبراني.</p></li>
+      </ol>
+    </div>
+  </section>
+  <!-- ========================= SEC-08 · National note =========================
+       Own green palette (this section only). No flag, emblem or government logos — by design. -->
+  <section class="sec sec-national" id="s8" aria-labelledby="s8-title">
+    <!-- Abstract pattern built from plan lines: walls, room grid, dimension ticks -->
+    <svg class="nat-pattern" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1200 800">
+      <g class="np-thin">
+        <path d="M0 160H1200M0 640H1200M200 0V800M1000 0V800"/>
+        <path d="M200 120v80M1000 120v80M200 600v80M1000 600v80"/>
+        <path d="M60 60h1080v680H60z"/>
+      </g>
+      <g class="np-wall">
+        <path d="M200 160h320v200H200zM520 160h200v120H520zM720 160h280v200H720z"/>
+        <path d="M200 440h240v200H200zM440 440h320v200H440zM760 440h240v200H760z"/>
+        <path d="M200 360h800M200 440h800"/>
+      </g>
+      <g class="np-thin">
+        <path d="M520 280h200v80M600 440v-80M880 360a80 80 0 0 0-80-80"/>
+        <path d="M320 640a60 60 0 0 1 60-60M640 440a60 60 0 0 0 60 60"/>
+        <circle cx="1080" cy="720" r="34"/><path d="M1080 680v80M1072 694l8-14 8 14"/>
+      </g>
+    </svg>
+
+    <div class="sec-inner nat-inner">
+      <div class="plate-row">
+        <span class="plate">SEC-08</span>
+        <span class="plate-name" data-i18n="nav.s8">لفتة وطنية</span>
+      </div>
+
+      <h2 class="nat-title" id="s8-title">
+        <span data-i18n="s8.title1">السعودية العظمى</span>
+        <span class="redline" data-i18n="s8.title2">خط أحمر</span>
+      </h2>
+
+      <figure class="nat-quote">
+        <figcaption data-i18n="s8.qhead">النظام الأساسي للحكم — المادة الرابعة والثلاثون</figcaption>
+        <!-- Verbatim legal text: always shown in Arabic -->
+        <blockquote lang="ar" dir="rtl">
+          <p>«الدفاع عن العقيدة الإسلامية، والمجتمع، والوطن واجب على كل مواطن، ويبين النظام أحكام الخدمة العسكرية.»</p>
+        </blockquote>
+      </figure>
+
+      <p class="nat-link" data-i18n="s8.link">وفي عصر المعلومات، يمتد الدفاع عن الوطن إلى حماية معلوماته وأصوله الرقمية؛ وهذا ما يطبقه مشروع رَصين بالضوابط الأساسية للأمن السيبراني الصادرة عن الهيئة الوطنية للأمن السيبراني.</p>
+
+      <footer class="nat-credits">
+        <dl>
+          <div><dt data-i18n="tb.course">المقرر</dt><dd data-i18n="tb.courseVal">أمن المعلومات وإدارة المخاطر</dd></div>
+          <div><dt data-i18n="s8.univ">الجامعة</dt><dd data-i18n="tb.deptVal">قسم نظم المعلومات الإدارية، كلية إدارة الأعمال، جامعة الطائف</dd></div>
+        </dl>
+
+        <h3 class="team-title" data-i18n="s8.teamTitle">فريق المشروع</h3>
+        <!-- Names stay Arabic in both languages -->
+        <ul class="team" lang="ar" dir="rtl">
+          <li><svg class="cap" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 9.5 12 5l10 4.5L12 14z"/><path d="M6 11.3v4.2c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.2M22 9.5v5"/></svg><span class="member">رغد ناصر المرشدي</span><span class="sid">44503468</span></li>
+          <li><svg class="cap" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 9.5 12 5l10 4.5L12 14z"/><path d="M6 11.3v4.2c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.2M22 9.5v5"/></svg><span class="member">شيهان خالد العتيبي</span><span class="sid">44550306</span></li>
+          <li><svg class="cap" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 9.5 12 5l10 4.5L12 14z"/><path d="M6 11.3v4.2c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.2M22 9.5v5"/></svg><span class="member">غيد فيصل الشيخ</span><span class="sid">44500186</span></li>
+          <li><svg class="cap" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 9.5 12 5l10 4.5L12 14z"/><path d="M6 11.3v4.2c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.2M22 9.5v5"/></svg><span class="member">غلا فهد العتيبي</span><span class="sid">44503149</span></li>
+          <li><svg class="cap" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 9.5 12 5l10 4.5L12 14z"/><path d="M6 11.3v4.2c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.2M22 9.5v5"/></svg><span class="member">في فواز العدواني</span><span class="sid">44502703</span></li>
+          <li><svg class="cap" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 9.5 12 5l10 4.5L12 14z"/><path d="M6 11.3v4.2c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.2M22 9.5v5"/></svg><span class="member">همس محمد الغامدي</span><span class="sid">44508059</span></li>
+        </ul>
+      </footer>
+    </div>
+  </section>
+
+</main>
+
+<!-- Presentation-mode progress (hidden until the mode is on) -->
+<div class="progress" id="progress" aria-hidden="true">
+  <span class="progress-ticks" id="progressTicks"></span>
+  <span class="progress-text" id="progressText">1 / 8</span>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- Fallback dictionaries for file:// (where fetch of the JSON files is blocked). Generated from the JSON files. -->
+<script src="assets/i18n/i18n.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
