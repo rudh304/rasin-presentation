@@ -236,14 +236,10 @@ main { padding-top: var(--hdr); }
   margin-inline-end: .22em; vertical-align: -.02em;
   fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
 }
-/* instructor label replaces the SEC-01 plate; crown sits centred above without moving the label */
-.plate.instructor {
-  position: relative;
-  font-family: var(--f-body); font-size: 13px; letter-spacing: 0; line-height: 1.2;
-}
-.instructor .crown {
-  position: absolute; left: 50%; bottom: calc(100% + 3px); transform: translateX(-50%);
-  height: 14px; width: auto; aspect-ratio: 24 / 16;
+/* crown beside the course instructor in the title block */
+.tb-instructor .crown {
+  display: inline-block; height: 14px; width: auto; aspect-ratio: 24 / 16;
+  margin-inline-end: 6px; vertical-align: -1px;
   fill: none; stroke: var(--z3s); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
 }
 html[lang="en"] .hero-title { line-height: 1.15; letter-spacing: -.01em; }

@@ -26,7 +26,6 @@ window.RASIN_I18N = {
   "ui.embedNote": "Interactive drawings are in Arabic",
   "ui.openFull": "فتح في صفحة كاملة",
 
-  "s1.instructor": "أستاذة المقرر: د. منى اليامي",
   "s1.title": "مركز رَصين للأمن والحماية المتكاملة",
   "s1.tagline": "تصميم أمن مادي متكامل يحمي المعلومات قبل أن تصل إليها يد غير مصرح لها",
   "s1.stat.floors": "طوابق",
@@ -265,7 +264,6 @@ window.RASIN_I18N = {
   "ui.embedNote": "Interactive drawings are in Arabic",
   "ui.openFull": "Open full page",
 
-  "s1.instructor": "Course instructor: Dr. Muna Al-Yami",
   "s1.title": "RASIN Integrated Security Center",
   "s1.tagline": "An integrated physical security design that protects information before an unauthorized hand can reach it.",
   "s1.stat.floors": "Floors",
