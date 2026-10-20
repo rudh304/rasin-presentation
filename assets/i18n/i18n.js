@@ -44,8 +44,8 @@ window.RASIN_I18N = {
 
   "s2.lead": "مركز افتراضي متخصص في الأمن السيبراني وحماية المعلومات.",
   "s2.whyTitle": "لماذا هذه الجهة؟",
-  "s2.why": "رَصين جهة افتراضية وُلدت من رحم الخيال، تتبنى موضوع المقرر: أمن المعلومات. توظّف مفهوم إنترنت الأشياء (IoT) لكونه متسيّد العصر، وتقوم بدورها في حماية البيانات والتصدي للهجمات السيبرانية الرقمية.",
-  "s2.goalLabel": "هدف التكليف",
+  "s2.why": "رَصين جهة افتراضية وُلدت من رحم الخيال: مركزٌ لأمن المعلومات والحماية الرقمية، تتبنى موضوع المقرر: أمن المعلومات. توظّف مفهوم إنترنت الأشياء (IoT) لكونه متسيّد العصر، وتقوم بدورها في حماية البيانات والتصدي للهجمات السيبرانية الرقمية. ولأن أثمن ما تحرسه رَصين بياناتٌ لا تُرى، يروي المشروع كيف نصون هذا الكنز الرقمي بأدوات ملموسة: سورٌ وبوابة، وكاميرا لا تغفل، وبابٌ لا يُفتح إلا لصاحب الحق؛ فالمعلومة تُحمى في المبنى قبل أن تُحمى في الشبكة.",
+  "s2.goalLabel": "ما الغاية المنشودة من المشروع؟",
   "s2.goal": "«تطبيق مفاهيم الحماية المادية للبيانات»",
   "s2.building": "مبنى مستقل من ثلاثة طوابق",
   "s2.f2": "الطابق الثاني",
@@ -94,7 +94,6 @@ window.RASIN_I18N = {
   "s3.focus.f2": "السجلات والوثائق",
   "s3.embedTitle": "مخططات رَصين المعمارية",
 
-  "s4.lead": "ستة عناصر للأمن المادي يطلبها التكليف: ماذا وضعنا، وأين، ولماذا، ووظيفة كل عنصر، وما يحميه من ثلاثية CIA.",
   "s4.what": "ماذا وضعنا",
   "s4.where": "أين",
   "s4.why": "لماذا",
@@ -234,7 +233,6 @@ window.RASIN_I18N = {
   "s8.title2": "خط أحمر",
   "s8.qhead": "النظام الأساسي للحكم — المادة الرابعة والثلاثون",
   "s8.link": "وفي عصر المعلومات، يمتد الدفاع عن الوطن إلى حماية معلوماته وأصوله الرقمية؛ وهذا ما يطبقه مشروع رَصين بالضوابط الأساسية للأمن السيبراني الصادرة عن الهيئة الوطنية للأمن السيبراني.",
-  "s8.univ": "الجامعة",
   "s8.teamTitle": "فريق المشروع"
 }
 ,
@@ -282,8 +280,8 @@ window.RASIN_I18N = {
 
   "s2.lead": "A hypothetical center specializing in cybersecurity and information protection.",
   "s2.whyTitle": "Why this organization?",
-  "s2.why": "RASIN is a fictional organization born of imagination, built around the course subject: information security. It applies the Internet of Things (IoT), the defining technology of our era, and works to protect data and counter digital cyberattacks.",
-  "s2.goalLabel": "Assignment goal",
+  "s2.why": "RASIN is a fictional organization born of imagination: a center for information security and digital protection, built around the course subject: information security. It applies the Internet of Things (IoT), the defining technology of our era, and works to protect data and counter digital cyberattacks. Because RASIN's most precious holdings are data no one can see, the project tells how we guard that digital treasure with tools you can touch: a fence and a gate, a camera that never blinks, and a door that opens only for those entitled to enter. Information is protected in the building before it is protected on the network.",
+  "s2.goalLabel": "What is the project's purpose?",
   "s2.goal": "“Applying physical protection concepts to data”",
   "s2.building": "A standalone three-storey building",
   "s2.f2": "Second floor",
@@ -332,7 +330,6 @@ window.RASIN_I18N = {
   "s3.focus.f2": "Records and documents",
   "s3.embedTitle": "RASIN architectural drawings",
 
-  "s4.lead": "The six physical-security elements the assignment asks for: what we placed, where, why, each element's function, and which part of the CIA triad it protects.",
   "s4.what": "What we placed",
   "s4.where": "Where",
   "s4.why": "Why",
@@ -472,7 +469,6 @@ window.RASIN_I18N = {
   "s8.title2": "a red line",
   "s8.qhead": "Basic Law of Governance — Article 34",
   "s8.link": "In the information age, defending the homeland extends to protecting its information and digital assets — which is what the RASIN project applies through the Essential Cybersecurity Controls issued by the National Cybersecurity Authority.",
-  "s8.univ": "University",
   "s8.teamTitle": "Project Team"
 }
 
