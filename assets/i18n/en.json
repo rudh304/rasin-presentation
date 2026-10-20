@@ -38,7 +38,8 @@
   "tb.projectVal": "Chapter 5 project: Physical Security & Physical Security Standards",
   "tb.dept": "Department",
   "tb.deptVal": "Department of Management Information Systems, College of Business Administration, Taif University",
-  "tb.sheet": "Sheet",
+  "tb.instructor": "Course instructor",
+  "tb.instructorVal": "Dr. Muna Al-Yami",
 
   "s2.lead": "A hypothetical center specializing in cybersecurity and information protection.",
   "s2.whyTitle": "Why this organization?",

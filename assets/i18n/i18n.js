@@ -40,7 +40,8 @@ window.RASIN_I18N = {
   "tb.projectVal": "مشروع الفصل الخامس: الأمن المادي ومعايير الأمن المادي",
   "tb.dept": "القسم",
   "tb.deptVal": "قسم نظم المعلومات الإدارية، كلية إدارة الأعمال، جامعة الطائف",
-  "tb.sheet": "اللوحة",
+  "tb.instructor": "أستاذة المقرر",
+  "tb.instructorVal": "د. منى اليامي",
 
   "s2.lead": "مركز افتراضي متخصص في الأمن السيبراني وحماية المعلومات.",
   "s2.whyTitle": "لماذا هذه الجهة؟",
@@ -278,7 +279,8 @@ window.RASIN_I18N = {
   "tb.projectVal": "Chapter 5 project: Physical Security & Physical Security Standards",
   "tb.dept": "Department",
   "tb.deptVal": "Department of Management Information Systems, College of Business Administration, Taif University",
-  "tb.sheet": "Sheet",
+  "tb.instructor": "Course instructor",
+  "tb.instructorVal": "Dr. Muna Al-Yami",
 
   "s2.lead": "A hypothetical center specializing in cybersecurity and information protection.",
   "s2.whyTitle": "Why this organization?",
