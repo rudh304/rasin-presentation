@@ -28,6 +28,7 @@ window.RASIN_I18N = {
 
   "s1.title": "مركز رَصين للأمن والحماية المتكاملة",
   "why.q": "لمَ رَصين؟",
+  "why.label": "أضئ معرفتك",
   "why.a1": "رصين",
   "why.a2": "لأن الأمان يبدأ من أساسٍ لا يهتز",
   "why.note": "الرصانة هي الثبات والإحكام، ومن هنا انبثق اختيار الاسم لمشروعنا، رصين.. حمايةٌ راسخة، وثقة لا تزعزع",
@@ -268,6 +269,7 @@ window.RASIN_I18N = {
 
   "s1.title": "RASIN Integrated Security Center",
   "why.q": "Why RASIN?",
+  "why.label": "Light up your knowledge",
   "why.a1": "RASIN",
   "why.a2": "Because security starts from a foundation that never shakes",
   "why.note": "Rasana means steadiness and firmness, and that is where our project's name came from. RASIN: protection that stands firm, and trust that never wavers.",
