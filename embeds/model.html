@@ -4,6 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <style>[hidden]{display:none!important}</style>
+<!-- Background mode (model.html?bg=1): used by the presentation's opening section — shows the building only, no UI -->
+<script>if(/[?&]bg=1(&|$)/.test(location.search))document.documentElement.classList.add('bg');</script>
+<style>
+html.bg .top,html.bg .panel,html.bg .where,html.bg .compass,html.bg .elev,html.bg .vctl,html.bg .tourcard{display:none!important}
+html.bg body{margin:0;padding:0;overflow:hidden}
+html.bg .wrap{max-width:none;margin:0;gap:0}
+html.bg .board{display:block}
+html.bg .viewer{position:fixed;inset:0;height:100vh;min-height:0;border:0;border-radius:0}
+html.bg .scene text,html.bg .scene .devs{display:none}
+</style>
 </head>
 <body>
 <title>نموذج رَصين التفاعلي</title>

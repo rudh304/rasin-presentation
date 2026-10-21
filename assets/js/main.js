@@ -321,6 +321,23 @@
     }
   }
 
+  /* ---------------- "Why RASIN?" note ---------------- */
+  var whyBtn = document.getElementById('whyBtn');
+  var whyPop = document.getElementById('whyPop');
+  if (whyBtn && whyPop) {
+    var setWhy = function (open) {
+      whyPop.hidden = !open;
+      whyBtn.setAttribute('aria-expanded', String(open));
+    };
+    whyBtn.addEventListener('click', function (e) { e.stopPropagation(); setWhy(whyPop.hidden); });
+    document.addEventListener('click', function (e) {
+      if (!whyPop.hidden && !whyPop.contains(e.target)) setWhy(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !whyPop.hidden) { setWhy(false); whyBtn.focus(); }
+    });
+  }
+
   /* ---------------- Init ---------------- */
   // Arabic is inline in the HTML; load its dictionary too so switching back works.
   loadDict('ar').then(function () {
