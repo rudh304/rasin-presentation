@@ -13,8 +13,8 @@ window.RASIN_I18N = {
   "nav.s2": "ما هو رَصين؟",
   "nav.s3": "المخطط المعماري وثلاثية CIA",
   "nav.s4": "التصميم الأمني",
-  "nav.s5": "تطبيق المعايير",
-  "nav.s6": "الجولات التفاعلية",
+  "nav.s5": "الجولات التفاعلية",
+  "nav.s6": "تطبيق المعايير",
   "nav.s7": "#لا_تفتح_مجال",
   "nav.s8": "لفتة وطنية",
 
@@ -235,6 +235,7 @@ window.RASIN_I18N = {
   "s7.m3s": "لا تكتمل الحماية بجدار آمن أو نظام رقمي متطور، بل بتكامل التصميم الهندسي والأمن السيبراني.",
 
   "s7.nogap.t1": "لا تفتح مجال",
+  "nca.badge": "مستند إلى الهيئة الوطنية للأمن السيبراني",
   "s7.nogap.t2": "حين يبدأ الأمن بقرار",
   "s7.nogap.leadK1": "أمن المعلومات",
   "s7.nogap.leadA": "لا يبدأ حين يقع الهجوم، بل قبله بكثير؛ في",
@@ -279,8 +280,8 @@ window.RASIN_I18N = {
   "nav.s2": "What is RASIN?",
   "nav.s3": "Architectural Plan & the CIA Triad",
   "nav.s4": "Security Design",
-  "nav.s5": "Applying the Standards",
-  "nav.s6": "Interactive Tours",
+  "nav.s5": "Interactive Tours",
+  "nav.s6": "Applying the Standards",
   "nav.s7": "#LeaveNoOpening",
   "nav.s8": "A National Note",
 
@@ -501,6 +502,7 @@ window.RASIN_I18N = {
   "s7.m3s": "Protection is never complete with a secure wall or an advanced digital system alone, but with the integration of architectural design and cybersecurity.",
 
   "s7.nogap.t1": "Leave No Opening",
+  "nca.badge": "Based on the National Cybersecurity Authority (NCA)",
   "s7.nogap.t2": "When Security Starts with a Decision",
   "s7.nogap.leadK1": "Information security",
   "s7.nogap.leadA": "does not begin when an attack happens, but long before it — in the",

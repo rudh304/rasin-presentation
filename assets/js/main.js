@@ -89,17 +89,6 @@
   document.querySelectorAll('iframe').forEach(function (f) {
     f.addEventListener('load', function () { syncFrameTheme(f, root.getAttribute('data-theme')); });
   });
-  // Follow the OS setting until the user picks a theme explicitly.
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
-    var saved = null;
-    try { saved = localStorage.getItem('rasin-theme'); } catch (err) {}
-    if (!saved) {
-      var th = e.matches ? 'dark' : 'light';
-      root.setAttribute('data-theme', th);
-      document.querySelectorAll('iframe').forEach(function (f) { syncFrameTheme(f, th); });
-      refreshToolLabels();
-    }
-  });
 
   /* ---------------- Tool buttons ---------------- */
   var themeBtn = document.getElementById('themeBtn');

@@ -17,7 +17,7 @@
     var d = document.documentElement, t = null, l = null;
     d.classList.add('js');
     try { t = localStorage.getItem('rasin-theme'); l = localStorage.getItem('rasin-lang'); } catch (e) {}
-    if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    if (t !== 'dark') t = 'light';   /* light by default; dark only when the visitor picked it */
     d.setAttribute('data-theme', t);
     if (l === 'en') { d.lang = 'en'; d.dir = 'ltr'; }
   })();
@@ -51,8 +51,8 @@
       <li><a href="#s2"><span class="num">02</span><span data-i18n="nav.s2">ما هو رَصين؟</span></a></li>
       <li><a href="#s3"><span class="num">03</span><span data-i18n="nav.s3">المخطط المعماري وثلاثية CIA</span></a></li>
       <li><a href="#s4"><span class="num">04</span><span data-i18n="nav.s4">التصميم الأمني</span></a></li>
-      <li><a href="#s5"><span class="num">05</span><span data-i18n="nav.s5">تطبيق المعايير</span></a></li>
-      <li><a href="#s6"><span class="num">06</span><span data-i18n="nav.s6">الجولات التفاعلية</span></a></li>
+      <li><a href="#s5"><span class="num">05</span><span data-i18n="nav.s5">الجولات التفاعلية</span></a></li>
+      <li><a href="#s6"><span class="num">06</span><span data-i18n="nav.s6">تطبيق المعايير</span></a></li>
       <li><a href="#s7"><span class="num">07</span><span data-i18n="nav.s7">#لا_تفتح_مجال</span></a></li>
       <li><a href="#s8"><span class="num">08</span><span data-i18n="nav.s8">لفتة وطنية</span></a></li>
     </ol>
@@ -495,14 +495,54 @@
       </div>
     </div>
   </section>
-  <!-- ========================= SEC-05 · Applying the standards =========================
-       Control → project mapping comes from the standards fields in embeds/security.html. -->
-  <section class="sec" id="s5" aria-labelledby="s5-title">
+  <!-- ========================= SEC-05 · Interactive tours ========================= -->
+  <section class="sec sec-wide" id="s5" aria-labelledby="s5-title">
     <div class="sec-inner">
-      <header class="sec-head"><span class="plate">SEC-05</span><h2 id="s5-title" data-i18n="nav.s5">تطبيق المعايير</h2></header>
+      <header class="sec-head"><span class="plate">SEC-05</span><h2 id="s5-title" data-i18n="nav.s5">الجولات التفاعلية</h2></header>
+
+      <ol class="tours">
+        <li class="tour">
+          <span class="plate">T-01</span>
+          <h3 data-i18n="s6.t1">رحلة الزائر</h3>
+          <p class="tour-steps"><span class="mono">8</span> <span data-i18n="s6.steps8">خطوات</span></p>
+        </li>
+        <li class="tour">
+          <span class="plate">T-02</span>
+          <h3 data-i18n="s6.t2">الطريق إلى غرفة الخوادم</h3>
+          <p class="tour-steps"><span class="mono">6</span> <span data-i18n="s6.steps6">خطوات</span></p>
+        </li>
+        <li class="tour">
+          <span class="plate">T-03</span>
+          <h3 data-i18n="s6.t3">محاولة تسلل ليلية</h3>
+          <p class="tour-steps"><span class="mono">5</span> <span data-i18n="s6.steps5">خطوات</span></p>
+          <p class="tour-note"><span data-i18n="s6.t3note">تبين التقارب بين الأمن المادي والسيبراني</span> <span class="mono dup-en">Security Convergence</span></p>
+        </li>
+      </ol>
+
+      <p class="tour-howto">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>
+        <span data-i18n="s6.howto">اختر الجولة من داخل النموذج</span>
+      </p>
+
+      <div class="embed embed-xl">
+        <p class="embed-note" data-i18n="ui.embedNote">Interactive drawings are in Arabic</p>
+        <iframe class="embed-frame" src="embeds/model.html" loading="lazy"
+                title="نموذج رَصين التفاعلي" data-i18n-title="s6.embedTitle"></iframe>
+        <a class="embed-open" href="embeds/model.html" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg>
+          <span data-i18n="ui.openFull">فتح في صفحة كاملة</span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- ========================= SEC-06 · Applying the standards =========================
+       Control → project mapping comes from the standards fields in embeds/security.html. -->
+  <section class="sec sec-nca" id="s6" aria-labelledby="s6-title">
+    <div class="sec-inner">
+      <header class="sec-head"><span class="plate">SEC-06</span><h2 id="s6-title" data-i18n="nav.s6">تطبيق المعايير</h2><span class="nca-badge"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.5 4.5 5.5v5.2c0 4.6 3.1 8.1 7.5 9.8 4.4-1.7 7.5-5.2 7.5-9.8V5.5z"/><path d="m8.6 11.8 2.4 2.4 4.4-4.6"/></svg><span data-i18n="nca.badge">مستند إلى الهيئة الوطنية للأمن السيبراني</span></span></header>
 
       <!-- ECC -->
-      <div class="std">
+      <div class="std std-nca">
         <header class="std-head">
           <span class="std-code mono">ECC-2:2024</span>
           <div>
@@ -584,50 +624,10 @@
       </div>
     </div>
   </section>
-  <!-- ========================= SEC-06 · Interactive tours ========================= -->
-  <section class="sec sec-wide" id="s6" aria-labelledby="s6-title">
-    <div class="sec-inner">
-      <header class="sec-head"><span class="plate">SEC-06</span><h2 id="s6-title" data-i18n="nav.s6">الجولات التفاعلية</h2></header>
-
-      <ol class="tours">
-        <li class="tour">
-          <span class="plate">T-01</span>
-          <h3 data-i18n="s6.t1">رحلة الزائر</h3>
-          <p class="tour-steps"><span class="mono">8</span> <span data-i18n="s6.steps8">خطوات</span></p>
-        </li>
-        <li class="tour">
-          <span class="plate">T-02</span>
-          <h3 data-i18n="s6.t2">الطريق إلى غرفة الخوادم</h3>
-          <p class="tour-steps"><span class="mono">6</span> <span data-i18n="s6.steps6">خطوات</span></p>
-        </li>
-        <li class="tour">
-          <span class="plate">T-03</span>
-          <h3 data-i18n="s6.t3">محاولة تسلل ليلية</h3>
-          <p class="tour-steps"><span class="mono">5</span> <span data-i18n="s6.steps5">خطوات</span></p>
-          <p class="tour-note"><span data-i18n="s6.t3note">تبين التقارب بين الأمن المادي والسيبراني</span> <span class="mono dup-en">Security Convergence</span></p>
-        </li>
-      </ol>
-
-      <p class="tour-howto">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>
-        <span data-i18n="s6.howto">اختر الجولة من داخل النموذج</span>
-      </p>
-
-      <div class="embed embed-xl">
-        <p class="embed-note" data-i18n="ui.embedNote">Interactive drawings are in Arabic</p>
-        <iframe class="embed-frame" src="embeds/model.html" loading="lazy"
-                title="نموذج رَصين التفاعلي" data-i18n-title="s6.embedTitle"></iframe>
-        <a class="embed-open" href="embeds/model.html" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg>
-          <span data-i18n="ui.openFull">فتح في صفحة كاملة</span>
-        </a>
-      </div>
-    </div>
-  </section>
   <!-- ========================= SEC-07 · Closing messages ========================= -->
-  <section class="sec" id="s7" aria-labelledby="s7-title">
+  <section class="sec sec-nca" id="s7" aria-labelledby="s7-title">
     <div class="sec-inner">
-      <header class="sec-head"><span class="plate">SEC-07</span><h2 id="s7-title" data-i18n="nav.s7">#لا_تفتح_مجال</h2></header>
+      <header class="sec-head"><span class="plate">SEC-07</span><h2 id="s7-title" data-i18n="nav.s7">#لا_تفتح_مجال</h2><span class="nca-badge"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.5 4.5 5.5v5.2c0 4.6 3.1 8.1 7.5 9.8 4.4-1.7 7.5-5.2 7.5-9.8V5.5z"/><path d="m8.6 11.8 2.4 2.4 4.4-4.6"/></svg><span data-i18n="nca.badge">مستند إلى الهيئة الوطنية للأمن السيبراني</span></span></header>
 
       <ol class="takeaways">
         <li><span class="mono">01</span><p data-i18n="s7.m1">المعمار أول خط دفاع أمني.</p><p class="takeaway-sub" data-i18n="s7.m1s">تبدأ الحماية من تصميم المكان.</p></li>

@@ -815,6 +815,19 @@ html.is-presenting .sec { scroll-margin-top: var(--hdr); }
   }
 }
 
+/* ---------- NCA-based sections (SEC-06 standards, SEC-07 awareness) ----------
+   Teal / navy inspired by the NCA identity — colour only, no logo. */
+.sec-nca { --nca: #0B7A73; --nca-deep: #0F3D52; --nca-fill: #DDEFEC; }
+:root[data-theme="dark"] .sec-nca { --nca: #5CCFC3; --nca-deep: #8FD9D0; --nca-fill: #133A38; }
+.sec-nca .sec-head h2 { box-shadow: inset 0 -3px 0 var(--nca); padding-bottom: 2px; }
+.nca-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 12px 5px 10px; font-size: 14px; font-weight: 600; line-height: 1.5;
+  color: var(--ink); background: var(--nca-fill); border: 1px solid var(--nca);
+}
+.nca-badge svg { width: 20px; height: 20px; flex: none; fill: none; stroke: var(--nca); stroke-width: 1.7; stroke-linejoin: round; stroke-linecap: round; }
+.std-nca .std-head { background: var(--nca-deep); }
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
