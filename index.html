@@ -208,7 +208,6 @@
         <div>
           <p class="s3-thesis" data-i18n="s3.thesis">«المعمار هو أول ضابط أمني»</p>
           <p class="s3-explain" data-i18n="s3.explain">ترتفع الحساسية مع الارتفاع، وكلما صعد الشخص زادت نقاط التحقق التي يمر بها.</p>
-          <p class="s3-did"><span data-i18n="s3.did">الدفاع في العمق</span> <span class="mono dup-en">Defense in Depth</span></p>
         </div>
 
         <figure class="zones">
@@ -291,7 +290,7 @@
           </div>
           <h4><span data-i18n="st.did">استراتيجية الدفاع في العمق</span> <span class="mono dup-en">Defense in Depth</span></h4>
           <p class="strat-p" data-i18n="st.did.p">طبقات حماية متعددة ومتكاملة من المحيط الخارجي إلى المناطق عالية الحساسية، فلا يؤدي تجاوز ضابط واحد إلى اختراق المنظومة كلها. وهي نقطة الانطلاق: كل ما يلي طبقة داخلها.</p>
-          <p class="strat-a"><span class="label" data-i18n="st.in">في رَصين</span><span data-i18n="st.did.a">خمس مناطق أمنية من المحيط (Z0) إلى عالية الحساسية (Z4)، تزيد نقاط التحقق كلما اقترب الشخص من الخوادم والأرشيف؛ فالبطاقة المسروقة وحدها لا تكفي لدخول Z4.</span></p>
+          <p class="strat-a"><span class="label" data-i18n="st.in">في رَصين</span><span data-i18n="st.did.a">المناطق الأمنية الخمس الموضحة أعلاه، من المحيط (Z0) إلى عالية الحساسية (Z4)؛ كل منطقة طبقة مستقلة بمتطلب تحقق أشد من سابقتها، فتجاوز طبقة لا يفتح ما بعدها.</span></p>
           <p class="strat-cia"><span class="cia-tag cia-c">C</span><span class="cia-tag cia-i">I</span><span class="cia-tag cia-a">A</span></p>
         </li>
         <li class="strat" data-cia="c i a">
@@ -301,7 +300,7 @@
           </div>
           <h4><span data-i18n="st.phys">القيود والضوابط المادية</span> <span class="mono dup-en">Physical Security Controls</span></h4>
           <p class="strat-p" data-i18n="st.phys.p">حماية المنشأة والأصول من الدخول غير المصرح به أو العبث أو الوصول غير المشروع إلى الأجهزة والمعلومات الحساسة.</p>
-          <p class="strat-a"><span class="label" data-i18n="st.in">في رَصين</span><span data-i18n="st.phys.a">فصل مسار الزوار جنوب خط البوابات الدوارة، وفحص عند المدخل ببوابة كشف المعادن وجهاز الأشعة، وغرف عازلة أمام غرفة الخوادم والأرشيف، ولا تمديدات مياه فوقهما.</span></p>
+          <p class="strat-a"><span class="label" data-i18n="st.in">في رَصين</span><span data-i18n="st.phys.a">ستة أنظمة متكاملة: الحواجز المادية، والمراقبة، وكشف التسلل، والحراسة والفحص، والتحكم في الوصول، والعوامل البيئية.</span> <a class="strat-more" href="#s4" data-i18n="st.more">التفاصيل في «التصميم الأمني»</a></p>
           <p class="strat-cia"><span class="cia-tag cia-c">C</span><span class="cia-tag cia-i">I</span><span class="cia-tag cia-a">A</span></p>
         </li>
         <li class="strat" data-cia="c i">
@@ -321,7 +320,7 @@
           </div>
           <h4><span data-i18n="st.comp">مكونات التحكم في الوصول</span> <span class="mono dup-en">Access Control Components</span></h4>
           <p class="strat-p" data-i18n="st.comp.p">الوسائل التي تنفّذ قرار الصلاحية عند كل نقطة: تتحقق من الشخص، وتسجّل دخوله، وتمنع المرور المزدوج.</p>
-          <p class="strat-a"><span class="label" data-i18n="st.in">في رَصين</span><span data-i18n="st.comp.a">40 نقطة تحكم: قارئات بطاقات، وقارئات ثنائية (بطاقة مع رمز سري أو بصمة)، وبوابات دوارة، وغرف عازلة لا يُفتح بابها الثاني قبل إغلاق الأول.</span></p>
+          <p class="strat-a"><span class="label" data-i18n="st.in">في رَصين</span><span data-i18n="st.comp.a">40 نقطة تحكم موزعة على المناطق الأمنية؛ أنواعها ومواقعها وآلية الغرفة العازلة مفصلة في بطاقة «التحكم في الوصول».</span> <a class="strat-more" href="#s4" data-i18n="st.more">التفاصيل في «التصميم الأمني»</a></p>
           <p class="strat-cia"><span class="cia-tag cia-c">C</span><span class="cia-tag cia-i">I</span></p>
         </li>
         <li class="strat" data-cia="c i">
@@ -341,7 +340,7 @@
           </div>
           <h4><span data-i18n="st.enc">استراتيجية التشفير</span> <span class="mono dup-en">Encryption Strategy</span></h4>
           <p class="strat-p" data-i18n="st.enc.p">تحويل المعلومات إلى صيغة غير مقروءة لغير المصرح لهم، لحماية سريتها أثناء التخزين أو النقل.</p>
-          <p class="strat-a"><span class="label" data-i18n="st.in">في رَصين</span><span data-i18n="st.enc.a">النطاق الموثق: الحواسيب المحمولة التي تخرج من المبنى مشفّرة، وتُسجَّل عند خروجها وعودتها. ولا يوثق النموذج تشفيرًا لنقل البيانات أو للأنظمة الأخرى، فلا يُدّعى تطبيقه.</span></p>
+          <p class="strat-a"><span class="label" data-i18n="st.in">في رَصين</span><span data-i18n="st.enc.a">النطاق الموثق: الحواسيب المحمولة التي تخرج من المبنى مشفّرة (ISO 7.9). ولا يوثق النموذج تشفيرًا لنقل البيانات أو للأنظمة الأخرى، فلا يُدّعى تطبيقه.</span></p>
           <p class="strat-cia"><span class="cia-tag cia-c">C</span></p>
         </li>
       </ol>
@@ -516,10 +515,9 @@
           <dl class="el-body">
             <div><dt data-i18n="s4.what">ماذا وضعنا</dt><dd><ul class="ticks">
               <li data-i18n="s4.c5.w1">40 نقطة: قارئات بطاقات، وقارئات ثنائية، وبوابات دوارة، وغرف عازلة.</li>
-              <li data-i18n="s4.c5.w2">مصفوفة صلاحيات لتسعة أدوار وظيفية.</li>
             </ul></dd></div>
             <div><dt data-i18n="s4.where">أين</dt><dd data-i18n="s4.c5.where">البوابات الدوارة في الدور الأرضي، وقارئ بطاقة على باب كل إدارة، وغرفة عازلة بقارئين ثنائيين أمام غرفة الخوادم والأرشيف.</dd></div>
-            <div><dt data-i18n="s4.why">لماذا</dt><dd data-i18n="s4.c5.why">البطاقة المسروقة وحدها لا تكفي لدخول منطقة Z4، ولا يفتح الباب الثاني للغرفة العازلة قبل إغلاق الأول، فلا يدخل شخصان ببطاقة واحدة. والوصول حسب الوظيفة لا حسب الطابق فقط.</dd></div>
+            <div><dt data-i18n="s4.why">لماذا</dt><dd data-i18n="s4.c5.why">البطاقة المسروقة وحدها لا تكفي لدخول منطقة Z4، ولا يفتح الباب الثاني للغرفة العازلة قبل إغلاق الأول، فلا يدخل شخصان ببطاقة واحدة.</dd></div>
           </dl>
           <footer class="el-foot">
             <ul class="fn" aria-label="الوظيفة" data-i18n-aria="s4.fn">
@@ -631,7 +629,7 @@
           <table class="schedule std-table">
             <thead><tr><th scope="col" data-i18n="s5.th.control">الضابط</th><th scope="col" data-i18n="s5.th.applied">ما طبقناه في رَصين</th></tr></thead>
             <tbody>
-              <tr><th scope="row"><span class="ctl">2-14-1</span><span data-i18n="ecc.1">تحديد متطلبات الحماية المادية وتوثيقها واعتمادها.</span></th><td data-i18n="ecc.1.a">تحديد متطلبات الحماية المادية وتوثيقها واعتمادها.</td></tr>
+              <tr><th scope="row"><span class="ctl">2-14-1</span><span data-i18n="ecc.1">تحديد متطلبات الحماية المادية وتوثيقها واعتمادها.</span></th><td data-i18n="ecc.1.a">كل جهاز في النموذج مربوط بمتطلب الحماية المادية الذي يحققه (ت-3 إلى ت-11)، وبالضابط المقابل له في المعايير الثلاثة.</td></tr>
               <tr><th scope="row"><span class="ctl">2-14-2</span><span data-i18n="ecc.2">تطبيقها.</span></th><td data-i18n="ecc.2.a">السور وحساس اهتزازه، وحاجز الطريق، وكواشف التسلل، وأزرار الاستغاثة، ومواقع الحراسة.</td></tr>
               <tr><th scope="row"><span class="ctl">2-14-3</span><span data-i18n="ecc.3">مجالات التطبيق: التحكم بالوصول إلى المناطق الحساسة، وتسجيل الدخول والخروج والمراقبة بالكاميرات، وحماية السجلات، والإتلاف الآمن، وحماية الأجهزة.</span></th><td data-i18n="ecc.3.a">قارئات البطاقات والقارئات الثنائية والغرف العازلة، والكاميرات وكاميرا قراءة اللوحات، وخزنة الوسائط، وغرفة الإتلاف الآمن، وحساسات البيئة والإطفاء لحماية الأجهزة.</td></tr>
               <tr><th scope="row"><span class="ctl">2-14-4</span><span data-i18n="ecc.4">المراجعة الدورية.</span></th><td data-i18n="ecc.4.a">مراجعة ضوابط الحماية المادية وقوائم الصلاحيات كل ستة أشهر، وبعد أي حادث.</td></tr>
