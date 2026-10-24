@@ -321,6 +321,21 @@
     }
   }
 
+  /* ---------------- Reveal: "لا تفتح مجال" box rises in once ---------------- */
+  var nogap = document.getElementById('nogap');
+  if (nogap) {
+    if ('IntersectionObserver' in window && !reduceMotion.matches) {
+      var gio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { nogap.classList.add('in-view'); gio.disconnect(); }
+        });
+      }, { threshold: 0.15 });
+      gio.observe(nogap);
+    } else {
+      nogap.classList.add('in-view');
+    }
+  }
+
   /* ---------------- "Why RASIN?" note ---------------- */
   var whyBtn = document.getElementById('whyBtn');
   var whyPop = document.getElementById('whyPop');
