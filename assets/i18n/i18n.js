@@ -256,7 +256,7 @@ window.RASIN_I18N = {
   "s6.howto": "اختر الجولة من داخل النموذج",
   "s6.embedTitle": "نموذج رَصين التفاعلي",
 
-  "s7.m1": "المعمار أول خط دفاع أمني.",
+  "s7.m1": "قبل أن تُكتب أول شيفرة، رُسم أول جدار.",
   "s7.m1s": "تبدأ الحماية من تصميم المكان.",
   "s7.m2": "كل معلومة أمانة، وكل جهاز مسؤولية.",
   "s7.m2s": "حماية البيانات لا تقتصر على الأنظمة الرقمية؛ فكل أصل يحمل قيمة تستحق الحماية.",
@@ -552,7 +552,7 @@ window.RASIN_I18N = {
   "s6.howto": "Choose the tour from inside the model",
   "s6.embedTitle": "RASIN interactive model",
 
-  "s7.m1": "Architecture is the first line of defense.",
+  "s7.m1": "Before the first line of code, the first wall was drawn.",
   "s7.m1s": "Protection begins with the design of the place.",
   "s7.m2": "Every piece of information is a trust; every device is a responsibility.",
   "s7.m2s": "Data protection is not limited to digital systems; every asset carries value worth protecting.",
