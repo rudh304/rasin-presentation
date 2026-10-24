@@ -476,6 +476,70 @@ html[dir="rtl"] .zones-axis svg { transform: scaleX(-1); }
 .cia-def { font-size: 16px; padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px dashed var(--rule); }
 .cia-card .label { margin-bottom: 0; }
 
+/* Heading with its Latin twin underneath (Arabic only; .dup-en hides it in English) */
+.h2-bi { display: flex; flex-direction: column; }
+.h2-bi .sub-latin { margin-top: 2px; }
+
+/* ---------- SEC-03 · Strategies & controls strip ---------- */
+.strat-lead { max-width: 78ch; font-size: 17px; color: var(--ink-2); text-wrap: pretty; }
+.strat-bar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px;
+  margin: 18px 0 16px;
+}
+.strat-filter { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.strat-filter .label { margin: 0 0 0 4px; }
+.strat-fbtn {
+  font: inherit; font-size: 14.5px; font-weight: 600; line-height: 1.5; cursor: pointer;
+  padding: 4px 12px; color: var(--ink); background: var(--sheet); border: 1px solid var(--wall);
+}
+.strat-fbtn[aria-pressed="true"] { background: var(--wall); color: var(--sheet); }
+.strat-fbtn.cia-c[aria-pressed="true"], .strat-fbtn.cia-i[aria-pressed="true"], .strat-fbtn.cia-a[aria-pressed="true"] {
+  background: var(--cia-fill); color: var(--ink); border-color: var(--cia); box-shadow: inset 0 -3px 0 var(--cia);
+}
+.strat-legend { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13.5px; color: var(--ink-2); }
+.strat-legend li { display: flex; align-items: center; gap: 6px; }
+
+.strat-status { display: inline-block; padding: 1px 8px; font-size: 12.5px; font-weight: 600; line-height: 1.6; color: var(--ink); white-space: nowrap; }
+.st-done { background: var(--z1); border: 1px solid var(--z1s); }
+.st-part { background: var(--z3); border: 1px solid var(--z3s); }
+.st-prop { background: transparent; border: 1px dashed var(--ink-2); color: var(--ink-2); }
+
+.strats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 268px), 1fr)); gap: 16px; }
+.strat {
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 18px 18px 16px; background: var(--sheet); border: 1px solid var(--wall); border-top: 3px solid var(--wall);
+}
+.strat-anchor { grid-column: 1 / -1; border-top: 4px solid var(--accent); }
+.strat-proposed { border-style: dashed; border-top-style: solid; border-top-color: var(--rule); }
+.strat-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.strat-icon { width: 30px; height: 30px; flex: none; fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+.strat-proposed .strat-icon { stroke: var(--ink-2); }
+.strat-type { font-family: var(--f-mono); font-size: 12px; color: var(--ink-2); letter-spacing: .04em; }
+html[lang="ar"] .strat-type { font-family: var(--f-body); font-size: 13px; }
+.strat-top .strat-status { margin-inline-start: auto; }
+.strat h4 { margin: 0; font-family: var(--f-head); font-size: 19px; line-height: 1.45; display: flex; flex-direction: column; }
+.strat h4 .mono { font-weight: 400; font-size: 12.5px; color: var(--ink-2); letter-spacing: .04em; }
+.strat-anchor h4 { font-size: clamp(20px, 2vw, 24px); }
+.strat-p { font-size: 15.5px; line-height: 1.7; }
+.strat-a { font-size: 15px; line-height: 1.7; color: var(--ink-2); padding-top: 10px; border-top: 1px dashed var(--rule); }
+.strat-a .label { display: block; margin-bottom: 2px; color: var(--accent); }
+.strat-cia { display: flex; gap: 6px; margin-top: auto; padding-top: 4px; }
+.cia-tag {
+  width: 26px; height: 26px; display: grid; place-items: center;
+  font-family: var(--f-mono); font-size: 13px; font-weight: 600;
+  color: var(--cia); background: var(--cia-fill); border: 1px solid var(--cia);
+}
+@media (min-width: 981px) {
+  .strat-anchor { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); column-gap: 28px; row-gap: 10px; }
+  .strat-anchor .strat-top, .strat-anchor h4 { grid-column: 1 / -1; }
+  .strat-anchor .strat-a { border-top: 0; padding-top: 0; border-inline-start: 1px dashed var(--rule); padding-inline-start: 24px; }
+  .strat-anchor .strat-cia { grid-column: 1 / -1; }
+}
+/* CIA filter: cards that do not support the chosen goal step back */
+.strats[data-filter="c"] .strat:not([data-cia~="c"]),
+.strats[data-filter="i"] .strat:not([data-cia~="i"]),
+.strats[data-filter="a"] .strat:not([data-cia~="a"]) { opacity: .3; }
+
 @media (max-width: 980px) {
   .s3-idea { grid-template-columns: 1fr; }
   .cia-cards { grid-template-columns: 1fr; }

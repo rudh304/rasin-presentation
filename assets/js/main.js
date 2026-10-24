@@ -310,6 +310,19 @@
     }
   }
 
+  /* ---------------- SEC-03 strategies: CIA filter dims the cards that do not support the chosen goal ---------------- */
+  var strats = document.getElementById('strats');
+  if (strats) {
+    var fbtns = document.querySelectorAll('.strat-fbtn');
+    fbtns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var f = b.getAttribute('data-f');
+        if (f === 'all') strats.removeAttribute('data-filter'); else strats.setAttribute('data-filter', f);
+        fbtns.forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); });
+      });
+    });
+  }
+
   /* ---------------- Reveal: SEC-07 phrase boxes rise in once when they enter view; siblings are staggered ---------------- */
   var revealSel = '.takeaways li, .nogap, .nogap-steps li';
   var boxes = document.querySelectorAll(revealSel);

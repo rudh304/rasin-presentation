@@ -201,7 +201,7 @@
   <!-- ========================= SEC-03 · Architectural plan & the CIA triad ========================= -->
   <section class="sec" id="s3" aria-labelledby="s3-title">
     <div class="sec-inner">
-      <header class="sec-head"><span class="plate">SEC-03</span><h2 id="s3-title" data-i18n="nav.s3">المخطط المعماري وثلاثية CIA</h2></header>
+      <header class="sec-head"><span class="plate">SEC-03</span><h2 id="s3-title" class="h2-bi"><span data-i18n="s3.title">المنهجية الأمنية الداعمة لثلاثية CIA</span> <span class="mono sub-latin dup-en">Security Framework Supporting the CIA Triad</span></h2></header>
 
       <!-- Idea + zones -->
       <div class="s3-idea">
@@ -268,6 +268,117 @@
           </ul>
         </article>
       </div>
+
+      <!-- Strategies & controls strip. Every "في رَصين" line is taken from embeds/security.html / model.html;
+           items the model does not document are marked "مقترح" or "نطاق محدود", never shown as implemented. -->
+      <h3 class="sub-title"><span data-i18n="st.title">الاستراتيجيات والضوابط الأمنية في رَصين</span> <span class="mono sub-latin dup-en">Security Strategies &amp; Controls in RASIN</span></h3>
+      <p class="strat-lead" data-i18n="st.lead">الدفاع في العمق هو الإطار الذي تنتظم داخله بقية العناصر. وليست كلها استراتيجيات بالمعنى الأكاديمي؛ لذا يبين كل عنصر نوعه، وحالة تطبيقه في النموذج، وأهداف CIA التي يدعمها.</p>
+
+      <div class="strat-bar">
+        <div class="strat-filter" role="group" aria-labelledby="stFilterLbl">
+          <span class="label" id="stFilterLbl" data-i18n="st.filter">اعرض ما يدعم:</span>
+          <button type="button" class="strat-fbtn" data-f="all" aria-pressed="true" data-i18n="st.all">الكل</button>
+          <button type="button" class="strat-fbtn cia-c" data-f="c" aria-pressed="false" data-i18n="cia.c">السرية</button>
+          <button type="button" class="strat-fbtn cia-i" data-f="i" aria-pressed="false" data-i18n="cia.i">السلامة</button>
+          <button type="button" class="strat-fbtn cia-a" data-f="a" aria-pressed="false" data-i18n="cia.a">التوافر</button>
+        </div>
+        <ul class="strat-legend">
+          <li><span class="strat-status st-done" data-i18n="st.s.done">مطبّق</span> <span data-i18n="st.s.doneD">موثق في النموذج</span></li>
+          <li><span class="strat-status st-part" data-i18n="st.s.part">نطاق محدود</span> <span data-i18n="st.s.partD">مطبق في جزء موثق فقط</span></li>
+          <li><span class="strat-status st-prop" data-i18n="st.s.prop">مقترح</span> <span data-i18n="st.s.propD">يهيئ له التصميم، وإجراءاته غير موثقة</span></li>
+        </ul>
+      </div>
+
+      <ol class="strats" id="strats">
+        <li class="strat strat-anchor" data-cia="c i a">
+          <div class="strat-top">
+            <svg class="strat-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18"/><rect x="7" y="7" width="10" height="10"/><rect x="10.5" y="10.5" width="3" height="3"/></svg>
+            <span class="strat-type" data-i18n="st.t.strategy">استراتيجية</span>
+            <span class="strat-status st-done" data-i18n="st.s.done">مطبّق</span>
+          </div>
+          <h4><span data-i18n="st.did">استراتيجية الدفاع في العمق</span> <span class="mono dup-en">Defense in Depth</span></h4>
+          <p class="strat-p" data-i18n="st.did.p">طبقات حماية متعددة ومتكاملة من المحيط الخارجي إلى المناطق عالية الحساسية، فلا يؤدي تجاوز ضابط واحد إلى اختراق المنظومة كلها. وهي نقطة الانطلاق: كل ما يلي طبقة داخلها.</p>
+          <p class="strat-a"><span class="label" data-i18n="st.in">في رَصين</span><span data-i18n="st.did.a">خمس مناطق أمنية من المحيط (Z0) إلى عالية الحساسية (Z4)، تزيد نقاط التحقق كلما اقترب الشخص من الخوادم والأرشيف؛ فالبطاقة المسروقة وحدها لا تكفي لدخول Z4.</span></p>
+          <p class="strat-cia"><span class="cia-tag cia-c">C</span><span class="cia-tag cia-i">I</span><span class="cia-tag cia-a">A</span></p>
+        </li>
+        <li class="strat" data-cia="c i a">
+          <div class="strat-top">
+            <svg class="strat-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 21V9l8-5 8 5v12M3 21h18M9.5 21v-6h5v6"/></svg>
+            <span class="strat-type" data-i18n="st.t.physical">ضوابط مادية</span>
+            <span class="strat-status st-done" data-i18n="st.s.done">مطبّق</span>
+          </div>
+          <h4><span data-i18n="st.phys">القيود والضوابط المادية</span> <span class="mono dup-en">Physical Security Controls</span></h4>
+          <p class="strat-p" data-i18n="st.phys.p">حماية المنشأة والأصول من الدخول غير المصرح به أو العبث أو الوصول غير المشروع إلى الأجهزة والمعلومات الحساسة.</p>
+          <p class="strat-a"><span class="label" data-i18n="st.in">في رَصين</span><span data-i18n="st.phys.a">فصل مسار الزوار جنوب خط البوابات الدوارة، وفحص عند المدخل ببوابة كشف المعادن وجهاز الأشعة، وغرف عازلة أمام غرفة الخوادم والأرشيف، ولا تمديدات مياه فوقهما.</span></p>
+          <p class="strat-cia"><span class="cia-tag cia-c">C</span><span class="cia-tag cia-i">I</span><span class="cia-tag cia-a">A</span></p>
+        </li>
+        <li class="strat" data-cia="c i">
+          <div class="strat-top">
+            <svg class="strat-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="8" cy="12" r="4"/><path d="M12 12h9M18 12v3M21 12v2"/></svg>
+            <span class="strat-type" data-i18n="st.t.control">ضابط أمني</span>
+            <span class="strat-status st-done" data-i18n="st.s.done">مطبّق</span>
+          </div>
+          <h4><span data-i18n="st.ac">التحكم في الوصول</span> <span class="mono dup-en">Access Control</span></h4>
+          <p class="strat-p" data-i18n="st.ac.p">تنظيم الوصول إلى المناطق والموارد وفق مستويات صلاحية معتمدة، بما يحدّ من الوصول غير المصرح به.</p>
+          <p class="strat-a"><span class="label" data-i18n="st.in">في رَصين</span><span data-i18n="st.ac.a">مصفوفة صلاحيات لتسعة أدوار وظيفية، ومتطلب تحقق لكل منطقة. والوصول حسب الوظيفة لا حسب الطابق فقط؛ فالإدارة العليا لا تدخل غرفة الخوادم ولا الأرشيف بصلاحيتها الوظيفية.</span></p>
+          <p class="strat-cia"><span class="cia-tag cia-c">C</span><span class="cia-tag cia-i">I</span></p>
+        </li>
+        <li class="strat" data-cia="c i">
+          <div class="strat-top">
+            <svg class="strat-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="3" width="12" height="18"/><circle cx="12" cy="9" r="2.5"/><path d="M9 15h6M9 18h6"/></svg>
+            <span class="strat-type" data-i18n="st.t.components">مكونات تقنية</span>
+            <span class="strat-status st-done" data-i18n="st.s.done">مطبّق</span>
+          </div>
+          <h4><span data-i18n="st.comp">مكونات التحكم في الوصول</span> <span class="mono dup-en">Access Control Components</span></h4>
+          <p class="strat-p" data-i18n="st.comp.p">الوسائل التي تنفّذ قرار الصلاحية عند كل نقطة: تتحقق من الشخص، وتسجّل دخوله، وتمنع المرور المزدوج.</p>
+          <p class="strat-a"><span class="label" data-i18n="st.in">في رَصين</span><span data-i18n="st.comp.a">40 نقطة تحكم: قارئات بطاقات، وقارئات ثنائية (بطاقة مع رمز سري أو بصمة)، وبوابات دوارة، وغرف عازلة لا يُفتح بابها الثاني قبل إغلاق الأول.</span></p>
+          <p class="strat-cia"><span class="cia-tag cia-c">C</span><span class="cia-tag cia-i">I</span></p>
+        </li>
+        <li class="strat" data-cia="c i">
+          <div class="strat-top">
+            <svg class="strat-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14"/><circle cx="9" cy="11" r="2.2"/><path d="M5.8 16.2c.6-1.6 1.8-2.4 3.2-2.4s2.6.8 3.2 2.4M14.5 10h4M14.5 13.5h4"/></svg>
+            <span class="strat-type" data-i18n="st.t.process">إدارة وإجراءات</span>
+            <span class="strat-status st-part" data-i18n="st.s.part">نطاق محدود</span>
+          </div>
+          <h4><span data-i18n="st.iam">إدارة الهوية والوصول</span> <span class="mono dup-en">Identity &amp; Access Management (IAM)</span></h4>
+          <p class="strat-p" data-i18n="st.iam.p">ربط الوصول بهوية الشخص ودوره الوظيفي ومستوى تصريحه، وإدارة هذه الصلاحيات ومراجعتها.</p>
+          <p class="strat-a"><span class="label" data-i18n="st.in">في رَصين</span><span data-i18n="st.iam.a">على مستوى الوصول المادي: بطاقات الموظفين مرتبطة بمصفوفة الأدوار، وسجل دخول وخروج في Z4، ومراجعة شهرية لقائمة أصحاب التحقق الثنائي. ولا يتضمن النموذج نظام IAM رقميًا لحسابات الأنظمة.</span></p>
+          <p class="strat-cia"><span class="cia-tag cia-c">C</span><span class="cia-tag cia-i">I</span></p>
+        </li>
+        <li class="strat" data-cia="c">
+          <div class="strat-top">
+            <svg class="strat-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="10.5" width="14" height="10"/><path d="M8 10.5v-3a4 4 0 0 1 8 0v3M12 14.5v2.5"/></svg>
+            <span class="strat-type" data-i18n="st.t.tech">ضابط تقني</span>
+            <span class="strat-status st-part" data-i18n="st.s.part">نطاق محدود</span>
+          </div>
+          <h4><span data-i18n="st.enc">استراتيجية التشفير</span> <span class="mono dup-en">Encryption Strategy</span></h4>
+          <p class="strat-p" data-i18n="st.enc.p">تحويل المعلومات إلى صيغة غير مقروءة لغير المصرح لهم، لحماية سريتها أثناء التخزين أو النقل.</p>
+          <p class="strat-a"><span class="label" data-i18n="st.in">في رَصين</span><span data-i18n="st.enc.a">النطاق الموثق: الحواسيب المحمولة التي تخرج من المبنى مشفّرة، وتُسجَّل عند خروجها وعودتها. ولا يوثق النموذج تشفيرًا لنقل البيانات أو للأنظمة الأخرى، فلا يُدّعى تطبيقه.</span></p>
+          <p class="strat-cia"><span class="cia-tag cia-c">C</span></p>
+        </li>
+        <li class="strat strat-proposed" data-cia="c i a">
+          <div class="strat-top">
+            <svg class="strat-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h18M4.5 4v11h15V4M12 15v3M8.5 21l3.5-3 3.5 3"/></svg>
+            <span class="strat-type" data-i18n="st.t.admin">إجراء إداري</span>
+            <span class="strat-status st-prop" data-i18n="st.s.prop">مقترح</span>
+          </div>
+          <h4><span data-i18n="st.train">تدريب الموظفين والتوعية الأمنية</span> <span class="mono dup-en">Employee Security Training</span></h4>
+          <p class="strat-p" data-i18n="st.train.p">تعزيز الوعي بالممارسات الأمنية والمسؤوليات، والالتزام بإجراءات الدخول والتعامل مع الأصول الحساسة.</p>
+          <p class="strat-a"><span class="label" data-i18n="st.in">في رَصين</span><span data-i18n="st.train.a">يخصص التصميم قاعة التوعية والتدريب (G-01) لبرامج التوعية للزوار والموظفين؛ أما محتوى البرنامج وجدوله فغير موثقين، فيُعرض إجراءً إداريًا مقترحًا.</span></p>
+          <p class="strat-cia"><span class="cia-tag cia-c">C</span><span class="cia-tag cia-i">I</span><span class="cia-tag cia-a">A</span></p>
+        </li>
+        <li class="strat strat-proposed" data-cia="a">
+          <div class="strat-top">
+            <svg class="strat-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4.5h-4.5M12 8v4l2.5 2"/></svg>
+            <span class="strat-type" data-i18n="st.t.admin">إجراء إداري</span>
+            <span class="strat-status st-prop" data-i18n="st.s.prop">مقترح</span>
+          </div>
+          <h4><span data-i18n="st.dr">خطط التعافي من الأزمات</span> <span class="mono dup-en">Disaster Recovery Plans</span></h4>
+          <p class="strat-p" data-i18n="st.dr.p">استعادة الأنظمة والعمليات بعد الحوادث، والحد من أثر الانقطاع على توافر المعلومات والخدمات.</p>
+          <p class="strat-a"><span class="label" data-i18n="st.in">في رَصين</span><span data-i18n="st.dr.a">تدابير داعمة موجودة: طاقة غير منقطعة (UPS)، ومولد احتياطي، وتبريد دقيق مزدوج (N+1)، وخزنة نسخ احتياطية مقاومة للحريق. وهذه تدابير استمرارية لا خطة تعافٍ؛ فإجراءات الاستعادة غير موثقة وتُعرض مقترحًا.</span></p>
+          <p class="strat-cia"><span class="cia-tag cia-a">A</span></p>
+        </li>
+      </ol>
 
       <!-- CIA focus per floor -->
       <h3 class="sub-title" data-i18n="s3.focusTitle">تركيز CIA في كل طابق</h3>
