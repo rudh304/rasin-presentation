@@ -321,19 +321,24 @@
     }
   }
 
-  /* ---------------- Reveal: "لا تفتح مجال" box rises in once ---------------- */
-  var nogap = document.getElementById('nogap');
-  if (nogap) {
-    if ('IntersectionObserver' in window && !reduceMotion.matches) {
-      var gio = new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) {
-          if (en.isIntersecting) { nogap.classList.add('in-view'); gio.disconnect(); }
-        });
-      }, { threshold: 0.15 });
-      gio.observe(nogap);
-    } else {
-      nogap.classList.add('in-view');
-    }
+  /* ---------------- Reveal: boxes rise in once when they enter view; siblings are staggered ---------------- */
+  var revealSel = '.titleblock, .building, .stats, .goal, .embed, .el-card, .cia-card, .std, .tour, ' +
+                  '.takeaways li, .nogap, .nogap-steps li';
+  var boxes = document.querySelectorAll(revealSel);
+  if ('IntersectionObserver' in window && !reduceMotion.matches) {
+    var rio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in-view'); rio.unobserve(en.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    boxes.forEach(function (el) {
+      var i = Array.prototype.indexOf.call(el.parentNode.children, el);
+      el.style.setProperty('--rv-i', Math.min(i, 3));
+      el.classList.add('rv');
+      rio.observe(el);
+    });
+  } else {
+    boxes.forEach(function (el) { el.classList.add('in-view'); });
   }
 
   /* ---------------- "Why RASIN?" note ---------------- */
