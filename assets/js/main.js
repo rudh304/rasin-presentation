@@ -321,8 +321,9 @@
     }
   }
 
-  /* ---------------- Reveal: boxes rise in once when they enter view; siblings are staggered ---------------- */
-  var revealSel = '.titleblock, .building, .stats, .goal, .embed, .el-card, .cia-card, .std, .tour, ' +
+  /* ---------------- Reveal: boxes rise in once when they enter view; siblings are staggered ----------------
+     .embed is left out on purpose: hiding the iframe while it loads stops the interactive model from drawing. */
+  var revealSel = '.titleblock, .building, .stats, .goal, .el-card, .cia-card, .std, .tour, ' +
                   '.takeaways li, .nogap, .nogap-steps li';
   var boxes = document.querySelectorAll(revealSel);
   if ('IntersectionObserver' in window && !reduceMotion.matches) {
