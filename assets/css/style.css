@@ -787,7 +787,7 @@ html.js .sec-national:not(.in-view) .redline::after { transform: scaleX(0); }
   font-family: var(--f-head); font-weight: 500;
   font-size: clamp(19px, 2.1vw, 26px); line-height: 1.8;
 }
-.nat-link { margin-top: 22px; max-width: 72ch; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.85; }
+.nat-link { margin-top: 22px; max-width: 860px; font-size: clamp(14.5px, 1.2vw, 16.5px); line-height: 1.85; }
 
 .nat-credits { margin-top: clamp(36px, 7vh, 64px); padding-top: 18px; border-top: 1px solid color-mix(in srgb, var(--g-acc) 55%, transparent); }
 /* Project team: two columns, one on phones */
