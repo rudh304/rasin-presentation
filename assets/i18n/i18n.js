@@ -49,7 +49,7 @@ window.RASIN_I18N = {
 
   "s2.lead": "مركز افتراضي متخصص في الأمن السيبراني وحماية المعلومات.",
   "s2.whyTitle": "لماذا هذه الجهة؟",
-  "s2.why": "رَصين جهة افتراضية وُلدت من رحم الخيال: مركزٌ لأمن المعلومات والحماية الرقمية، تتبنى موضوع المقرر: أمن المعلومات. توظّف مفهوم إنترنت الأشياء (IoT) لكونه متسيّد العصر، وتقوم بدورها في حماية البيانات والتصدي للهجمات السيبرانية الرقمية. ولأن أثمن ما تحرسه رَصين بياناتٌ لا تُرى، يروي المشروع كيف نصون هذا الكنز الرقمي بأدوات ملموسة: سورٌ وبوابة، وكاميرا لا تغفل، وبابٌ لا يُفتح إلا لصاحب الحق؛ فالمعلومة تُحمى في المبنى قبل أن تُحمى في الشبكة.",
+  "s2.why": "رَصين جهة افتراضية وُلدت من رحم الخيال: مركزٌ لأمن المعلومات والحماية الرقمية، تتبنى موضوع المقرر: أمن المعلومات. وتستلهم من إنترنت الأشياء (IoT) فكرة الأجهزة المتصلة التي ترصد وتُنذر، وتقوم بدورها في حماية البيانات والتصدي للهجمات السيبرانية الرقمية. ولأن أثمن ما تحرسه رَصين بياناتٌ لا تُرى، يروي المشروع كيف نصون هذا الكنز الرقمي بأدوات ملموسة: سورٌ وبوابة، وكاميرا لا تغفل، وبابٌ لا يُفتح إلا لصاحب الحق؛ فالمعلومة تُحمى في المبنى قبل أن تُحمى في الشبكة.",
   "s2.goalLabel": "ما الغاية المنشودة من المشروع؟",
   "s2.goal": "«تطبيق مفاهيم الحماية المادية للبيانات»",
   "s2.building": "مبنى مستقل من ثلاثة طوابق",
@@ -345,7 +345,7 @@ window.RASIN_I18N = {
 
   "s2.lead": "A hypothetical center specializing in cybersecurity and information protection.",
   "s2.whyTitle": "Why this organization?",
-  "s2.why": "RASIN is a fictional organization born of imagination: a center for information security and digital protection, built around the course subject: information security. It applies the Internet of Things (IoT), the defining technology of our era, and works to protect data and counter digital cyberattacks. Because RASIN's most precious holdings are data no one can see, the project tells how we guard that digital treasure with tools you can touch: a fence and a gate, a camera that never blinks, and a door that opens only for those entitled to enter. Information is protected in the building before it is protected on the network.",
+  "s2.why": "RASIN is a fictional organization born of imagination: a center for information security and digital protection, built around the course subject: information security. It draws on the Internet of Things (IoT) for the idea of connected devices that detect and alert, and works to protect data and counter digital cyberattacks. Because RASIN's most precious holdings are data no one can see, the project tells how we guard that digital treasure with tools you can touch: a fence and a gate, a camera that never blinks, and a door that opens only for those entitled to enter. Information is protected in the building before it is protected on the network.",
   "s2.goalLabel": "What is the project's purpose?",
   "s2.goal": "“Applying physical protection concepts to data”",
   "s2.building": "A standalone three-storey building",
