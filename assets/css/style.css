@@ -336,7 +336,7 @@ html[lang="ar"] .titleblock dt { font-family: var(--f-body); font-size: 12px; le
 }
 html[lang="en"] .label { font-family: var(--f-mono); font-size: 11.5px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; }
 
-/* ---------- SEC-02 · Selected organization ---------- */
+/* ---------- SEC-03 · Selected organization ---------- */
 .s2-grid {
   display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
   gap: clamp(28px, 5vw, 64px); align-items: start;
@@ -416,7 +416,7 @@ html[lang="en"] .schedule thead th { font-family: var(--f-mono); font-weight: 50
   background: var(--cia-fill); color: var(--ink); border: 1px solid var(--cia);
 }
 
-/* ---------- SEC-03 · Plan & CIA ---------- */
+/* ---------- SEC-04 · Plan & CIA ---------- */
 .s3-idea {
   display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
   gap: clamp(28px, 5vw, 64px); align-items: end;
@@ -478,7 +478,7 @@ html[dir="rtl"] .zones-axis svg { transform: scaleX(-1); }
 .h2-bi { display: flex; flex-direction: column; }
 .h2-bi .sub-latin { margin-top: 2px; }
 
-/* ---------- SEC-03 · Strategies & controls strip ---------- */
+/* ---------- SEC-04 · Strategies & controls strip ---------- */
 .strat-bar {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px;
   margin: 18px 0 16px;
@@ -537,7 +537,7 @@ html[dir="ltr"] .strat-more::after { content: " →"; }
   .schedule tbody th { white-space: normal; }
 }
 
-/* ---------- SEC-04 · Security design ---------- */
+/* ---------- SEC-05 · Security design ---------- */
 .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
@@ -602,7 +602,7 @@ html[lang="en"] .el-body dt { font-family: var(--f-mono); font-weight: 500; font
 @media (max-width: 1100px) { .el-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 680px)  { .el-cards { grid-template-columns: 1fr; } }
 
-/* ---------- SEC-05 · Standards ---------- */
+/* ---------- SEC-06 · Standards ---------- */
 .std + .std { margin-top: clamp(28px, 5vh, 44px); }
 .std-head {
   display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
@@ -633,7 +633,7 @@ html[dir="rtl"] .std-table .ctl { margin-right: 0; margin-left: 12px; text-align
   .std-table td { padding-top: 0; }
 }
 
-/* ---------- SEC-06 · Interactive tours ---------- */
+/* ---------- SEC-07 · Interactive tours ---------- */
 .sec-wide .sec-inner { max-width: 1520px; }
 .tours { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .tour {
@@ -661,7 +661,7 @@ html[dir="rtl"] .std-table .ctl { margin-right: 0; margin-left: 12px; text-align
 
 @media (max-width: 860px) { .tours { grid-template-columns: 1fr; } }
 
-/* ---------- SEC-07 · Closing messages ---------- */
+/* ---------- SEC-08 · Closing messages ---------- */
 .takeaways { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .takeaways li {
   padding: 22px 22px 26px; background: var(--sheet); border: 1px solid var(--wall); border-top: 4px solid var(--accent);
@@ -750,7 +750,7 @@ html[dir="rtl"] .nogap-btn:hover .nogap-btn-ext { transform: scaleX(-1) translat
 .nogap.rv.in-view .nogap-icon { animation: nogap-pulse 1.2s ease .5s 1; }
 @keyframes nogap-pulse { 0%, 100% { transform: scale(1); } 40% { transform: scale(1.12); } }
 
-/* ---------- SEC-08 · National note (own green palette, this section only) ---------- */
+/* ---------- SEC-09 · National note (own green palette, this section only) ---------- */
 .sec-national {
   --g-bg:#0E3B26; --g-ink:#F2F5F1; --g-acc:#4FBF85; --g-red:#FF5A5F;
   position: relative; overflow: hidden;
@@ -803,7 +803,7 @@ html.js .sec-national:not(.in-view) .redline::after { transform: scaleX(0); }
 }
 .nat-link { margin-top: 22px; max-width: 860px; font-size: clamp(14.5px, 1.2vw, 16.5px); line-height: 1.85; }
 
-/* ---------- SEC-09 · Project team ---------- */
+/* ---------- SEC-02 · Project team ---------- */
 .team { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .team li {
   display: grid; grid-template-columns: 24px minmax(0, 1fr); align-items: center; gap: 4px 12px;
@@ -860,7 +860,7 @@ html.is-presenting .sec { scroll-margin-top: var(--hdr); }
 }
 .toast.show { opacity: 1; visibility: visible; }
 
-/* ---------- Reveal & hover for the SEC-07 phrase boxes ----------
+/* ---------- Reveal & hover for the SEC-08 phrase boxes ----------
    main.js adds .rv (only when motion is allowed) and .in-view once the box is on screen.
    Reveal moves `translate`, hover moves `transform`, so the two never fight over one property. */
 .rv {
@@ -877,7 +877,7 @@ html.is-presenting .sec { scroll-margin-top: var(--hdr); }
   }
 }
 
-/* ---------- NCA-based sections (SEC-06 standards, SEC-07 awareness) ----------
+/* ---------- NCA-based sections (SEC-07 standards, SEC-08 awareness) ----------
    Teal / navy inspired by the NCA identity — colour only, no logo. */
 .sec-nca { --nca: #0B7A73; --nca-deep: #0F3D52; --nca-fill: #DDEFEC; }
 :root[data-theme="dark"] .sec-nca { --nca: #5CCFC3; --nca-deep: #8FD9D0; --nca-fill: #133A38; }

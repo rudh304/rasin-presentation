@@ -295,7 +295,7 @@
     heroFrame.addEventListener('error', function () { heroFrame.remove(); });
   }
 
-  /* ---------------- Reveal: SEC-08 red line draws in once the section is in view ---------------- */
+  /* ---------------- Reveal: SEC-09 red line draws in once the section is in view ---------------- */
   var national = document.querySelector('.sec-national');
   if (national) {
     if ('IntersectionObserver' in window && !reduceMotion.matches) {
@@ -310,7 +310,7 @@
     }
   }
 
-  /* ---------------- SEC-03 strategies: CIA filter dims the cards that do not support the chosen goal ---------------- */
+  /* ---------------- SEC-04 strategies: CIA filter dims the cards that do not support the chosen goal ---------------- */
   var strats = document.getElementById('strats');
   if (strats) {
     var fbtns = document.querySelectorAll('.strat-fbtn');
@@ -323,7 +323,7 @@
     });
   }
 
-  /* ---------------- Reveal: SEC-07 phrase boxes rise in once when they enter view; siblings are staggered ---------------- */
+  /* ---------------- Reveal: SEC-08 phrase boxes rise in once when they enter view; siblings are staggered ---------------- */
   var revealSel = '.takeaways li, .nogap, .nogap-steps li';
   var boxes = document.querySelectorAll(revealSel);
   if ('IntersectionObserver' in window && !reduceMotion.matches) {
@@ -342,7 +342,7 @@
     boxes.forEach(function (el) { el.classList.add('in-view'); });
   }
 
-  /* ---------------- SEC-04 function words: one shared note, opened from the pressed word ---------------- */
+  /* ---------------- SEC-05 function words: one shared note, opened from the pressed word ---------------- */
   var fnPop = document.getElementById('fnPop');
   if (fnPop) {
     var fnTitle = fnPop.querySelector('.fn-pop-t');
