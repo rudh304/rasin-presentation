@@ -349,29 +349,54 @@
     var fnDesc = fnPop.querySelector('.fn-pop-d');
     var fnOff = fnPop.querySelector('.fn-pop-off');
     var fnOpen = null;
+    var fnHovered = false;   // opened by mouse hover (closes on leave) rather than pinned by a click
+    var fnTimer = null;
     var closeFn = function () {
+      clearTimeout(fnTimer);
       fnPop.hidden = true;
       if (fnOpen) fnOpen.setAttribute('aria-expanded', 'false');
       fnOpen = null;
+      fnHovered = false;
+    };
+    var openFn = function (b) {
+      closeFn();
+      var k = 'fn.' + b.getAttribute('data-fn');
+      // data-i18n keeps the open note in step with a language switch
+      fnTitle.setAttribute('data-i18n', k);
+      fnTitle.textContent = t(k);
+      fnDesc.setAttribute('data-i18n', k + '.d');
+      fnDesc.textContent = t(k + '.d');
+      fnOff.hidden = b.parentNode.classList.contains('on');
+      b.closest('.el-foot').appendChild(fnPop);
+      fnPop.hidden = false;
+      b.setAttribute('aria-expanded', 'true');
+      fnOpen = b;
+    };
+    var leaveFn = function (e) {
+      if (e.pointerType !== 'mouse' || !fnHovered) return;
+      // short delay so the mouse can cross the gap from the word to the note
+      clearTimeout(fnTimer);
+      fnTimer = setTimeout(closeFn, 150);
     };
     document.querySelectorAll('.fn-btn').forEach(function (b) {
+      b.addEventListener('pointerenter', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        clearTimeout(fnTimer);
+        if (fnOpen === b) return;
+        if (fnOpen && !fnHovered) return;   // leave a pinned note alone
+        openFn(b);
+        fnHovered = true;
+      });
+      b.addEventListener('pointerleave', leaveFn);
       b.addEventListener('click', function (e) {
         e.stopPropagation();
+        if (fnOpen === b && fnHovered) { clearTimeout(fnTimer); fnHovered = false; return; }   // pin it
         if (fnOpen === b) { closeFn(); return; }
-        closeFn();
-        var k = 'fn.' + b.getAttribute('data-fn');
-        // data-i18n keeps the open note in step with a language switch
-        fnTitle.setAttribute('data-i18n', k);
-        fnTitle.textContent = t(k);
-        fnDesc.setAttribute('data-i18n', k + '.d');
-        fnDesc.textContent = t(k + '.d');
-        fnOff.hidden = b.parentNode.classList.contains('on');
-        b.closest('.el-foot').appendChild(fnPop);
-        fnPop.hidden = false;
-        b.setAttribute('aria-expanded', 'true');
-        fnOpen = b;
+        openFn(b);
       });
     });
+    fnPop.addEventListener('pointerenter', function () { clearTimeout(fnTimer); });
+    fnPop.addEventListener('pointerleave', leaveFn);
     document.addEventListener('click', function (e) {
       if (fnOpen && !fnPop.contains(e.target)) closeFn();
     });
