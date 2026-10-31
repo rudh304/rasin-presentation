@@ -7,7 +7,7 @@
 
 /* ---------- Tokens ---------- */
 :root {
-  --paper:#EEF0EC; --sheet:#FAFAF7; --ink:#1B2226; --ink-2:#55616A; --rule:#CBD1CC; --wall:#1F282D; --accent:#1E5B74;
+  --paper:#F4EFE3; --sheet:#FBF8F0; --ink:#1B2226; --ink-2:#55616A; --rule:#D8D1C0; --wall:#1F282D; --accent:#1E5B74;
   --z0:#E2E5E0; --z0s:#7C857F;                                  /* Z0 perimeter — same values as the embedded drawings */
   --z1:#D4EADC; --z2:#D2E0F0; --z3:#F0DEB6; --z4:#EAB2A4;      /* zone fills */
   --z1s:#3B8660; --z2s:#3A6CA3; --z3s:#9C7019; --z4s:#AE3F2A;  /* zone strokes & text */
@@ -570,9 +570,23 @@ html[lang="en"] .el-body dt { font-family: var(--f-mono); font-weight: 500; font
 /* Function strip: all four shown, the element's own functions filled */
 .fn { list-style: none; margin: 0; padding: 0; display: flex; }
 .fn li {
-  padding: 3px 9px; font-size: 13px; line-height: 1.6;
+  font-size: 13px; line-height: 1.6;
   color: var(--ink-2); border: 1px dashed var(--rule);
 }
+.fn-btn {
+  display: block; padding: 3px 9px; font: inherit; color: inherit; background: none; border: 0; cursor: pointer;
+  text-decoration: underline dotted; text-underline-offset: 3px;
+}
+.fn-btn:hover, .fn-btn[aria-expanded="true"] { text-decoration-style: solid; }
+/* Short note on a function word; main.js moves it into the pressed card's footer */
+.el-foot { position: relative; }
+.fn-pop {
+  position: absolute; z-index: 5; bottom: calc(100% + 8px); inset-inline: 12px;
+  padding: 12px 14px; background: var(--sheet); border: 1px solid var(--wall); border-top: 4px solid var(--accent);
+}
+.fn-pop-t { font-family: var(--f-head); font-weight: 700; font-size: 16px; color: var(--accent); margin-bottom: 4px; }
+.fn-pop-d { font-size: 14.5px; line-height: 1.7; color: var(--ink); }
+.fn-pop-off { margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--rule); font-size: 13px; color: var(--ink-2); }
 .fn li + li { border-inline-start: 0; }
 .fn li.on { color: var(--sheet); background: var(--accent); border: 1px solid var(--accent); }
 .fn li.on + li { border-inline-start: 0; }

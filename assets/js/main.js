@@ -342,6 +342,44 @@
     boxes.forEach(function (el) { el.classList.add('in-view'); });
   }
 
+  /* ---------------- SEC-04 function words: one shared note, opened from the pressed word ---------------- */
+  var fnPop = document.getElementById('fnPop');
+  if (fnPop) {
+    var fnTitle = fnPop.querySelector('.fn-pop-t');
+    var fnDesc = fnPop.querySelector('.fn-pop-d');
+    var fnOff = fnPop.querySelector('.fn-pop-off');
+    var fnOpen = null;
+    var closeFn = function () {
+      fnPop.hidden = true;
+      if (fnOpen) fnOpen.setAttribute('aria-expanded', 'false');
+      fnOpen = null;
+    };
+    document.querySelectorAll('.fn-btn').forEach(function (b) {
+      b.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (fnOpen === b) { closeFn(); return; }
+        closeFn();
+        var k = 'fn.' + b.getAttribute('data-fn');
+        // data-i18n keeps the open note in step with a language switch
+        fnTitle.setAttribute('data-i18n', k);
+        fnTitle.textContent = t(k);
+        fnDesc.setAttribute('data-i18n', k + '.d');
+        fnDesc.textContent = t(k + '.d');
+        fnOff.hidden = b.parentNode.classList.contains('on');
+        b.closest('.el-foot').appendChild(fnPop);
+        fnPop.hidden = false;
+        b.setAttribute('aria-expanded', 'true');
+        fnOpen = b;
+      });
+    });
+    document.addEventListener('click', function (e) {
+      if (fnOpen && !fnPop.contains(e.target)) closeFn();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && fnOpen) { var b = fnOpen; closeFn(); b.focus(); }
+    });
+  }
+
   /* ---------------- "Why RASIN?" note ---------------- */
   var whyBtn = document.getElementById('whyBtn');
   var whyPop = document.getElementById('whyPop');

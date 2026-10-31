@@ -138,6 +138,11 @@ window.RASIN_I18N = {
   "fn.detect": "كشف",
   "fn.delay": "تأخير",
   "fn.respond": "استجابة",
+  "fn.deter.d": "ثني المعتدي عن المحاولة من الأساس، بإظهار أن الموقع محمي: سور، وكاميرات ظاهرة، وحراسة.",
+  "fn.detect.d": "اكتشاف المحاولة لحظة وقوعها وإطلاق الإنذار، عبر الحساسات والكاميرات.",
+  "fn.delay.d": "إبطاء المعتدي بحواجز وأبواب متتابعة، ليكسب فريق الأمن وقتًا للوصول قبل بلوغه الهدف.",
+  "fn.respond.d": "التحرك لإيقاف الحادث والحد من أثره: حراس، أو إنذار إلى غرفة التحكم، أو إطفاء آلي.",
+  "fn.off": "لا يؤدي هذا النظام هذه الوظيفة.",
   "s4.embedTitle": "مخطط رَصين للأمن المادي",
 
   "s4.c1.title": "الحواجز المادية",
@@ -434,6 +439,11 @@ window.RASIN_I18N = {
   "fn.detect": "Detect",
   "fn.delay": "Delay",
   "fn.respond": "Respond",
+  "fn.deter.d": "Discouraging an attempt in the first place by showing the site is protected: a fence, visible cameras and guards.",
+  "fn.detect.d": "Spotting an attempt as it happens and raising the alarm, through sensors and cameras.",
+  "fn.delay.d": "Slowing an intruder with successive barriers and doors, buying the security team time to arrive before the target is reached.",
+  "fn.respond.d": "Acting to stop the incident and limit its impact: guards, an alert to the control room, or automatic fire suppression.",
+  "fn.off": "This system does not perform this function.",
   "s4.embedTitle": "RASIN physical security plan",
 
   "s4.c1.title": "Physical barriers",
