@@ -265,8 +265,8 @@ main { padding-top: var(--hdr); }
 
 /* line-drawn lock beside the title, about the height of the letters */
 .title-lock {
-  display: inline-block; height: .78em; width: auto; aspect-ratio: 24 / 28;
-  margin-inline-end: .22em; vertical-align: -.02em;
+  display: inline-block; height: .95em; width: auto; aspect-ratio: 24 / 28;
+  margin-inline-end: .22em; vertical-align: -.1em;
   fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
 }
 /* crown to the left of the course instructor's name in the title block */
@@ -876,6 +876,24 @@ html.is-presenting .sec { scroll-margin-top: var(--hdr); }
 }
 .nca-badge svg { width: 20px; height: 20px; flex: none; fill: none; stroke: var(--nca); stroke-width: 1.7; stroke-linejoin: round; stroke-linecap: round; }
 .std-nca .std-head { background: var(--nca-deep); }
+
+/* ---------- Heading icons & colour accents ---------- */
+.ic {
+  display: inline-block; flex: none; width: 1.05em; height: 1.05em;
+  margin-inline-end: .4em; vertical-align: -.16em;
+  fill: none; stroke: var(--ic, var(--accent)); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;
+}
+.hero-title, .sec-head h2, .el-head h3, .tour h3, .strat h4, .s2-why .label, .zones .label { color: var(--accent); }
+.sub-title { color: var(--z2s); --ic: var(--z2s); }
+.cia-card { --ic: var(--cia); }
+.cia-card .label, .cia-card h4 span:not(.mono) { color: var(--cia); }
+.std-head { --ic: currentColor; }
+.sec-nca { --ic: var(--nca); }
+.sec-nca .sec-head h2, .takeaways li > p:not(.takeaway-sub) { color: var(--nca); }
+.nogap { --ic: var(--warn); }
+.nogap-steps h4 { color: var(--warn); }
+.sec-national { --ic: var(--g-acc); }
+.sec-national .team-title { color: var(--g-acc); }
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
