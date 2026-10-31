@@ -2,7 +2,7 @@
   main.js — site behaviour for the RASIN presentation:
   theme (light/dark, synced into same-origin iframes), language (ar/en from assets/i18n),
   section navigation (current-section highlight, mobile dropdown) and presentation mode
-  (fullscreen, keyboard paging, "n / 8" progress).
+  (fullscreen, keyboard paging, "n / 9" progress).
 */
 (function () {
   'use strict';

@@ -803,18 +803,17 @@ html.js .sec-national:not(.in-view) .redline::after { transform: scaleX(0); }
 }
 .nat-link { margin-top: 22px; max-width: 860px; font-size: clamp(14.5px, 1.2vw, 16.5px); line-height: 1.85; }
 
-.nat-credits { margin-top: clamp(36px, 7vh, 64px); padding-top: 18px; border-top: 1px solid color-mix(in srgb, var(--g-acc) 55%, transparent); }
-/* Project team: two columns, one on phones */
-.team-title { margin-top: 0; font-size: 18px; color: var(--g-ink); }
-.team { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 28px; }
+/* ---------- SEC-09 · Project team ---------- */
+.team { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .team li {
-  display: grid; grid-template-columns: 20px minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 10px;
-  padding: 10px 0; border-bottom: 1px solid color-mix(in srgb, var(--g-acc) 30%, transparent);
+  display: grid; grid-template-columns: 24px minmax(0, 1fr); align-items: center; gap: 4px 12px;
+  padding: 16px 18px; background: var(--sheet); border: 1px solid var(--wall); border-top: 4px solid var(--accent);
 }
-.team .cap { width: 20px; height: 20px; flex: none; fill: none; stroke: var(--g-acc); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
-.team .member { font-size: 16px; font-weight: 600; }
-.team .sid { justify-self: center; font-family: var(--f-mono); font-size: 14px; letter-spacing: .04em; direction: ltr; unicode-bidi: isolate; }
-@media (max-width: 760px) { .team { grid-template-columns: 1fr; } }
+.team .cap { grid-row: span 2; width: 24px; height: 24px; fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+.team .member { font-family: var(--f-head); font-size: 17px; font-weight: 700; line-height: 1.5; color: var(--accent); }
+.team .sid { justify-self: start; font-family: var(--f-mono); font-size: 13.5px; letter-spacing: .04em; color: var(--ink-2); direction: ltr; unicode-bidi: isolate; }
+@media (max-width: 980px) { .team { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .team { grid-template-columns: 1fr; } }
 
 /* ---------- Embeds (shared by sections 3, 4, 6) ---------- */
 .embed { margin-top: 28px; }
@@ -907,7 +906,6 @@ html.is-presenting .sec { scroll-margin-top: var(--hdr); }
 .nogap { --ic: var(--warn); }
 .nogap-steps h4 { color: var(--warn); }
 .sec-national { --ic: var(--g-acc); }
-.sec-national .team-title { color: var(--g-acc); }
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {

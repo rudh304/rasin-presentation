@@ -17,6 +17,7 @@ window.RASIN_I18N = {
   "nav.s6": "تطبيق المعايير",
   "nav.s7": "#لا_تفتح_مجال",
   "nav.s8": "لفتة وطنية",
+  "nav.s9": "فريق المشروع",
 
   "ui.themeToDark": "التبديل إلى الوضع الداكن",
   "ui.themeToLight": "التبديل إلى الوضع الساطع",
@@ -297,8 +298,7 @@ window.RASIN_I18N = {
   "s8.title1": "السعودية العظمى",
   "s8.title2": "خط أحمر",
   "s8.qhead": "النظام الأساسي للحكم — المادة الرابعة والثلاثون",
-  "s8.link": "يمتدّ الدفاع عن الوطن إلى ما وراء حدوده المرئية، إلى فضاءٍ رقميٍّ تُصان فيه الأسرار، وتُسوَّر فيه الأصول بالحماية، وتُحفظ فيه الحقيقة من أن تلوّثها الشائعات أو تحرّفها الأقاويل. فكل معلومةٍ تُصان، وكل شائعةٍ يُحدّ من انتشارها، وكل كلمةٍ يُتحرّى صدقها.. جبهةُ دفاع. فلنجعل من مسؤوليتنا الرقمية عهدًا وطنيًا، ومن وعينا درعًا؛ فالأوطان لا يحميها الأبطال في الميدان فحسب، بل يحميها أيضًا وعيُ أبنائها في كل فضاء.",
-  "s8.teamTitle": "فريق المشروع"
+  "s8.link": "يمتدّ الدفاع عن الوطن إلى ما وراء حدوده المرئية، إلى فضاءٍ رقميٍّ تُصان فيه الأسرار، وتُسوَّر فيه الأصول بالحماية، وتُحفظ فيه الحقيقة من أن تلوّثها الشائعات أو تحرّفها الأقاويل. فكل معلومةٍ تُصان، وكل شائعةٍ يُحدّ من انتشارها، وكل كلمةٍ يُتحرّى صدقها.. جبهةُ دفاع. فلنجعل من مسؤوليتنا الرقمية عهدًا وطنيًا، ومن وعينا درعًا؛ فالأوطان لا يحميها الأبطال في الميدان فحسب، بل يحميها أيضًا وعيُ أبنائها في كل فضاء."
 }
 ,
 "en": {
@@ -318,6 +318,7 @@ window.RASIN_I18N = {
   "nav.s6": "Applying the Standards",
   "nav.s7": "#LeaveNoOpening",
   "nav.s8": "A National Note",
+  "nav.s9": "Project Team",
 
   "ui.themeToDark": "Switch to dark mode",
   "ui.themeToLight": "Switch to light mode",
@@ -598,8 +599,7 @@ window.RASIN_I18N = {
   "s8.title1": "Great Saudi Arabia is",
   "s8.title2": "a red line",
   "s8.qhead": "Basic Law of Governance — Article 34",
-  "s8.link": "Defending the homeland reaches beyond its visible borders, into a digital space where secrets are kept, assets are walled with protection, and truth is guarded from being tainted by rumour or twisted by hearsay. Every piece of information protected, every rumour contained, and every word checked for truth is a front of defense. Let us make our digital responsibility a national pledge and our awareness a shield; homelands are protected not only by heroes in the field, but also by the awareness of their people in every space.",
-  "s8.teamTitle": "Project Team"
+  "s8.link": "Defending the homeland reaches beyond its visible borders, into a digital space where secrets are kept, assets are walled with protection, and truth is guarded from being tainted by rumour or twisted by hearsay. Every piece of information protected, every rumour contained, and every word checked for truth is a front of defense. Let us make our digital responsibility a national pledge and our awareness a shield; homelands are protected not only by heroes in the field, but also by the awareness of their people in every space."
 }
 
 };
