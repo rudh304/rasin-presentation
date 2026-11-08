@@ -8,6 +8,7 @@
 /* ---------- Tokens ---------- */
 :root {
   --paper:#F4EFE3; --sheet:#FBF8F0; --ink:#1B2226; --ink-2:#55616A; --rule:#D8D1C0; --wall:#1F282D; --accent:#1E5B74;
+  --head:#172B38; --gold:#8A6514;
   --z0:#E2E5E0; --z0s:#7C857F;                                  /* Z0 perimeter — same values as the embedded drawings */
   --z1:#D4EADC; --z2:#D2E0F0; --z3:#F0DEB6; --z4:#EAB2A4;      /* zone fills */
   --z1s:#3B8660; --z2s:#3A6CA3; --z3s:#9C7019; --z4s:#AE3F2A;  /* zone strokes & text */
@@ -31,6 +32,7 @@
 
 :root[data-theme="dark"] {
   --paper:#0F1416; --sheet:#161D20; --ink:#E2E7E5; --ink-2:#9AA6AA; --rule:#2E383C; --wall:#D3DBD8; --accent:#72B6CF;
+  --head:#EFE4CC; --gold:#D9B25C;
   --z0:#232A2C; --z0s:#8A9490;
   --z1:#1D3A2B; --z2:#1C2F47; --z3:#463818; --z4:#5A271E;
   --z1s:#6CC296; --z2s:#7FA9DE; --z3s:#E1B04F; --z4s:#F08A72;
@@ -818,15 +820,11 @@ html[dir="rtl"] .nogap-btn:hover .nogap-btn-ext { transform: scaleX(-1) translat
 .term-pop-d { font-size: 14px; line-height: 1.65; color: var(--ink); }
 
 /* ---------- SEC-10 · References ---------- */
-.refs { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.refs li {
-  display: grid; grid-template-columns: auto auto minmax(0, 1fr); align-items: start; gap: 10px;
-  padding: 14px 18px; background: var(--sheet); border: 1px solid var(--wall); border-inline-start: 4px solid var(--accent);
-}
-.ref-num { font-size: 13px; color: var(--ink-2); padding-top: 3px; }
-.refs .ic { width: 20px; height: 20px; margin: 3px 0 0; }
-.refs p { font-size: 16px; line-height: 1.75; }
-.ref-link { display: inline-block; margin-top: 4px; font-size: 12.5px; color: var(--accent); word-break: break-all; }
+.refs-table th[scope="row"] { white-space: normal; font-weight: 600; }
+.refs-table td.ref-num { width: 40px; color: var(--gold); font-weight: 600; }
+.refs-table td.ref-year { white-space: nowrap; font-family: var(--f-mono); font-size: 14.5px; }
+.refs-table td.ref-link-cell { white-space: nowrap; }
+.ref-open { font-weight: 600; color: var(--accent); text-underline-offset: 3px; }
 
 /* ---------- SEC-09 · National note (own green palette, this section only) ---------- */
 .sec-national {
@@ -974,8 +972,10 @@ html.is-presenting .sec { scroll-margin-top: var(--hdr); }
   margin-inline-end: .4em; vertical-align: -.16em;
   fill: none; stroke: var(--ic, var(--accent)); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;
 }
-.hero-title, .sec-head h2, .el-head h3, .tour h3, .strat h4, .s2-why .label, .zones .label { color: var(--accent); }
-.sub-title { color: var(--z2s); --ic: var(--z2s); }
+.hero-title, .sec-head h2, .sub-title, .el-head h3, .tour h3, .strat h4, .team .member { color: var(--head); }
+.s2-why .label, .zones .label { color: var(--accent); }
+.sec-head .plate { color: var(--gold); border-color: var(--gold); }
+.stat-num, .tour-steps .mono, .el-num { color: var(--gold); }
 .cia-card { --ic: var(--cia); }
 .cia-card .label, .cia-card h4 span:not(.mono) { color: var(--cia); }
 .std-head { --ic: currentColor; }
