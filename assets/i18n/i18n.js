@@ -18,6 +18,7 @@ window.RASIN_I18N = {
   "nav.s7": "#لا_تفتح_مجال",
   "nav.s8": "لفتة وطنية",
   "nav.s9": "فريق المشروع",
+  "nav.s10": "المراجع",
 
   "ui.themeToDark": "التبديل إلى الوضع الداكن",
   "ui.themeToLight": "التبديل إلى الوضع الساطع",
@@ -36,7 +37,7 @@ window.RASIN_I18N = {
   "s1.tagline": "حصنٌ من حجر، يحرس كنزًا من بيانات.",
   "s1.stat.floors": "طوابق",
   "s1.stat.rooms": "غرفة",
-  "s1.stat.devices": "جهازًا أمنيًا",
+  "s1.stat.devices": "عنصرًا أمنيًا",
   "s1.stat.zones": "مناطق أمنية",
 
   "tb.course": "المقرر",
@@ -298,6 +299,11 @@ window.RASIN_I18N = {
   "s8.title1": "السعودية العظمى",
   "s8.title2": "خط أحمر",
   "s8.qhead": "النظام الأساسي للحكم — المادة الرابعة والثلاثون",
+  "ref.1": "الهيئة الوطنية للأمن السيبراني. (2024). الضوابط الأساسية للأمن السيبراني (ECC-2:2024). الرياض: الهيئة الوطنية للأمن السيبراني.",
+  "ref.2": "المنظمة الدولية للمعايير. (2022). ISO/IEC 27001:2022 — أنظمة إدارة أمن المعلومات: المتطلبات. جنيف: ISO.",
+  "ref.3": "المعهد الوطني للمعايير والتقنية. (2020). NIST SP 800-53 Rev. 5 — ضوابط الأمن والخصوصية لنظم المعلومات والمنظمات.",
+  "ref.4": "الهيئة الوطنية للأمن السيبراني. (2024). الكتيّب التوعوي لحملة «لا تفتح مجال».",
+  "ref.5": "النظام الأساسي للحكم في المملكة العربية السعودية، الصادر بالأمر الملكي رقم (أ/90) بتاريخ 27/8/1412هـ، المادة الرابعة والثلاثون.",
   "s8.link": "يمتدّ الدفاع عن الوطن إلى ما وراء حدوده المرئية، إلى فضاءٍ رقميٍّ تُصان فيه الأسرار، وتُسوَّر فيه الأصول بالحماية، وتُحفظ فيه الحقيقة من أن تلوّثها الشائعات أو تحرّفها الأقاويل. فكل معلومةٍ تُصان، وكل شائعةٍ يُحدّ من انتشارها، وكل كلمةٍ يُتحرّى صدقها.. جبهةُ دفاع. فلنجعل من مسؤوليتنا الرقمية عهدًا وطنيًا، ومن وعينا درعًا؛ فالأوطان لا يحميها الأبطال في الميدان فحسب، بل يحميها أيضًا وعيُ أبنائها في كل فضاء."
 }
 ,
@@ -319,6 +325,7 @@ window.RASIN_I18N = {
   "nav.s7": "#LeaveNoOpening",
   "nav.s8": "A National Note",
   "nav.s9": "Project Team",
+  "nav.s10": "References",
 
   "ui.themeToDark": "Switch to dark mode",
   "ui.themeToLight": "Switch to light mode",
@@ -337,7 +344,7 @@ window.RASIN_I18N = {
   "s1.tagline": "A fortress of stone, guarding a treasure of data.",
   "s1.stat.floors": "Floors",
   "s1.stat.rooms": "Rooms",
-  "s1.stat.devices": "Security devices",
+  "s1.stat.devices": "Security elements",
   "s1.stat.zones": "Security zones",
 
   "tb.course": "Course",
@@ -599,6 +606,11 @@ window.RASIN_I18N = {
   "s8.title1": "Great Saudi Arabia is",
   "s8.title2": "a red line",
   "s8.qhead": "Basic Law of Governance — Article 34",
+  "ref.1": "National Cybersecurity Authority. (2024). Essential Cybersecurity Controls (ECC-2:2024). Riyadh: NCA.",
+  "ref.2": "International Organization for Standardization. (2022). ISO/IEC 27001:2022 Information security management systems — Requirements. Geneva: ISO.",
+  "ref.3": "National Institute of Standards and Technology. (2020). Security and Privacy Controls for Information Systems and Organizations (NIST SP 800-53 Rev. 5).",
+  "ref.4": "National Cybersecurity Authority. (2024). \"La Tiftah Majal\" awareness campaign booklet.",
+  "ref.5": "Basic Law of Governance of the Kingdom of Saudi Arabia, Royal Order No. (A/90), 27/8/1412 AH, Article 34.",
   "s8.link": "Defending the homeland reaches beyond its visible borders, into a digital space where secrets are kept, assets are walled with protection, and truth is guarded from being tainted by rumour or twisted by hearsay. Every piece of information protected, every rumour contained, and every word checked for truth is a front of defense. Let us make our digital responsibility a national pledge and our awareness a shield; homelands are protected not only by heroes in the field, but also by the awareness of their people in every space."
 }
 
