@@ -750,6 +750,73 @@ html[dir="rtl"] .nogap-btn:hover .nogap-btn-ext { transform: scaleX(-1) translat
 .nogap.rv.in-view .nogap-icon { animation: nogap-pulse 1.2s ease .5s 1; }
 @keyframes nogap-pulse { 0%, 100% { transform: scale(1); } 40% { transform: scale(1.12); } }
 
+/* ---------- SEC-06 · Intruder challenge (collapsed until opened) ---------- */
+.chal { margin-bottom: 20px; background: var(--sheet); border: 1px solid var(--wall); border-inline-start: 4px solid var(--z4s); }
+.chal-open {
+  display: flex; align-items: center; gap: 14px; width: 100%; padding: 14px 18px;
+  font: inherit; color: inherit; text-align: start; background: none; border: 0; cursor: pointer;
+}
+.chal-ic { width: 30px; height: 30px; --ic: var(--z4s); margin: 0; }
+.chal-text { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.chal-badge { font-size: 12.5px; font-weight: 600; color: var(--z4s); }
+.chal-title { font-family: var(--f-head); font-weight: 700; font-size: clamp(18px, 2vw, 22px); line-height: 1.5; color: var(--accent); }
+.chal-lead { font-size: 14.5px; color: var(--ink-2); }
+.chal-cta {
+  flex: none; padding: 7px 14px; font-weight: 700; font-size: 14.5px;
+  color: var(--sheet); background: var(--z4s); border: 1px solid var(--z4s);
+}
+.chal-open:hover .chal-cta, .chal-open[aria-expanded="true"] .chal-cta { color: var(--z4s); background: var(--sheet); }
+.chal-body { padding: 4px 18px 18px; border-top: 1px dashed var(--rule); }
+.chal-steps { list-style: none; margin: 14px 0 10px; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+.chal-steps li { height: 6px; background: var(--rule); }
+.chal-steps li.done, .chal-steps li.now { background: var(--zc); }
+.chal-steps li.now { outline: 2px solid var(--zc); outline-offset: 1px; }
+.cz0 { --zc: var(--z0s); } .cz1 { --zc: var(--z1s); } .cz2 { --zc: var(--z2s); } .cz3 { --zc: var(--z3s); } .cz4 { --zc: var(--z4s); }
+.chal-layer { display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; color: var(--ink-2); }
+.chal-z { display: inline-block; padding: 0 6px; font-family: var(--f-mono); font-size: 12px; color: var(--ink); border: 1px solid var(--zc); background: color-mix(in srgb, var(--zc) 18%, transparent); }
+.chal-q { margin: 6px 0 12px; font-family: var(--f-head); font-size: 19px; line-height: 1.5; }
+.chal-q:focus, .chal-res-t:focus { outline: none; }
+.chal-opts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.chal-opt {
+  padding: 10px 12px; font: inherit; font-size: 15px; font-weight: 600; text-align: start; line-height: 1.5;
+  color: var(--ink); background: var(--paper); border: 1px solid var(--wall); cursor: pointer;
+}
+.chal-opt:hover:not(:disabled) { border-color: var(--z4s); color: var(--z4s); }
+.chal-opt:disabled { cursor: default; opacity: .45; }
+.chal-opt.is-chosen { opacity: 1; border: 2px solid var(--z4s); color: var(--z4s); }
+.chal-res { margin-top: 12px; padding: 12px 14px; background: color-mix(in srgb, var(--z4) 35%, var(--sheet)); border: 1px solid var(--z4s); }
+.chal-res-t { font-family: var(--f-head); font-weight: 700; font-size: 16.5px; color: var(--ink); }
+.chal-stop { color: var(--z4s); }
+.chal-res-w { margin-top: 4px; font-size: 15px; line-height: 1.7; }
+.chal-type { display: inline-block; margin-top: 8px; padding: 1px 8px; font-size: 12.5px; font-weight: 600; color: var(--accent); border: 1px solid var(--accent); }
+.chal-btn {
+  margin-top: 12px; padding: 8px 14px; font: inherit; font-size: 14.5px; font-weight: 700; cursor: pointer;
+  color: var(--sheet); background: var(--accent); border: 1px solid var(--accent);
+}
+.chal-btn:hover { color: var(--accent); background: var(--sheet); }
+.chal-btn-ghost { color: var(--accent); background: transparent; }
+.chal-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.chal-end-text { font-size: 15.5px; line-height: 1.8; max-width: 80ch; margin-bottom: 12px; }
+.chal-log { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 6px; }
+.chal-log li { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 15px; }
+.chal-log .chal-type { margin-top: 0; }
+@media (max-width: 760px) {
+  .chal-opts { grid-template-columns: 1fr; }
+  .chal-open { flex-wrap: wrap; }
+  .chal-cta { width: 100%; text-align: center; }
+}
+
+/* ---------- Glossary terms (marked by main.js) ---------- */
+.term { text-decoration: underline dotted; text-decoration-color: var(--accent); text-underline-offset: 4px; cursor: help; }
+.term:hover, .term:focus-visible { text-decoration-style: solid; }
+.term-pop {
+  position: fixed; z-index: 80; max-width: min(300px, calc(100vw - 16px));
+  padding: 10px 12px; background: var(--sheet); border: 1px solid var(--wall); border-top: 3px solid var(--accent);
+  pointer-events: none;
+}
+.term-pop-t { font-family: var(--f-head); font-weight: 700; font-size: 14.5px; color: var(--accent); margin-bottom: 2px; }
+.term-pop-d { font-size: 14px; line-height: 1.65; color: var(--ink); }
+
 /* ---------- SEC-10 · References ---------- */
 .refs { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .refs li {

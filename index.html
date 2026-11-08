@@ -638,6 +638,20 @@
     <div class="sec-inner">
       <header class="sec-head"><span class="plate">SEC-06</span><h2 id="s5-title"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-route"/></svg><span data-i18n="nav.s5">الجولات التفاعلية</span></h2></header>
 
+      <!-- Intruder challenge: content lives in the i18n files (ch.*), rendered by main.js -->
+      <div class="chal" id="chal">
+        <button type="button" class="chal-open" id="chalOpen" aria-expanded="false" aria-controls="chalBody">
+          <svg class="ic chal-ic" aria-hidden="true" focusable="false"><use href="#i-target"/></svg>
+          <span class="chal-text">
+            <span class="chal-badge" data-i18n="ch.badge">تحدٍّ تفاعلي</span>
+            <span class="chal-title" data-i18n="ch.title">هل تقدر توصل لغرفة الخوادم؟</span>
+            <span class="chal-lead" data-i18n="ch.lead">العب دور المتسلل: اختر طريقتك في كل طبقة، وشاهد أي ضابط في رَصين يوقفك.</span>
+          </span>
+          <span class="chal-cta" data-i18n="ch.start">ابدأ التحدي</span>
+        </button>
+        <div class="chal-body" id="chalBody" hidden></div>
+      </div>
+
       <ol class="tours">
         <li class="tour">
           <span class="plate">T-01</span>
@@ -886,6 +900,7 @@
   <span class="progress-text" id="progressText">1 / 10</span>
 </div>
 
+<div class="term-pop" id="termPop" role="tooltip" hidden><p class="term-pop-t"></p><p class="term-pop-d"></p></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <!-- Fallback dictionaries for file:// (where fetch of the JSON files is blocked). Generated from the JSON files. -->

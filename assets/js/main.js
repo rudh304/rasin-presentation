@@ -66,6 +66,7 @@
       root.lang = lang;
       root.dir = lang === 'ar' ? 'rtl' : 'ltr';
       applyDict(d);
+      document.dispatchEvent(new Event('rasin:lang'));   // let text built by script re-render
       store('rasin-lang', lang);
       refreshToolLabels();
       updateNavToggle();
@@ -422,10 +423,214 @@
     });
   }
 
+  /* ---------------- SEC-06 intruder challenge: five layers, each attempt stopped by a real control ---------------- */
+  // Option text lives in the i18n files as ch.sN.oM (+ .c control, .w why); `type` names the
+  // SEC-05 system the control belongs to (its card title key), or ch.design for layout decisions.
+  var CH_STEPS = [
+    { z: 0, types: ['s4.c3.title', 's4.c1.title', 's4.c4.title'] },
+    { z: 1, types: ['s4.c4.title', 'ch.design', 's4.c3.title'] },
+    { z: 3, types: ['s4.c2.title', 'ch.design', 's4.c4.title'] },
+    { z: 3, types: ['s4.c5.title', 's4.c5.title', 's4.c3.title'] },
+    { z: 4, types: ['s4.c5.title', 's4.c5.title', 's4.c2.title'] }
+  ];
+  var chalOpen = document.getElementById('chalOpen');
+  var chalBody = document.getElementById('chalBody');
+  if (chalOpen && chalBody) {
+    var ch = { step: 0, chosen: null, log: [] };
+    var el = function (tag, cls, text) {
+      var n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text != null) n.textContent = text;
+      return n;
+    };
+    var btn = function (cls, text, fn) {
+      var b = el('button', cls, text);
+      b.type = 'button';
+      b.addEventListener('click', fn);
+      return b;
+    };
+    var renderChal = function (focusSel) {
+      chalBody.textContent = '';
+      var total = CH_STEPS.length;
+      if (ch.step >= total) {
+        var end = el('div', 'chal-end');
+        end.appendChild(el('h4', 'chal-q', t('ch.endTitle'))).tabIndex = -1;
+        end.appendChild(el('p', 'chal-end-text', t('ch.endText')));
+        end.appendChild(el('p', 'label', t('ch.endList')));
+        var ul = el('ol', 'chal-log');
+        ch.log.forEach(function (r) {
+          var li = el('li');
+          li.appendChild(el('span', 'chal-z cz' + r.z, 'Z' + r.z));
+          li.appendChild(el('b', null, t(r.c)));
+          li.appendChild(el('span', 'chal-type', t(r.type)));
+          ul.appendChild(li);
+        });
+        end.appendChild(ul);
+        var row = el('div', 'chal-actions');
+        row.appendChild(btn('chal-btn', t('ch.again'), function () { ch = { step: 0, chosen: null, log: [] }; renderChal('.chal-q'); }));
+        row.appendChild(btn('chal-btn chal-btn-ghost', t('ch.close'), function () { setChal(false); chalOpen.focus(); }));
+        end.appendChild(row);
+        chalBody.appendChild(end);
+      } else {
+        var s = CH_STEPS[ch.step], p = 'ch.s' + (ch.step + 1);
+        var bar = el('ol', 'chal-steps');
+        bar.setAttribute('aria-hidden', 'true');
+        CH_STEPS.forEach(function (st, i) {
+          bar.appendChild(el('li', 'cz' + st.z + (i < ch.step ? ' done' : i === ch.step ? ' now' : '')));
+        });
+        chalBody.appendChild(bar);
+        var head = el('p', 'chal-layer');
+        head.appendChild(el('span', 'chal-z cz' + s.z, 'Z' + s.z));
+        head.appendChild(document.createTextNode(t('ch.layer') + ' ' + (ch.step + 1) + ' ' + t('ch.of') + ' ' + total + ' · ' + t(p + '.t')));
+        chalBody.appendChild(head);
+        chalBody.appendChild(el('h4', 'chal-q', t(p + '.q'))).tabIndex = -1;
+        var opts = el('div', 'chal-opts');
+        [1, 2, 3].forEach(function (o, i) {
+          var b = btn('chal-opt', t(p + '.o' + o), function () {
+            if (ch.chosen != null) return;
+            ch.chosen = i;
+            ch.log.push({ z: s.z, c: p + '.o' + o + '.c', type: s.types[i] });
+            renderChal('.chal-res-t');
+          });
+          if (ch.chosen != null) {
+            b.disabled = true;
+            if (ch.chosen === i) b.classList.add('is-chosen');
+          }
+          opts.appendChild(b);
+        });
+        chalBody.appendChild(opts);
+        if (ch.chosen != null) {
+          var k = p + '.o' + (ch.chosen + 1);
+          var res = el('div', 'chal-res');
+          var rt = el('p', 'chal-res-t');
+          rt.tabIndex = -1;
+          rt.appendChild(el('span', 'chal-stop', t('ch.stopped')));
+          rt.appendChild(document.createTextNode(' ' + t(k + '.c')));
+          res.appendChild(rt);
+          res.appendChild(el('p', 'chal-res-w', t(k + '.w')));
+          res.appendChild(el('span', 'chal-type', t(s.types[ch.chosen])));
+          chalBody.appendChild(res);
+          var last = ch.step === total - 1;
+          chalBody.appendChild(btn('chal-btn', t(last ? 'ch.finish' : 'ch.next'), function () {
+            ch.step++; ch.chosen = null; renderChal('.chal-q');
+          }));
+        }
+      }
+      if (focusSel) { var f = chalBody.querySelector(focusSel); if (f) f.focus(); }
+    };
+    var setChal = function (open) {
+      chalBody.hidden = !open;
+      chalOpen.setAttribute('aria-expanded', String(open));
+      chalOpen.querySelector('.chal-cta').textContent = t(open ? 'ch.close' : 'ch.start');
+      chalOpen.querySelector('.chal-cta').setAttribute('data-i18n', open ? 'ch.close' : 'ch.start');
+      if (open) renderChal('.chal-q');
+    };
+    chalOpen.addEventListener('click', function () { setChal(chalBody.hidden); });
+    document.addEventListener('rasin:lang', function () { if (!chalBody.hidden) renderChal(); });
+  }
+
+  /* ---------------- Glossary: technical terms get a dotted underline and a short note ---------------- */
+  // First mention per section only, so the page does not fill up with underlines.
+  // Terms sit inside i18n text (textContent is replaced on a language switch), so they are re-marked after each switch.
+  var TERMS = [
+    { k: 'mantrap', ar: /Mantrap|(?:لل|ال)?غرف(?:ة)? (?:ال)?عازلة/, en: /mantraps?/i },
+    { k: 'ups', ar: /\bUPS\b/, en: /\bUPS\b/ },
+    { k: 'n1', ar: /N\+1/, en: /N\+1/ },
+    { k: 'vesda', ar: /VESDA/, en: /VESDA/ },
+    { k: 'ecc', ar: /\bECC(?:-2:2024)?/, en: /\bECC(?:-2:2024)?/ },
+    { k: 'bms', ar: /\bBMS\b/, en: /\bBMS\b/ },
+    { k: 'bollard', ar: /Bollards/, en: /[Bb]ollards?/ },
+    { k: 'gas', ar: /(?:بال|ال)غاز النظيف/, en: /[Cc]lean-agent(?: gas)?/ },
+    { k: '2fa', ar: /(?:ال)?تحقق (?:ال)?ثنائي|(?:ال)?قارئات (?:ال)?ثنائية|(?:ال)?قارئ (?:ال)?ثنائي/, en: /two-factor/i }
+  ];
+  var TERM_SKIP = 'a,button,svg,script,style,h1,h2,.term,.chal,.plate,.nca-badge,.fn-pop,.why-pop,.term-pop,.sub-latin,.ref-link,.sr-only,[hidden]';
+  var termPop = document.getElementById('termPop');
+  function unmarkTerms() {
+    document.querySelectorAll('main .term').forEach(function (s) {
+      var p = s.parentNode;
+      p.replaceChild(document.createTextNode(s.textContent), s);
+      p.normalize();
+    });
+  }
+  function markTerms() {
+    unmarkTerms();
+    var lang = root.lang === 'en' ? 'en' : 'ar';
+    document.querySelectorAll('main > .sec').forEach(function (sec) {
+      TERMS.forEach(function (term) {
+        var re = term[lang];
+        var walker = document.createTreeWalker(sec, NodeFilter.SHOW_TEXT, {
+          acceptNode: function (n) {
+            var p = n.parentElement;
+            return p && !p.closest(TERM_SKIP) && re.test(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+          }
+        });
+        var node = walker.nextNode();
+        if (!node) return;
+        var m = node.nodeValue.match(re);
+        var hit = node.splitText(m.index);
+        hit.splitText(m[0].length);
+        var span = document.createElement('span');
+        span.className = 'term';
+        span.tabIndex = 0;
+        span.setAttribute('data-term', term.k);
+        span.textContent = hit.nodeValue;
+        hit.parentNode.replaceChild(span, hit);
+      });
+    });
+  }
+  if (termPop) {
+    var termNow = null;
+    var termTimer = null;
+    var showTerm = function (span) {
+      clearTimeout(termTimer);
+      if (termNow && termNow !== span) termNow.removeAttribute('aria-describedby');
+      var k = 'gl.' + span.getAttribute('data-term');
+      termPop.querySelector('.term-pop-t').textContent = t(k + '.t');
+      termPop.querySelector('.term-pop-d').textContent = t(k + '.d');
+      termPop.hidden = false;
+      span.setAttribute('aria-describedby', 'termPop');
+      termNow = span;
+      var r = span.getBoundingClientRect(), pw = termPop.offsetWidth, ph = termPop.offsetHeight;
+      var top = r.top - ph - 8 < 8 ? r.bottom + 8 : r.top - ph - 8;
+      var left = Math.max(8, Math.min(window.innerWidth - pw - 8, r.left + r.width / 2 - pw / 2));
+      termPop.style.top = top + 'px';
+      termPop.style.left = left + 'px';
+    };
+    var hideTerm = function () {
+      clearTimeout(termTimer);
+      termPop.hidden = true;
+      if (termNow) termNow.removeAttribute('aria-describedby');
+      termNow = null;
+    };
+    document.addEventListener('pointerover', function (e) {
+      var s = e.target.closest && e.target.closest('.term');
+      if (s && e.pointerType === 'mouse') showTerm(s);
+    });
+    document.addEventListener('pointerout', function (e) {
+      var s = e.target.closest && e.target.closest('.term');
+      if (s && e.pointerType === 'mouse') termTimer = setTimeout(hideTerm, 120);
+    });
+    document.addEventListener('focusin', function (e) {
+      if (e.target.classList && e.target.classList.contains('term')) showTerm(e.target);
+    });
+    document.addEventListener('focusout', function (e) {
+      if (e.target.classList && e.target.classList.contains('term')) hideTerm();
+    });
+    document.addEventListener('click', function (e) {
+      var s = e.target.closest && e.target.closest('.term');
+      if (s) { if (termNow === s) hideTerm(); else showTerm(s); }
+      else if (termNow) hideTerm();
+    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && termNow) hideTerm(); });
+    window.addEventListener('scroll', function () { if (termNow) hideTerm(); }, { passive: true });
+    document.addEventListener('rasin:lang', markTerms);
+  }
+
   /* ---------------- Init ---------------- */
   // Arabic is inline in the HTML; load its dictionary too so switching back works.
   loadDict('ar').then(function () {
     if (root.lang === 'en') return setLang('en');
+    document.dispatchEvent(new Event('rasin:lang'));
     refreshToolLabels();
     updateNavToggle();
   });
