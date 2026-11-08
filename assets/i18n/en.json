@@ -30,7 +30,7 @@
   "why.label": "Light up your knowledge",
   "why.a1": "RASIN",
   "why.a2": "Because security starts from a foundation that never shakes",
-  "why.note": "In Arabic, rasuna means to become firm and well set; rasin describes what is steady and does not waver, as in a sound opinion or a solid building. We took our project's name from that meaning, so that saying it is itself a promise of steadiness: protection that stands firm, and trust that never wavers.",
+  "why.note": "In Arabic, rasuna means to become firm and well set; rasin describes what is steady and does not waver, as in a solid building. We took our project's name from that meaning, so that saying it is itself a promise of steadiness: protection that stands firm, and trust that never wavers.",
   "s1.tagline": "A fortress of stone, guarding a treasure of data.",
   "s1.stat.floors": "Floors",
   "s1.stat.rooms": "Rooms",
@@ -252,7 +252,7 @@
 
   "s6.t1": "The visitor's journey",
   "s6.t2": "The route to the server room",
-  "s6.t3": "A night-time intrusion attempt",
+  "s6.t3": "A night-time perimeter breach",
   "s6.steps8": "steps",
   "s6.steps6": "steps",
   "s6.steps5": "steps",
