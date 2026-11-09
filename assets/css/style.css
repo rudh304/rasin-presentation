@@ -831,6 +831,7 @@ html[dir="rtl"] .nogap-btn:hover .nogap-btn-ext { transform: scaleX(-1) translat
 .refs-table td.ref-year { white-space: nowrap; font-family: var(--f-mono); font-size: 14.5px; }
 .refs-table td.ref-link-cell { white-space: nowrap; }
 .ref-open { font-weight: 600; color: var(--accent); text-underline-offset: 3px; }
+.refs-note { margin-top: 14px; font-size: 14px; color: var(--ink-2); }
 
 /* ---------- SEC-09 · National note (own green palette, this section only) ---------- */
 .sec-national {
