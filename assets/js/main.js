@@ -541,9 +541,21 @@
     { k: 'bms', ar: /\bBMS\b/, en: /\bBMS\b/ },
     { k: 'bollard', ar: /Bollards/, en: /[Bb]ollards?/ },
     { k: 'gas', ar: /(?:بال|ال)غاز النظيف/, en: /[Cc]lean-agent(?: gas)?/ },
-    { k: '2fa', ar: /(?:ال)?تحقق (?:ال)?ثنائي|(?:ال)?قارئات (?:ال)?ثنائية|(?:ال)?قارئ (?:ال)?ثنائي/, en: /two-factor/i }
+    { k: '2fa', ar: /(?:ال)?تحقق (?:ال)?ثنائي|(?:ال)?قارئات (?:ال)?ثنائية|(?:ال)?قارئ (?:ال)?ثنائي/, en: /two-factor/i },
+    { k: 'cia', ar: /ثلاثية CIA|\bCIA\b/, en: /CIA triad|\bCIA\b/ },
+    { k: 'did', ar: /(?:ال)?دفاع في العمق/, en: /[Dd]efen[cs]e in [Dd]epth/ },
+    { k: 'iso', ar: /ISO(?:\/IEC)? 27001(?::2022)?/, en: /ISO(?:\/IEC)? 27001(?::2022)?/ },
+    { k: 'nist', ar: /NIST(?: SP 800-53)?/, en: /NIST(?: SP 800-53)?/ },
+    { k: 'cool', ar: /(?:ال)?تبريد (?:ال)?دقيق/, en: /precision cooling/i },
+    { k: 'desk', ar: /(?:ال)?مكتب (?:ال)?نظيف/, en: /clean[- ]desk/i },
+    { k: 'matrix', ar: /مصفوفة (?:ال)?صلاحيات/, en: /(?:access|role|permissions) matrix/i },
+    { k: 'iot', ar: /إنترنت الأشياء/, en: /Internet of Things/i },
+    { k: 'conv', ar: /(?:ال)?تقارب بين الأمن المادي و(?:ال)?سيبراني/, en: /[Ss]ecurity [Cc]onvergence|convergence/ },
+    { k: 'soc', ar: /مركز (?:ال)?عمليات(?: (?:ال)?أمنية)?/, en: /(?:security )?operations cent(?:er|re)/i },
+    { k: 'iam', ar: /\bIAM\b/, en: /\bIAM\b/ },
+    { k: 'epo', ar: /(?:مفتاح )?فصل الطاقة الطارئ/, en: /emergency power-off/i }
   ];
-  var TERM_SKIP = 'a,button,svg,script,style,h1,h2,.term,.chal,.plate,.nca-badge,.fn-pop,.why-pop,.term-pop,.sub-latin,.ref-link,.sr-only,[hidden]';
+  var TERM_SKIP = 'a,button,svg,script,style,h1,h2,.term,.chal,.plate,.nca-badge,.fn-pop,.why-pop,.term-pop,.sub-latin,.ref-link,.sr-only,[hidden],html[lang="en"] .dup-en';
   var termPop = document.getElementById('termPop');
   function unmarkTerms() {
     document.querySelectorAll('main .term').forEach(function (s) {

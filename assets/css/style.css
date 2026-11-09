@@ -809,8 +809,14 @@ html[dir="rtl"] .nogap-btn:hover .nogap-btn-ext { transform: scaleX(-1) translat
 }
 
 /* ---------- Glossary terms (marked by main.js) ---------- */
-.term { text-decoration: underline dotted; text-decoration-color: var(--accent); text-underline-offset: 4px; cursor: help; }
+.term {
+  color: var(--accent); font-weight: 600;
+  text-decoration: underline dotted; text-decoration-color: var(--gold); text-decoration-thickness: 2px; text-underline-offset: 5px;
+  cursor: help;
+}
 .term:hover, .term:focus-visible { text-decoration-style: solid; }
+/* inside dark table heads and coloured labels keep the surrounding colour */
+.std-head .term, .label .term { color: inherit; }
 .term-pop {
   position: fixed; z-index: 80; max-width: min(300px, calc(100vw - 16px));
   padding: 10px 12px; background: var(--sheet); border: 1px solid var(--wall); border-top: 3px solid var(--accent);
