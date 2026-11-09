@@ -565,7 +565,7 @@
     { k: 'iam', ar: /\bIAM\b/, en: /\bIAM\b/ },
     { k: 'epo', ar: /(?:مفتاح )?فصل الطاقة الطارئ/, en: /emergency power-off/i }
   ];
-  var TERM_SKIP = 'a,button,svg,script,style,h1,h2,.term,.chal,.plate,.nca-badge,.fn-pop,.why-pop,.term-pop,.sub-latin,.ref-link,.sr-only,[hidden],html[lang="en"] .dup-en';
+  var TERM_SKIP = 'a,button,svg,script,style,h1,h2,table,.std-code,.term,.chal,.plate,.nca-badge,.fn-pop,.why-pop,.term-pop,.sub-latin,.ref-link,.sr-only,[hidden],html[lang="en"] .dup-en';
   var termPop = document.getElementById('termPop');
   function unmarkTerms() {
     document.querySelectorAll('main .term').forEach(function (s) {

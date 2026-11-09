@@ -7,7 +7,7 @@
 
 /* ---------- Tokens ---------- */
 :root {
-  --paper:#F4EFE3; --sheet:#FBF8F0; --ink:#1B2226; --ink-2:#55616A; --rule:#D8D1C0; --wall:#1F282D; --accent:#1E5B74;
+  --paper:#EBF0F3; --sheet:#FBF8F0; --ink:#1B2226; --ink-2:#55616A; --rule:#D8D1C0; --wall:#1F282D; --accent:#1E5B74;
   --head:#172B38; --gold:#8A6514;
   --z0:#E2E5E0; --z0s:#7C857F;                                  /* Z0 perimeter — same values as the embedded drawings */
   --z1:#D4EADC; --z2:#D2E0F0; --z3:#F0DEB6; --z4:#EAB2A4;      /* zone fills */
@@ -16,8 +16,9 @@
   /* CIA — fixed mapping across the whole site */
   --cia-c: var(--z2s); --cia-i: var(--z3s); --cia-a: var(--z1s);
 
-  --grid: color-mix(in srgb, var(--rule) 55%, transparent);
-  --grid-major: color-mix(in srgb, var(--rule) 100%, transparent);
+  /* blueprint-tinted page under cream sheets */
+  --grid: color-mix(in srgb, var(--accent) 6%, transparent);
+  --grid-major: color-mix(in srgb, var(--accent) 11%, transparent);
   --frame-opacity: .16;
 
   --f-body: "IBM Plex Sans Arabic", Tahoma, "Segoe UI", sans-serif;
@@ -828,14 +829,14 @@ html[dir="rtl"] .nogap-btn:hover .nogap-btn-ext { transform: scaleX(-1) translat
 /* ---------- SEC-10 · References ---------- */
 .refs-table th[scope="row"] { white-space: normal; font-weight: 600; }
 .refs-table td.ref-num { width: 40px; color: var(--gold); font-weight: 600; }
-.refs-table td.ref-year { white-space: nowrap; font-family: var(--f-mono); font-size: 14.5px; }
+.refs-table td.ref-year { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .refs-table td.ref-link-cell { white-space: nowrap; }
 .ref-open { font-weight: 600; color: var(--accent); text-underline-offset: 3px; }
 .refs-note { margin-top: 14px; font-size: 14px; color: var(--ink-2); }
 
 /* ---------- SEC-09 · National note (own green palette, this section only) ---------- */
 .sec-national {
-  --g-bg:#0E3B26; --g-ink:#F2F5F1; --g-acc:#4FBF85; --g-red:#FF5A5F;
+  --g-bg:#0E3B26; --g-ink:#F2F5F1; --g-acc:#4FBF85; --g-red:#EF4444;
   position: relative; overflow: hidden;
   display: flex; align-items: center;
   background: var(--g-bg); color: var(--g-ink);
@@ -846,10 +847,10 @@ html[dir="rtl"] .nogap-btn:hover .nogap-btn-ext { transform: scaleX(-1) translat
 /* faint red outline of the Kingdom ("the borders are a red line"); centred behind the text on phones */
 .nat-map {
   position: absolute; top: 50%; inset-inline-end: 4%; width: min(44vw, 600px); height: auto; translate: 0 -50%;
-  pointer-events: none; fill: none; stroke: var(--g-red); stroke-width: 1.6; stroke-linejoin: round; opacity: .6;
+  pointer-events: none; fill: none; stroke: var(--g-red); stroke-width: 1.6; stroke-linejoin: round; opacity: .7;
 }
 .nat-map path { vector-effect: non-scaling-stroke; }
-@media (max-width: 760px) { .nat-map { inset-inline-end: auto; left: 50%; translate: -50% -50%; width: 92vw; opacity: .3; } }
+@media (max-width: 760px) { .nat-map { inset-inline-end: auto; left: 50%; translate: -50% -50%; width: 92vw; opacity: .36; } }
 
 .nat-inner { position: relative; width: 100%; }
 .sec-national .plate { background: transparent; color: var(--g-ink); border-color: var(--g-acc); }
