@@ -17,6 +17,7 @@
   "nav.s8": "A National Note",
   "nav.s9": "Project Team",
   "nav.s10": "References",
+  "nav.s11": "Beyond RASIN",
 
   "ui.themeToDark": "Switch to dark mode",
   "ui.themeToLight": "Switch to light mode",
@@ -430,5 +431,15 @@
   "ref.5": "Basic Law of Governance, Article 34 (Royal Order No. A/90)",
   "ref.5.p": "Kingdom of Saudi Arabia",
   "ref.5.y": "1412 AH",
-  "s8.link": "Defending the homeland reaches beyond its visible borders, into a digital space where secrets are kept, assets are walled with protection, and truth is guarded from being tainted by rumour or twisted by hearsay. Every piece of information protected, every rumour contained, and every word checked for truth is a front of defense. Let us make our digital responsibility a national pledge and our awareness a shield; homelands are protected not only by heroes in the field, but also by the awareness of their people in every space."
+  "s8.link": "Defending the homeland reaches beyond its visible borders, into a digital space where secrets are kept, assets are walled with protection, and truth is guarded from being tainted by rumour or twisted by hearsay. Every piece of information protected, every rumour contained, and every word checked for truth is a front of defense. Let us make our digital responsibility a national pledge and our awareness a shield; homelands are protected not only by heroes in the field, but also by the awareness of their people in every space.",
+  "bx.link": "Beyond RASIN",
+  "bx.lead": "RASIN was never confined within the walls of a physical-security project; it was an opportunity we seized to celebrate the identity of our major.",
+  "bx.center": "Management Information Systems",
+  "bx.1": "Information Security",
+  "bx.2": "Design",
+  "bx.3": "Risk Analysis",
+  "bx.4": "Governance & Standards",
+  "bx.5": "Web Development",
+  "bx.6": "Research & Documentation",
+  "bx.close": "A discipline that stands where technology meets management; it listens to both languages and bridges them."
 }

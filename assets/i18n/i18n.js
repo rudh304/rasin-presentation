@@ -19,6 +19,7 @@ window.RASIN_I18N = {
   "nav.s8": "لفتة وطنية",
   "nav.s9": "فريق المشروع",
   "nav.s10": "المراجع",
+  "nav.s11": "ما وراء رَصين",
 
   "ui.themeToDark": "التبديل إلى الوضع الداكن",
   "ui.themeToLight": "التبديل إلى الوضع الساطع",
@@ -432,7 +433,17 @@ window.RASIN_I18N = {
   "ref.5": "النظام الأساسي للحكم، المادة الرابعة والثلاثون (الأمر الملكي رقم أ/90)",
   "ref.5.p": "المملكة العربية السعودية",
   "ref.5.y": "1412هـ",
-  "s8.link": "يمتدّ الدفاع عن الوطن إلى ما وراء حدوده المرئية، إلى فضاءٍ رقميٍّ تُصان فيه الأسرار، وتُسوَّر فيه الأصول بالحماية، وتُحفظ فيه الحقيقة من أن تلوّثها الشائعات أو تحرّفها الأقاويل. فكل معلومةٍ تُصان، وكل شائعةٍ يُحدّ من انتشارها، وكل كلمةٍ يُتحرّى صدقها.. جبهةُ دفاع. فلنجعل من مسؤوليتنا الرقمية عهدًا وطنيًا، ومن وعينا درعًا؛ فالأوطان لا يحميها الأبطال في الميدان فحسب، بل يحميها أيضًا وعيُ أبنائها في كل فضاء."
+  "s8.link": "يمتدّ الدفاع عن الوطن إلى ما وراء حدوده المرئية، إلى فضاءٍ رقميٍّ تُصان فيه الأسرار، وتُسوَّر فيه الأصول بالحماية، وتُحفظ فيه الحقيقة من أن تلوّثها الشائعات أو تحرّفها الأقاويل. فكل معلومةٍ تُصان، وكل شائعةٍ يُحدّ من انتشارها، وكل كلمةٍ يُتحرّى صدقها.. جبهةُ دفاع. فلنجعل من مسؤوليتنا الرقمية عهدًا وطنيًا، ومن وعينا درعًا؛ فالأوطان لا يحميها الأبطال في الميدان فحسب، بل يحميها أيضًا وعيُ أبنائها في كل فضاء.",
+  "bx.link": "ما وراء رَصين",
+  "bx.lead": "لم يكن رَصين أسيرَ أسوارِ مشروعٍ في الأمن المادي فحسب، بل كان فرصةً انتهزناها للإشادة بهوية تخصصنا.",
+  "bx.center": "نظم المعلومات الإدارية",
+  "bx.1": "أمن المعلومات",
+  "bx.2": "التصميم",
+  "bx.3": "تحليل المخاطر",
+  "bx.4": "الحوكمة والمعايير",
+  "bx.5": "تطوير الويب",
+  "bx.6": "البحث والتوثيق",
+  "bx.close": "تخصصٌ يقف حيث تلتقي التقنية بالإدارة؛ يُصغي إلى لغتيهما، ويصل بينهما."
 }
 ,
 "en": {
@@ -454,6 +465,7 @@ window.RASIN_I18N = {
   "nav.s8": "A National Note",
   "nav.s9": "Project Team",
   "nav.s10": "References",
+  "nav.s11": "Beyond RASIN",
 
   "ui.themeToDark": "Switch to dark mode",
   "ui.themeToLight": "Switch to light mode",
@@ -867,7 +879,17 @@ window.RASIN_I18N = {
   "ref.5": "Basic Law of Governance, Article 34 (Royal Order No. A/90)",
   "ref.5.p": "Kingdom of Saudi Arabia",
   "ref.5.y": "1412 AH",
-  "s8.link": "Defending the homeland reaches beyond its visible borders, into a digital space where secrets are kept, assets are walled with protection, and truth is guarded from being tainted by rumour or twisted by hearsay. Every piece of information protected, every rumour contained, and every word checked for truth is a front of defense. Let us make our digital responsibility a national pledge and our awareness a shield; homelands are protected not only by heroes in the field, but also by the awareness of their people in every space."
+  "s8.link": "Defending the homeland reaches beyond its visible borders, into a digital space where secrets are kept, assets are walled with protection, and truth is guarded from being tainted by rumour or twisted by hearsay. Every piece of information protected, every rumour contained, and every word checked for truth is a front of defense. Let us make our digital responsibility a national pledge and our awareness a shield; homelands are protected not only by heroes in the field, but also by the awareness of their people in every space.",
+  "bx.link": "Beyond RASIN",
+  "bx.lead": "RASIN was never confined within the walls of a physical-security project; it was an opportunity we seized to celebrate the identity of our major.",
+  "bx.center": "Management Information Systems",
+  "bx.1": "Information Security",
+  "bx.2": "Design",
+  "bx.3": "Risk Analysis",
+  "bx.4": "Governance & Standards",
+  "bx.5": "Web Development",
+  "bx.6": "Research & Documentation",
+  "bx.close": "A discipline that stands where technology meets management; it listens to both languages and bridges them."
 }
 
 };

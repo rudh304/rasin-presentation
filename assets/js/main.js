@@ -343,6 +343,16 @@
     boxes.forEach(function (el) { el.classList.add('in-view'); });
   }
 
+  /* ---------------- Beyond RASIN: hub spokes draw once on entry (static without IO or with reduced motion) ---------------- */
+  var bxMap = document.getElementById('bxMap');
+  if (bxMap && 'IntersectionObserver' in window && !reduceMotion.matches) {
+    bxMap.classList.add('bx-ready');
+    var bio = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { bxMap.classList.add('in-view'); bio.disconnect(); }
+    }, { threshold: 0.35 });
+    bio.observe(bxMap);
+  }
+
   /* ---------------- SEC-05 function words: one shared note, opened from the pressed word ---------------- */
   var fnPop = document.getElementById('fnPop');
   if (fnPop) {
