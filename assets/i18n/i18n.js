@@ -43,6 +43,7 @@ window.RASIN_I18N = {
 
   "tb.course": "المقرر",
   "tb.courseVal": "أمن المعلومات وإدارة المخاطر",
+  "tb.term": "الفصل الدراسي الأول 1448",
   "tb.project": "المشروع",
   "tb.projectVal": "تطبيق معايير الأمن المادي",
   "tb.dept": "القسم",
@@ -490,6 +491,7 @@ window.RASIN_I18N = {
 
   "tb.course": "Course",
   "tb.courseVal": "Information Security & Risk Management",
+  "tb.term": "First Semester, 1448 AH",
   "tb.project": "Project",
   "tb.projectVal": "Applying Physical Security Standards",
   "tb.dept": "Department",
